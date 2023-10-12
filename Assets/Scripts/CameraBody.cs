@@ -29,7 +29,6 @@ public class CameraBody : MonoBehaviour
     [SerializeField] private CameraShaker camShaker;
     [SerializeField] private PlayerRef player;
     [SerializeField] private LockOn lockOn;
-    [SerializeField] private Transform testBlock;
 
     public bool CanMoveCamera { get; private set; } = true;
 
