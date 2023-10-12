@@ -4,27 +4,82 @@ using UnityEngine;
 
 public class GloveCollision : MonoBehaviour
 {
+    [Header("Collision")]
     [SerializeField] private LayerMask hitLayer;
     [SerializeField] ParticleSystem hitSpark;
-    [SerializeField] float punchForce;
     [SerializeField] SphereCollider gloveCollider;
+    [SerializeField] float punchForce;
+
+    [Header("Attack Settings")]
+    [SerializeField] float punchRange;
+    [SerializeField] float punchForwardTime;
+    [SerializeField] float punchBackTime;
+    [SerializeField] float punchDelay;
+
+    //Data to modify during runtime
+    float punchElapsed;
 
     public bool Active { get; set; } = false;
-    public BoxingGloves GloveOwner { get; set; } = null;
-    public int GloveIndex { get; set; } = -1;
+    public bool CanPunch => punchElapsed >= punchBackTime + punchDelay;
 
-    void OnTriggerEnter(Collider col)
+    public void DetectCollisions(Transform thrower)
     {
-        if (!Active || GloveOwner == null || GloveIndex == -1) return;
+        Vector3 gloveTravel = transform.position - thrower.position;
+        if (Active && Physics.SphereCast(thrower.position, gloveCollider.radius * 0.5f, gloveTravel, out var hit, gloveTravel.magnitude, hitLayer))
+        {
+            PlayerRef player = hit.collider.gameObject.GetComponent<PlayerRef>();
+            if (player != null)
+            {
+                if (player.PlayerMovement.Crouching) return;
 
-        Instantiate(hitSpark, transform.position, Quaternion.identity);
+                player.PlayerMovement.Rb.AddForce(-hit.normal * punchForce, ForceMode.Impulse);
+                Instantiate(hitSpark, transform.position, Quaternion.identity);
+                punchElapsed = Mathf.Infinity;
+                return;
+            }
 
-        Rigidbody rb = col.gameObject.GetComponent<Rigidbody>();
+            Instantiate(hitSpark, transform.position, Quaternion.identity);
+            punchElapsed = Mathf.Infinity;
 
-        GloveOwner.SetGloveInactive(GloveIndex);
+            Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
+            if (rb == null) return;
 
-        if (rb == null) return;
+            rb.AddForce(-hit.normal * punchForce, ForceMode.Impulse);
+        }
+    }
 
-        rb.AddExplosionForce(punchForce, transform.position, 1f, gloveCollider.radius, ForceMode.Impulse);
+    Vector3 endPunchPos = Vector3.zero;
+    public void HandleGloves(Transform handPosition, Vector3 forward)
+    {
+        punchElapsed += Time.deltaTime;
+
+        if (Active)
+        {
+            if (punchElapsed >= punchForwardTime)
+            {
+                punchElapsed = 0f;
+                Active = false;
+                endPunchPos = transform.position;
+                return;
+            }
+
+            endPunchPos = handPosition.position + forward * punchRange;
+
+            transform.position = Vector3.Lerp(handPosition.position, endPunchPos, EaseInQuad(punchElapsed / punchForwardTime));
+            return;
+        }
+
+        transform.position = Vector3.Lerp(endPunchPos, handPosition.position, punchElapsed / punchBackTime);
+    }
+
+    public void SetGlove(bool active = true, float punchElapsed = 0f)
+    {
+        this.punchElapsed = punchElapsed;
+        Active = active;
+    }
+
+    float EaseInQuad(float x)
+    {
+        return x * x;
     }
 }
