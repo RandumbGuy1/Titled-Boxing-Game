@@ -235,7 +235,7 @@ public class PlayerMovement : MonoBehaviour
         //Crouch
         if (Crouching)
         {
-            player.CameraBody.CamHeadBob.BobOnce(5f);
+            player.CameraBody.CamHeadBob.BobOnce(1f);
 
             if (timeSinceLastSlide > 0f) return;
             rb.AddForce(Magnitude * slideBoostSpeed * (Grounded ? 0.8f : 0.1f) * moveDir.normalized, ForceMode.Impulse);

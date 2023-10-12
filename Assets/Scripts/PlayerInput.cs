@@ -17,7 +17,7 @@ public class PlayerInput : MonoBehaviour
     public event ReceieveBoolInput OnCrouchInput;
     public event ReceieveBoolInput OnInteractInput;
 
-    public event ReceieveBoolInput OnPerspectiveToggle;
+    public event ReceieveBoolInput OnLockOnInput;
     public event ReceieveBoolInput OnPauseToggle;
 
     public event ReceieveIntInput OnMouseButtonDownInput;
@@ -31,13 +31,13 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private KeyCode interactKey;
 
     [Header("UI Keybinds")]
-    [SerializeField] private KeyCode togglePerspectKey;
+    [SerializeField] private KeyCode toggleLockOnKey;
     [SerializeField] private KeyCode pauseMenuKey;
 
     public KeyCode JumpKey => jumpKey;
     public KeyCode CrouchKey => crouchKey;
     public KeyCode InteractKey => interactKey;
-    public KeyCode TogglePerspectKey => togglePerspectKey;
+    public KeyCode ToggleLockOnKey => toggleLockOnKey;
     public KeyCode PauseMenuKey => pauseMenuKey;
 
     void Update()
@@ -51,7 +51,7 @@ public class PlayerInput : MonoBehaviour
         OnJumpHoldInput?.Invoke(Input.GetKey(jumpKey));
         OnCrouchInput?.Invoke(Input.GetKey(crouchKey));
 
-        OnPerspectiveToggle?.Invoke(Input.GetKeyDown(togglePerspectKey));
+        OnLockOnInput?.Invoke(Input.GetKeyDown(toggleLockOnKey));
 
         OnMouseButtonDownInput?.Invoke(MouseButtonDown());
         OnMouseButtonInput?.Invoke(MouseButton());

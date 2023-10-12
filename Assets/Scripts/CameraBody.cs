@@ -28,6 +28,8 @@ public class CameraBody : MonoBehaviour
     [SerializeField] private Transform targetHead;
     [SerializeField] private CameraShaker camShaker;
     [SerializeField] private PlayerRef player;
+    [SerializeField] private LockOn lockOn;
+    [SerializeField] private Transform testBlock;
 
     public bool CanMoveCamera { get; private set; } = true;
 
@@ -36,13 +38,6 @@ public class CameraBody : MonoBehaviour
         SetCursorState(true);
 
         player.PlayerInput.OnMouseInput += camLookSettings.LookUpdate;
-        player.PlayerInput.OnPerspectiveToggle += (bool toggle) => {
-            if (!toggle) return;
-
-            camCollider.Enabled = !camCollider.Enabled;
-            player.Rendering.shadowCastingMode = camCollider.Enabled ? ShadowCastingMode.On : ShadowCastingMode.ShadowsOnly;
-        };
-
         player.PlayerMovement.OnPlayerLand += camHeadBob.BobOnce;
     }
 
@@ -56,19 +51,30 @@ public class CameraBody : MonoBehaviour
         camCollider.ColliderUpdate(player.PlayerCam.transform.position, player.transform.position);
     }
 
+    float angle = 0f;
+    float getLockOnAngleDelta()
+    {
+        if (lockOn.LockOnTarget == null) return angle;
+
+        Vector3 camToLockOn = (lockOn.LockOnTarget.position - player.Orientation.position).normalized;
+        angle = Mathf.Rad2Deg * Mathf.Atan2(camToLockOn.x, camToLockOn.z) - camLookSettings.SmoothRotation.y;
+
+        return angle;
+    }
+
     void LateUpdate()
     {
         smoothDeltaRotation = Vector3.Lerp(smoothDeltaRotation, deltaRotation, Time.deltaTime * 25f);
 
         //Apply Rotations And Positions
         {
-            Quaternion newCamRot = Quaternion.Euler((Vector3) camLookSettings.SmoothRotation + smoothDeltaRotation + camIdleSway.HeadSwayOffset);
-            Quaternion newPlayerRot = Quaternion.Euler(0f, camLookSettings.SmoothRotation.y + deltaRotation.y, 0f);
+            transform.rotation = Quaternion.Euler(camLookSettings.SmoothRotation.x, getLockOnAngleDelta() + camLookSettings.SmoothRotation.y, 0);
+            player.Orientation.rotation = Quaternion.Euler(0, getLockOnAngleDelta() + camLookSettings.SmoothRotation.y, 0);
 
-            player.Orientation.localRotation = newPlayerRot;
-            transform.localRotation = newCamRot;
-            player.PlayerCam.transform.localRotation = Quaternion.Euler(ToEuler(camHeadBob.ViewBobOffset) + Vector3.forward * camHeadBob.TiltSway + camShaker.Offset);
+            //Camera effects rotation
+            player.PlayerCam.transform.localRotation = Quaternion.Euler(ToEuler(camHeadBob.ViewBobOffset) + Vector3.forward * camHeadBob.TiltSway + camShaker.Offset + camIdleSway.HeadSwayOffset);
 
+            //Camera positions
             Vector3 cameraTPSOffset = camCollider.Enabled ? posOffset + CamHeadBob.ViewBobOffset * 0.2f : Vector3.zero;
             smoothPosOffset = Vector3.Lerp(smoothPosOffset, cameraTPSOffset, 6f * Time.deltaTime);
 
@@ -109,7 +115,6 @@ public class CameraBody : MonoBehaviour
         if (CanMoveCamera) player.PlayerInput.OnMouseInput += camLookSettings.LookUpdate;
         else player.PlayerInput.OnMouseInput -= camLookSettings.LookUpdate;
     }
-        
 
     public void LookAt(Vector3 fromTo)
     {

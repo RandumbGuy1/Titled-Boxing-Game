@@ -5,8 +5,10 @@ using UnityEngine;
 public class BoxingGloves : MonoBehaviour
 {
     [SerializeField] Transform[] handPositions = new Transform[0];
-    [SerializeField] Rigidbody[] gloves = new Rigidbody[0];
+    [SerializeField] Transform[] gloves = new Transform[0];
     [SerializeField] float[] punchCooldownTimes = new float[0];
+
+    Vector3[] startHandPositions = new Vector3[2];
 
     float[] punchCooldowns = new float[2];
     [SerializeField] float[] punchForces = new float[0];
@@ -16,6 +18,11 @@ public class BoxingGloves : MonoBehaviour
     void Start()
     {
         player.PlayerInput.OnMouseButtonDownInput += HandlePunching;
+
+        for (int i = 0; i < handPositions.Length; i++)
+        {
+            startHandPositions[i] = handPositions[i].localPosition;
+        }
     }
 
     void HandlePunching(int button)
@@ -27,9 +34,8 @@ public class BoxingGloves : MonoBehaviour
 
         if (button >= 2 || button < 0) return;
         if (punchCooldowns[button] > 0f) return;
-         
-        gloves[button].velocity = Vector3.zero;
-        gloves[button].AddForce(player.Orientation.forward * punchForces[button], ForceMode.Impulse);
+
+        handPositions[button].localPosition += Vector3.forward * punchForces[button];
         punchCooldowns[button] = punchCooldownTimes[button];
 
     }
@@ -38,12 +44,8 @@ public class BoxingGloves : MonoBehaviour
     {
         for (int i = 0; i < handPositions.Length && i < gloves.Length; i++)
         {
-            Vector3 followVel = (handPositions[i].position - gloves[i].transform.position);
-            followVel = Vector3.ClampMagnitude(followVel, 50f);
-
-            gloves[i].drag = (gloves[i].velocity.magnitude / 10f) / Mathf.Clamp((handPositions[i].position - gloves[i].transform.position).sqrMagnitude * 0.5f, 0.05f, 0.6f);
-
-            gloves[i].AddForce(0.1f * handSpeed * followVel, ForceMode.VelocityChange);
+            gloves[i].position = Vector3.Lerp(gloves[i].position, handPositions[i].position, Time.deltaTime * handSpeed);
+            handPositions[i].localPosition = Vector3.Lerp(handPositions[i].localPosition, startHandPositions[i], Time.deltaTime * handSpeed * 0.5f);
         }
     }
 }
