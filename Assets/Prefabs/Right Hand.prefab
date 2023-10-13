@@ -66,10 +66,17 @@ MonoBehaviour:
   hitSpark: {fileID: 5293751812607336622, guid: cd7fcc5518bf7473eb622e3315fd01f9,
     type: 3}
   gloveCollider: {fileID: 4555363806734254086}
-  punchForce: 100
-  punchRange: 5
-  punchForwardTime: 0.125
-  punchBackTime: 0.125
+  punchDamage: 15
+  punchStun: 0.3
+  punchForce: 15
+  punchClips:
+  - {fileID: 8300000, guid: 5ee2e7dc3057c2a41ab26fe41b086609, type: 3}
+  - {fileID: 8300000, guid: 3be47e4a5790d5245ace2243945e6813, type: 3}
+  - {fileID: 8300000, guid: d211b9ea34268af4599810ed7ae8cb5c, type: 3}
+  - {fileID: 8300000, guid: 6a2b8180c89db9c4bba23519f4e06afe, type: 3}
+  punchRange: 3.25
+  punchForwardTime: 0.225
+  punchBackTime: 0.15
   punchDelay: 0.3
 --- !u!96 &4555363806734254080
 TrailRenderer:

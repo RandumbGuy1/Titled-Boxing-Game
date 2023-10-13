@@ -49,7 +49,7 @@ public class PlayerInput : MonoBehaviour
 
         OnJumpInput?.Invoke(Input.GetKeyDown(jumpKey));
         OnJumpHoldInput?.Invoke(Input.GetKey(jumpKey));
-        OnCrouchInput?.Invoke(Input.GetKey(crouchKey));
+        OnCrouchInput?.Invoke(Input.GetKeyDown(crouchKey));
 
         OnLockOnInput?.Invoke(Input.GetKeyDown(toggleLockOnKey));
 

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Punching Movement Settings")]
+    [SerializeField] private float punchingMaxSpeed = 3f;
+    [SerializeField] private BoxingGloves gloveController;
+    [SerializeField] private float dashStaminaCost = 10f;
+    [SerializeField] StaminaController stamina;
+
     [Header("General Movement Settings")]
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
@@ -45,10 +51,6 @@ public class PlayerMovement : MonoBehaviour
     public bool Crouching { get; private set; } = false;
     public Vector3 CrouchOffset => (playerHeight - player.CapsuleCol.height) * transform.localScale.y * Vector3.down;
 
-    [Header("Swim Settings")]
-    [SerializeField] private float swimAcceleration;
-    [SerializeField] private float swimJumpBoost;
-
     [Header("Hover Settings")]
     [SerializeField] private LayerMask environment;
     [SerializeField] private float rideRayExtension;
@@ -69,26 +71,10 @@ public class PlayerMovement : MonoBehaviour
         }   
     }
 
-    public event PlayerInput.ReceieveBoolInput OnWaterEnter;
     public event PlayerInput.ReceieveFloatInput OnPlayerLand;
 
     public event PlayerInput.ReceieveBoolInput OnPlayerMove;
     public event PlayerInput.ReceieveBoolInput OnPlayerCrouch;
-
-    private bool inWater = false;
-    public bool InWater
-    {
-        get => inWater;
-        set {
-            OnWaterEnter?.Invoke(value);
-            inWater = value;
-        }
-    }
-    public float Submergence { get; set; } = 0f;
-
-    [Header("Standing Settings")]
-    [SerializeField] private float uprightSpringStrength;
-    [SerializeField] private float uprightSpringStrengthDamper;
 
     [Header("Friction Settings")]
     [SerializeField] private float friction;
@@ -140,9 +126,8 @@ public class PlayerMovement : MonoBehaviour
 
         Friction();
         HoverOffGround(CalculateVault());
-        UpdateUprightForce();
 
-        float movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
+        float movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f) * (!gloveController.AllGlovesCanPunch() ? 0.3f : 1f);
         ClampSpeed(movementMultiplier);
 
         Magnitude = rb.velocity.magnitude;
@@ -153,7 +138,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Crouching) return;
 
-        if (InWater) rb.AddForceAtPosition(acceleration * movementMultiplier * moveDir.normalized, transform.position + transform.up, ForceMode.Impulse); 
         else rb.AddForce(acceleration * movementMultiplier * moveDir.normalized, ForceMode.Impulse);
     }
 
@@ -170,9 +154,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 bufferPosition = transform.position + bufferOffset;
         bool buffer = Physics.Raycast(bufferPosition, Vector3.down, out var hit, rideHeight + rideRayExtension * 1.5f, environment);
 
-        Grounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out _, rideHeight + rideRayExtension, environment) || InWater || buffer;
+        Grounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out _, rideHeight + rideRayExtension, environment) || buffer;
 
-        if (!buffer || InWater) return;
+        if (!buffer) return;
 
         Vector3 vel = rb.velocity;
         Vector3 otherVel = Vector3.zero;
@@ -189,12 +173,6 @@ public class PlayerMovement : MonoBehaviour
         if (hitBody != null) hitBody.AddForceAtPosition(Vector3.down * -springForce, hit.point);
     }
 
-    public void UpdateUprightForce()
-    {
-        Quaternion fromTo = Quaternion.FromToRotation(transform.up, Vector3.up);
-        rb.AddTorque((new Vector3(fromTo.x, fromTo.y, fromTo.z) * uprightSpringStrength) - (rb.angularVelocity * uprightSpringStrengthDamper), ForceMode.Impulse);
-    }
-
     private void ReceiveJumpInput(bool jumping)
     {
         Jumping = jumping;
@@ -202,49 +180,40 @@ public class PlayerMovement : MonoBehaviour
         if (!Grounded || !Jumping) return;
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        rb.AddForce((InWater ? swimJumpBoost : 1f) * jumpForce * Vector3.up, ForceMode.Impulse);
+        rb.AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
 
         player.CameraBody.CamHeadBob.BobOnce(5.5f);
     }
 
-    private void ReceiveSwimSinkInput(bool sinking)
-    {
-        if (sinking && InWater) rb.AddForce(swimAcceleration * Vector3.down, ForceMode.Impulse);
-    }
-
+    private float crouchElapsed = 0f;
     private void ReceiveCrouchInput(bool crouching)
     {
         UpdateCrouch();
 
-        if (InWater)
-        {
-            Crouching = false;
-            timeSinceLastSlide = slideBoostCooldown;
-            return;
-        }
-
-        if (!crouching) timeSinceLastSlide = Mathf.Max(0f, timeSinceLastSlide - Time.deltaTime);
-
-        bool prevCouching = Crouching;
-        Crouching = crouching;
-
-        if (Crouching == prevCouching) return;
-
-        OnPlayerCrouch?.Invoke(Crouching);
-
-        //Crouch
         if (Crouching)
         {
-            player.CameraBody.CamHeadBob.BobOnce(1f);
+            if (crouchElapsed > 0.2f)
+            {
+                Crouching = false;
+                crouchElapsed = 0f;
+                return;
+            }
 
-            if (timeSinceLastSlide > 0f) return;
-            rb.AddForce(Magnitude * slideBoostSpeed * (Grounded ? 0.8f : 0.1f) * moveDir.normalized, ForceMode.Impulse);
-            timeSinceLastSlide = slideBoostCooldown;
+            crouchElapsed += Time.deltaTime;
             return;
         }
 
-        //Uncrouch
-        if (Grounded) rb.velocity *= 0.65f;
+        slideBoostCooldown = Mathf.Max(0f, slideBoostCooldown - Time.deltaTime);
+
+        if (!crouching || slideBoostCooldown > 0f || stamina.RanOutofStamina) return;
+
+        OnPlayerCrouch?.Invoke(Crouching);
+        player.CameraBody.CamHeadBob.BobOnce(1f);
+        rb.AddForce(5f * slideBoostSpeed * (Grounded ? 0.8f : 0.1f) * moveDir.normalized, ForceMode.Impulse);
+        timeSinceLastSlide = slideBoostCooldown;
+        stamina.TakeStamina(dashStaminaCost);
+
+        Crouching = true;
     }
     private void UpdateCrouch()
     {
@@ -302,6 +271,8 @@ public class PlayerMovement : MonoBehaviour
     private float GetMaxSpeed()
     {
         if (Crouching) return crouchMaxSpeed;
+        if (!gloveController.AllGlovesCanPunch()) return punchingMaxSpeed;
+
         return maxSpeed * (Grounded ? 1f : 1.15f);
     }
 
