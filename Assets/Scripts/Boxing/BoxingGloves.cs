@@ -6,8 +6,6 @@ public class BoxingGloves : MonoBehaviour
 {
     [SerializeField] Transform[] handPositions = new Transform[2];
     [SerializeField] GloveCollision[] gloves = new GloveCollision[2];
-    [SerializeField] StaminaController stamina;
-
     [SerializeField] PlayerRef player;
 
     void Start()
@@ -30,11 +28,10 @@ public class BoxingGloves : MonoBehaviour
             gloves[i].HandleGloves(handPositions[i], player.Orientation.forward);
         }
 
-        if (button >= 2 || button < 0 || !AllGlovesCanPunch() || player.PlayerMovement.Crouching || stamina.RanOutofStamina) return;
+        if (button >= 2 || button < 0 || !AllGlovesCanPunch() || player.PlayerMovement.Crouching || player.Stamina.RanOutofStamina) return;
 
-        gloves[button].SetGlove(true);
+        gloves[button].SetGlove(true, 0f, player.Stamina);
         player.PlayerMovement.Rb.velocity *= 0f;
-        stamina.TakeStamina(15f);
     }
 
     public bool AllGlovesCanPunch()

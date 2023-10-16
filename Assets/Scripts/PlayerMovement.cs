@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float punchingMaxSpeed = 3f;
     [SerializeField] private BoxingGloves gloveController;
     [SerializeField] private float dashStaminaCost = 10f;
-    [SerializeField] StaminaController stamina;
 
     [Header("General Movement Settings")]
     [SerializeField] private float acceleration;
@@ -205,13 +204,14 @@ public class PlayerMovement : MonoBehaviour
 
         slideBoostCooldown = Mathf.Max(0f, slideBoostCooldown - Time.deltaTime);
 
-        if (!crouching || slideBoostCooldown > 0f || stamina.RanOutofStamina) return;
+        if (!crouching || slideBoostCooldown > 0f || player.Stamina.RanOutofStamina) return;
 
         OnPlayerCrouch?.Invoke(Crouching);
         player.CameraBody.CamHeadBob.BobOnce(1f);
         rb.AddForce(5f * slideBoostSpeed * (Grounded ? 0.8f : 0.1f) * moveDir.normalized, ForceMode.Impulse);
         timeSinceLastSlide = slideBoostCooldown;
-        stamina.TakeStamina(dashStaminaCost);
+
+        player.Stamina.TakeStamina(dashStaminaCost);
 
         Crouching = true;
     }

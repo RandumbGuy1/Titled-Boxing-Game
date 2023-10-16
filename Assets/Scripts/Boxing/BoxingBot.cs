@@ -11,6 +11,7 @@ public class BoxingBot : MonoBehaviour
     [SerializeField] private float turnSpeed;
     [SerializeField] private float standingRange;
     [SerializeField] private Transform target;
+    [SerializeField] private StaminaController stamina;
 
     private float[] elapsed = new float[2];
     private float[] randomTimes = new float[2];
@@ -42,7 +43,7 @@ public class BoxingBot : MonoBehaviour
                 {
                     elapsed[i] = 0f;
                     randomTimes[i] = Random.Range(0.2f, 1f);
-                    gloves[i].SetGlove(true);
+                    gloves[i].SetGlove(true, 0f, stamina);
                 }
             }
         }

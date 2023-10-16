@@ -10,6 +10,7 @@ public class PlayerRef : MonoBehaviour
     [SerializeField] private Transform orientation;
     [SerializeField] private MeshRenderer rendering;
     [SerializeField] private CapsuleCollider capsuleCol;
+    [SerializeField] private StaminaController stamina;
 
     public CapsuleCollider CapsuleCol => capsuleCol;
     public MeshRenderer Rendering => rendering;
@@ -18,6 +19,8 @@ public class PlayerRef : MonoBehaviour
     public CameraBody CameraBody => cameraBody;
     public Camera PlayerCam => playerCam;
     public Transform Orientation => orientation;
+
+    public StaminaController Stamina => stamina;
 
     void Awake()
     {

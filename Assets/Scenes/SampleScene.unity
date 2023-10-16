@@ -294,8 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   punchingMaxSpeed: 3
   gloveController: {fileID: 79618419}
-  dashStaminaCost: 10
-  stamina: {fileID: 79618423}
+  dashStaminaCost: 20
   acceleration: 30
   maxSpeed: 12
   jumpForce: 20
@@ -304,7 +303,7 @@ MonoBehaviour:
   crouchHeight: 0.7
   crouchSmoothTime: 0.1
   slideBoostSpeed: 5
-  slideBoostCooldown: 0.1
+  slideBoostCooldown: 0.2
   environment:
     serializedVersion: 2
     m_Bits: 64
@@ -355,6 +354,7 @@ MonoBehaviour:
   orientation: {fileID: 505645115}
   rendering: {fileID: 1734988589}
   capsuleCol: {fileID: 79618410}
+  stamina: {fileID: 79618423}
 --- !u!54 &79618417
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -401,7 +401,6 @@ MonoBehaviour:
   gloves:
   - {fileID: 1335673215}
   - {fileID: 1586858035}
-  stamina: {fileID: 79618423}
   player: {fileID: 79618416}
 --- !u!114 &79618420
 MonoBehaviour:
@@ -4735,6 +4734,7 @@ GameObject:
   - component: {fileID: 1623931474}
   - component: {fileID: 1623931475}
   - component: {fileID: 1623931476}
+  - component: {fileID: 1623931477}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -4846,6 +4846,7 @@ MonoBehaviour:
   turnSpeed: 12.5
   standingRange: 5
   target: {fileID: 79618413}
+  stamina: {fileID: 1623931477}
 --- !u!54 &1623931475
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4879,6 +4880,20 @@ MonoBehaviour:
   OnPlayerDamageEffects:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1623931477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623931469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9965906d29133c749bdd7c95290a2440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxstaminaHp: 100
+  slider: {fileID: 1856463546}
 --- !u!1 &1628040515
 GameObject:
   m_ObjectHideFlags: 0

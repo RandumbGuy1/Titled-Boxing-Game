@@ -14,6 +14,7 @@ public class GloveCollision : MonoBehaviour
     [SerializeField] AudioClip[] punchClips;
 
     [Header("Attack Settings")]
+    [SerializeField] float staminaCost;
     [SerializeField] float punchRange;
     [SerializeField] float punchForwardTime;
     [SerializeField] float punchBackTime;
@@ -77,10 +78,15 @@ public class GloveCollision : MonoBehaviour
         transform.position = Vector3.Lerp(endPunchPos, handPosition.position, punchElapsed / punchBackTime);
     }
 
-    public void SetGlove(bool active = true, float punchElapsed = 0f)
+    public void SetGlove(bool active = true, float punchElapsed = 0f, StaminaController stamina = null)
     {
         this.punchElapsed = punchElapsed;
         Active = active;
+
+        if (active && stamina != null)
+        {
+            stamina.TakeStamina(staminaCost);
+        }
     }
 
     float EaseInQuad(float x)

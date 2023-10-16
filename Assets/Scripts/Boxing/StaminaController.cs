@@ -10,19 +10,21 @@ public class StaminaController : MonoBehaviour
     private float staminaHp = 0f;
     private float staminaMulti = 1f;
 
-    public bool RanOutofStamina => staminaHp <= 0f;
+    public bool RanOutofStamina => staminaHp <= 5f;
 
     void Start()
     {
         staminaHp = maxstaminaHp;
     }
 
+    float smoothStamina = 100f;
     void Update()
     {
         staminaHp += Time.deltaTime * staminaMulti;
-        staminaMulti = Mathf.Lerp(staminaMulti, 1f, Time.deltaTime * 5f);
+        staminaMulti = Mathf.Lerp(staminaMulti, 100f, Time.deltaTime * 0.4f);
 
-        slider.value = staminaHp / maxstaminaHp;
+        smoothStamina = Mathf.Lerp(smoothStamina, staminaHp, 5f * Time.deltaTime);
+        slider.value = smoothStamina / maxstaminaHp;
     }
 
     public void TakeStamina(float stamina)
