@@ -126,7 +126,8 @@ public class PlayerMovement : MonoBehaviour
         Friction();
         HoverOffGround(CalculateVault());
 
-        float movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f) * (!gloveController.AllGlovesCanPunch() ? 0.3f : 1f);
+        float movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f) *
+            (gloveController.AllGlovesCanPunch() ? 1f : 0.3f) * (player.Stamina.RanOutofStamina ? 0.3f : 1f);
         ClampSpeed(movementMultiplier);
 
         Magnitude = rb.velocity.magnitude;
@@ -137,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Crouching) return;
 
-        else rb.AddForce(acceleration * movementMultiplier * moveDir.normalized, ForceMode.Impulse);
+        rb.AddForce(acceleration * movementMultiplier * moveDir.normalized, ForceMode.Impulse);
     }
 
     private Vector3 CalculateVault()
@@ -314,4 +315,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void RemoveSpring() => Destroy(joint);
+
+    public void ResetVelocity(float x)
+    {
+        rb.velocity = Vector3.zero;
+        print(1);
+    }
 }

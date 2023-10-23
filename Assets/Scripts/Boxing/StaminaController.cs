@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class StaminaController : MonoBehaviour
 {
+    [SerializeField] private float maxStaminaRecharge = 100f;
+    [SerializeField] private float staminaBreakRegainSpeed = 0f;
     [SerializeField] private float maxstaminaHp;
     [SerializeField] private Slider slider;
     private float staminaHp = 0f;
     private float staminaMulti = 1f;
 
-    public bool RanOutofStamina => staminaHp <= 5f;
+    public bool RanOutofStamina { get; private set; } = false;
+    public UnityEvent<float> OnStaminaBreakEffects;
 
     void Start()
     {
@@ -18,18 +22,31 @@ public class StaminaController : MonoBehaviour
     }
 
     float smoothStamina = 100f;
+    public float SliderValue => staminaHp == 0f ? 0f : smoothStamina / maxstaminaHp;
     void Update()
     {
-        staminaHp += Time.deltaTime * staminaMulti;
-        staminaMulti = Mathf.Lerp(staminaMulti, 100f, Time.deltaTime * 0.4f);
+        staminaHp = Mathf.Min(staminaHp + Time.deltaTime * staminaMulti * (RanOutofStamina ? staminaBreakRegainSpeed : 1f), maxstaminaHp);
+        staminaMulti = RanOutofStamina ? 1f : Mathf.Lerp(staminaMulti, maxStaminaRecharge, Time.deltaTime * 0.5f);
+        smoothStamina = Mathf.Lerp(smoothStamina, staminaHp, 15f * Time.deltaTime);
 
-        smoothStamina = Mathf.Lerp(smoothStamina, staminaHp, 5f * Time.deltaTime);
-        slider.value = smoothStamina / maxstaminaHp;
+        if (slider) slider.value = SliderValue;
+
+        if (RanOutofStamina)
+        {
+            if (SliderValue >= 0.99f) RanOutofStamina = false;
+        }
     }
 
     public void TakeStamina(float stamina)
     {
-        staminaHp = Mathf.Max(0f, staminaHp -= stamina);
+        staminaHp = staminaHp -= stamina;
         staminaMulti = 0f;
+
+        if (staminaHp <= 0f)
+        {
+            staminaHp = 0f;
+            RanOutofStamina = true;
+            OnStaminaBreakEffects?.Invoke(1f);
+        }
     }
 }

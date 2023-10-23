@@ -12,6 +12,7 @@ public class Damageable : MonoBehaviour
     private float smoothHealth;
 
     public float Health { get; private set; }
+    public float SliderValue => Health == 0f ? 0f : smoothHealth / maxHealth;
     public UnitState State { get; private set; } = UnitState.Active;
 
     public delegate void DamageEntity(float damage, float stun);
@@ -33,7 +34,7 @@ public class Damageable : MonoBehaviour
             //Death
             if (Health <= 0f)
             {
-                healthBar.value = Health / maxHealth;
+                smoothHealth = Health / maxHealth;
                 gameObject.SetActive(false);
             }
         };
@@ -41,9 +42,9 @@ public class Damageable : MonoBehaviour
 
     void Update()
     {
-        if (healthBar == null) return;
-
         smoothHealth = Mathf.Lerp(smoothHealth, Health, Time.deltaTime * 15f);
+
+        if (healthBar == null) return;
         healthBar.value = smoothHealth / maxHealth;
     }
 
