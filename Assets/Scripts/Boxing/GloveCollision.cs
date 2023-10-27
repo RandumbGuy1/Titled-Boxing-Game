@@ -45,9 +45,26 @@ public class GloveCollision : MonoBehaviour
 
             Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
             if (rb != null) rb.AddForce(-hit.normal * punchForce, ForceMode.Impulse);
+            
+            IBoxer boxer = hit.collider.GetComponent<IBoxer>();
+            if (boxer != null)
+            {
+                if (boxer.Punching)
+                {
+                    boxer.Health.Damage(punchDamage * 1.25f);
+                    boxer.Health.Counter();
+                    return;
+                }
 
-            Damageable toHit = hit.collider.gameObject.GetComponent<Damageable>();
-            if (toHit != null) toHit.Damage(punchDamage, punchStun);
+                if (boxer.Block.Blocking)
+                {
+                    boxer.Health.Damage(punchDamage * 0.25f);
+                    return;
+                }
+
+                boxer.Health.Damage(punchDamage);
+                boxer.Stun.Stun((hit.point - thrower.position).normalized, punchStun);
+            }
         }
     }
 
@@ -65,7 +82,6 @@ public class GloveCollision : MonoBehaviour
                 else overExtendDelay = 5f;
 
                 SetGlove(false);
-                endPunchPos = transform.position;
                 return;
             }
 
@@ -81,6 +97,7 @@ public class GloveCollision : MonoBehaviour
     public void SetGlove(bool active = true, float punchElapsed = 0f, StaminaController stamina = null)
     {
         this.punchElapsed = punchElapsed;
+        endPunchPos = transform.position;
         Active = active;
 
         if (active && stamina != null)

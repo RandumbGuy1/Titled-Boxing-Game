@@ -29,6 +29,6 @@ public class SpecialConditionFX : MonoBehaviour
             postProcess.VignetteIntensity.SetValue(0.4f, 3f, true);
         }
 
-        AudioManager.Instance.PlayOnce(clip, transform.position, power);
+        AudioManager.Instance.PlayOnce(clip, transform.position );
     }
 }

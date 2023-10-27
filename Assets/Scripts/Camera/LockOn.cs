@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LockOn : MonoBehaviour
@@ -62,6 +60,7 @@ public class LockOn : MonoBehaviour
         display.SetHealthAndStamina(new GameObject());
         Destroy(currOutline);
     }
+
     public RaycastHit[] SortRayHitByDist(RaycastHit[] hits)
     {
         var n = hits.Length;

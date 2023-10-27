@@ -10,7 +10,7 @@ public class PlayerRef : MonoBehaviour
     [SerializeField] private Transform orientation;
     [SerializeField] private MeshRenderer rendering;
     [SerializeField] private CapsuleCollider capsuleCol;
-    [SerializeField] private StaminaController stamina;
+    [SerializeField] private BoxingGloves gloves;
 
     public CapsuleCollider CapsuleCol => capsuleCol;
     public MeshRenderer Rendering => rendering;
@@ -20,7 +20,7 @@ public class PlayerRef : MonoBehaviour
     public Camera PlayerCam => playerCam;
     public Transform Orientation => orientation;
 
-    public StaminaController Stamina => stamina;
+    public BoxingGloves Gloves => gloves;
 
     void Awake()
     {

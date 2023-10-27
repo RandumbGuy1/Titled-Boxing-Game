@@ -56,7 +56,7 @@ public class PlayerInput : MonoBehaviour
         OnMouseButtonDownInput?.Invoke(MouseButtonDown());
         OnMouseButtonInput?.Invoke(MouseButton());
 
-        OnInteractInput?.Invoke(Input.GetKeyDown(interactKey));
+        OnInteractInput?.Invoke(Input.GetKey(interactKey));
     }
 
     int IterateKeyBinds(List<KeyCode> keys)

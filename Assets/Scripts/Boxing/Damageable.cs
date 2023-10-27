@@ -15,21 +15,22 @@ public class Damageable : MonoBehaviour
     public float SliderValue => Health == 0f ? 0f : smoothHealth / maxHealth;
     public UnitState State { get; private set; } = UnitState.Active;
 
-    public delegate void DamageEntity(float damage, float stun);
+    public delegate void DamageEntity(float damage);
     public event DamageEntity OnPlayerDamage;
     public UnityEvent<float> OnPlayerDamageEffects;
+    public UnityEvent<float> OnPlayerCounter;
 
     void Start()
     {
         Health = maxHealth;
         smoothHealth = maxHealth;
 
-        OnPlayerDamage += (float damage, float stun) =>
+        OnPlayerDamage += (float damage) =>
         {
             if (State == UnitState.KO || State == UnitState.Inactive) return;
 
             Health = Mathf.Clamp(Health - damage, 0, maxHealth);
-            OnPlayerDamageEffects?.Invoke(damage / maxHealth);
+            OnPlayerDamageEffects?.Invoke(damage / Health);
 
             //Death
             if (Health <= 0f)
@@ -48,9 +49,14 @@ public class Damageable : MonoBehaviour
         healthBar.value = smoothHealth / maxHealth;
     }
 
-    public void Damage(float damage, float stun)
+    public void Damage(float damage)
     {
-        OnPlayerDamage?.Invoke(damage, stun);
+        OnPlayerDamage?.Invoke(damage);
+    }
+
+    public void Counter()
+    {
+        OnPlayerCounter?.Invoke(1f);
     }
 }
 

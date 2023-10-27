@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Punching Movement Settings")]
-    [SerializeField] private float punchingMaxSpeed = 3f;
-    [SerializeField] private BoxingGloves gloveController;
-    [SerializeField] private float dashStaminaCost = 10f;
-
     [Header("General Movement Settings")]
+    [SerializeField] private float inactiveSpeed = 2f;
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpForce;
@@ -37,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public float MagToMaxRatio => Mathf.Clamp01(Magnitude / (GetMaxSpeed() * 1.5f));
 
     [Header("Crouch Settings")]
+    [SerializeField] private float dashStaminaCost = 10f;
     [SerializeField] private float slideFriction;
     [SerializeField] private float crouchMaxSpeed;
     [SerializeField] private float crouchHeight;
@@ -126,14 +123,12 @@ public class PlayerMovement : MonoBehaviour
         Friction();
         HoverOffGround(CalculateVault());
 
-        float movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f) *
-            (gloveController.AllGlovesCanPunch() ? 1f : 0.3f) * (player.Stamina.RanOutofStamina ? 0.3f : 1f);
+        float movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f) * (player.Gloves.CanPreformActions ? 1f : 0.3f);
         ClampSpeed(movementMultiplier);
 
         Magnitude = rb.velocity.magnitude;
         Velocity = rb.velocity;
 
-        //Calculate move dir based on camera y rotation
         moveDir = player.Orientation.TransformDirection(Input.x, 0, Input.y);
 
         if (Crouching) return;
@@ -192,6 +187,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (Crouching)
         {
+            if (player.Gloves.Stamina.RanOutofStamina)
+            {
+                rb.velocity = Vector3.zero;
+            }
+
             if (crouchElapsed > 0.2f)
             {
                 Crouching = false;
@@ -205,14 +205,15 @@ public class PlayerMovement : MonoBehaviour
 
         slideBoostCooldown = Mathf.Max(0f, slideBoostCooldown - Time.deltaTime);
 
-        if (!crouching || slideBoostCooldown > 0f || player.Stamina.RanOutofStamina) return;
+        if (!crouching || slideBoostCooldown > 0f || !player.Gloves.CanPreformActions) return;
 
         OnPlayerCrouch?.Invoke(Crouching);
         player.CameraBody.CamHeadBob.BobOnce(1f);
         rb.AddForce(5f * slideBoostSpeed * (Grounded ? 0.8f : 0.1f) * moveDir.normalized, ForceMode.Impulse);
         timeSinceLastSlide = slideBoostCooldown;
 
-        player.Stamina.TakeStamina(dashStaminaCost);
+        player.Gloves.Stamina.TakeStamina(dashStaminaCost, true);
+        player.Gloves.Block.SetBlock(false);
 
         Crouching = true;
     }
@@ -247,8 +248,8 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 frictionForce = Vector3.zero;
 
-        if (Mathf.Abs(RelativeVel.x) > 0f && Input.x == 0f && readyToCounter.x > counterThresold) frictionForce -= player.Orientation.right * RelativeVel.x;
-        if (Mathf.Abs(RelativeVel.z) > 0f && Input.y == 0f && readyToCounter.y > counterThresold) frictionForce -= player.Orientation.forward * RelativeVel.z;
+        if (Mathf.Abs(RelativeVel.x) > 0f && Input.x == 0f && readyToCounter.x > counterThresold || !player.Gloves.CanPreformActions) frictionForce -= player.Orientation.right * RelativeVel.x;
+        if (Mathf.Abs(RelativeVel.z) > 0f && Input.y == 0f && readyToCounter.y > counterThresold || !player.Gloves.CanPreformActions) frictionForce -= player.Orientation.forward * RelativeVel.z;
 
         if (CounterMomentum(Input.x, RelativeVel.x)) frictionForce -= player.Orientation.right * RelativeVel.x;
         if (CounterMomentum(Input.y, RelativeVel.z)) frictionForce -= player.Orientation.forward * RelativeVel.z;
@@ -265,14 +266,14 @@ public class PlayerMovement : MonoBehaviour
     private void ClampSpeed(float movementMultiplier)
     {
         Vector3 vel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        float coefficientOfFriction = acceleration / GetMaxSpeed();
+        float coefficientOfFriction = acceleration * movementMultiplier / GetMaxSpeed();
 
-        if (vel.sqrMagnitude > maxSpeed * maxSpeed) rb.AddForce(coefficientOfFriction * movementMultiplier * -vel, ForceMode.Impulse);
+        if (vel.sqrMagnitude > maxSpeed * maxSpeed) rb.AddForce(coefficientOfFriction * -vel, ForceMode.Impulse);
     }
     private float GetMaxSpeed()
     {
         if (Crouching) return crouchMaxSpeed;
-        if (!gloveController.AllGlovesCanPunch()) return punchingMaxSpeed;
+        if (!player.Gloves.CanPreformActions || player.Gloves.Block.Blocking || !player.Gloves.CanPunch) return inactiveSpeed;
 
         return maxSpeed * (Grounded ? 1f : 1.15f);
     }
@@ -316,9 +317,5 @@ public class PlayerMovement : MonoBehaviour
 
     public void RemoveSpring() => Destroy(joint);
 
-    public void ResetVelocity(float x)
-    {
-        rb.velocity = Vector3.zero;
-        print(1);
-    }
+    public void ResetVelocity(float x) => rb.velocity = Vector3.zero;
 }
