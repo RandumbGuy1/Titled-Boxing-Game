@@ -544,9 +544,9 @@ MonoBehaviour:
   postProcess: {fileID: 832575520}
   clip: {fileID: 8300000, guid: 74189bc950d2be84c9c053714fc59c39, type: 3}
   effect: {fileID: 0}
+  effectText: {fileID: 0}
   effectName: 
   effectColor: {r: 1, g: 0, b: 0, a: 0}
-  effectText: {fileID: 1612699620}
   textShake: {fileID: 0}
 --- !u!114 &79618425
 MonoBehaviour:
@@ -564,9 +564,9 @@ MonoBehaviour:
   postProcess: {fileID: 832575520}
   clip: {fileID: 8300000, guid: 0773cec74862a514c866d92abb41555e, type: 3}
   effect: {fileID: 4030057093064698186, guid: 579947f454d298347b8b1ade58f40dd7, type: 3}
+  effectText: {fileID: 1612699620}
   effectName: Stamina Break
   effectColor: {r: 0.30081883, g: 0.40536633, b: 0.9811321, a: 1}
-  effectText: {fileID: 1612699620}
   textShake: {fileID: 1612699622}
 --- !u!114 &79618426
 MonoBehaviour:
@@ -611,9 +611,9 @@ MonoBehaviour:
   postProcess: {fileID: 832575520}
   clip: {fileID: 8300000, guid: ceffdcd973014461ca03ea58f9c0bbb7, type: 3}
   effect: {fileID: 4030057093064698186, guid: 282a6c66c6aee4bd393a3199d8bb74a7, type: 3}
+  effectText: {fileID: 1612699620}
   effectName: Counter!
   effectColor: {r: 0.98039216, g: 0.4564533, b: 0.30196077, a: 1}
-  effectText: {fileID: 1612699620}
   textShake: {fileID: 1612699622}
 --- !u!114 &79618428
 MonoBehaviour:
@@ -943,6 +943,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityName: {fileID: 99638551}
+  entityEffectText: {fileID: 0}
+  entityBlock: {fileID: 0}
   health: {fileID: 0}
   stamina: {fileID: 0}
   healthSlider: {fileID: 1299949466}
@@ -1460,9 +1462,9 @@ MonoBehaviour:
     spatialBlend: 0
     looping: 0
     playOnAwake: 0
-  - clip: {fileID: 8300000, guid: e52530891ba564601ad79fe237ac5f04, type: 3}
+  - clip: {fileID: 8300000, guid: 2b4eaf22c6a544cd9aaca51bd98f053b, type: 3}
     soundCapacity: 1
-    volume: 0.3
+    volume: 1
     pitch: 1
     spatialBlend: 0
     looping: 1
@@ -6112,9 +6114,9 @@ MonoBehaviour:
   postProcess: {fileID: 0}
   clip: {fileID: 8300000, guid: 0773cec74862a514c866d92abb41555e, type: 3}
   effect: {fileID: 4030057093064698186, guid: 579947f454d298347b8b1ade58f40dd7, type: 3}
+  effectText: {fileID: 448541882}
   effectName: Stamina Break
   effectColor: {r: 0.30081883, g: 0.40536633, b: 0.9811321, a: 1}
-  effectText: {fileID: 448541882}
   textShake: {fileID: 448541880}
 --- !u!114 &1623931479
 MonoBehaviour:
@@ -6159,9 +6161,9 @@ MonoBehaviour:
   postProcess: {fileID: 0}
   clip: {fileID: 8300000, guid: ceffdcd973014461ca03ea58f9c0bbb7, type: 3}
   effect: {fileID: 4030057093064698186, guid: 282a6c66c6aee4bd393a3199d8bb74a7, type: 3}
-  effectName: Counter!
-  effectColor: {r: 0.98039216, g: 0.4564533, b: 0.30196077, a: 1}
   effectText: {fileID: 448541882}
+  effectName: Counter
+  effectColor: {r: 0.98039216, g: 0.4564533, b: 0.30196077, a: 1}
   textShake: {fileID: 448541880}
 --- !u!114 &1623931481
 MonoBehaviour:

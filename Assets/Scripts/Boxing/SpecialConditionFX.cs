@@ -17,8 +17,11 @@ public class SpecialConditionFX : MonoBehaviour
 
     public void Trigger(float power)
     {
-        effectText.text = effectName;
-        effectText.color = effectColor;
+        if (effectText)
+        {
+            effectText.text = effectName;
+            effectText.color = effectColor;
+        }
 
         if (effect) Instantiate(effect, transform.position, Quaternion.identity);
         if (player) player.CameraBody.CamShaker.ShakeOnce(new PerlinShake(ShakeData.Create(20f, 6f, 0.7f, 10f)));
