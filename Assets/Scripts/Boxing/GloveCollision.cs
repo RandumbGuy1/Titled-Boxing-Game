@@ -19,6 +19,11 @@ public class GloveCollision : MonoBehaviour
     [SerializeField] float punchForwardTime;
     [SerializeField] float punchBackTime;
     [SerializeField] float punchDelay;
+
+    [Header("Glove GFX Settings")]
+    [SerializeField] Vector3 startRot;
+    [SerializeField] Quaternion hitRot;
+    [SerializeField] Transform gfx;
     private float overExtendDelay = 1f;
     bool hitSomething = false;
 
@@ -53,6 +58,7 @@ public class GloveCollision : MonoBehaviour
                 {
                     boxer.Health.Damage(punchDamage * 1.25f);
                     boxer.Health.Counter();
+                    boxer.Stun.Stun((hit.point - thrower.position).normalized, punchStun);
                     return;
                 }
 
@@ -86,12 +92,13 @@ public class GloveCollision : MonoBehaviour
             }
 
             endPunchPos = handPosition.position + forward * punchRange;
-
+            gfx.localRotation = Quaternion.Lerp(gfx.localRotation, hitRot, Time.deltaTime * 15f);
             transform.position = Vector3.Lerp(handPosition.position, endPunchPos, EaseInQuad(punchElapsed / punchForwardTime));
             return;
         }
 
         transform.position = Vector3.Lerp(endPunchPos, handPosition.position, punchElapsed / punchBackTime);
+        gfx.localRotation = Quaternion.Lerp(gfx.localRotation, Quaternion.Euler(startRot), Time.deltaTime * 15f);
     }
 
     public void SetGlove(bool active = true, float punchElapsed = 0f, StaminaController stamina = null)

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 6136373199581151447}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6136373200338076472}
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6136373199581151447}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -8640126420037812602, guid: 571b7dc947a1748b399b36954fd21c40, type: 3}
 --- !u!23 &6136373199581151449
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
     type: 3}
   gloveCollider: {fileID: 6136373200338076479}
   punchDamage: 10
-  punchStun: 0.5
+  punchStun: 0.25
   punchForce: 5
   punchClips:
   - {fileID: 8300000, guid: 5ee2e7dc3057c2a41ab26fe41b086609, type: 3}
@@ -162,6 +162,9 @@ MonoBehaviour:
   punchForwardTime: 0.2
   punchBackTime: 0.15
   punchDelay: 0.1
+  startRot: {x: 0, y: 0, z: 0}
+  hitRot: {x: 0.40557975, y: 0.579228, z: -0.579228, w: -0.40557975}
+  gfx: {fileID: 6136373199581151446}
 --- !u!96 &6136373200338076609
 TrailRenderer:
   serializedVersion: 2
@@ -183,7 +186,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a0615cfde6d2b484099eb9f27dda688e, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -207,7 +210,7 @@ TrailRenderer:
   m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.5
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -234,8 +237,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 0.84313726}
+      key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -252,8 +255,8 @@ TrailRenderer:
       ctime7: 0
       atime0: 0
       atime1: 65535
-      atime2: 0
-      atime3: 0
+      atime2: 65535
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0

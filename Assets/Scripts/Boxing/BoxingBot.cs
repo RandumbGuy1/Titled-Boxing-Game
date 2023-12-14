@@ -57,11 +57,13 @@ public class BoxingBot : MonoBehaviour, IBoxer
         Vector3 toTarget = target.position - transform.position;
         toTarget.y = 0f;
 
+        Vector3 toTargetFromDistance = (target.position - toTarget.normalized * standingRange * 0.5f) - transform.position;
+
         rb.rotation = Quaternion.Slerp(rb.rotation, Quaternion.LookRotation(toTarget), Time.fixedDeltaTime * turnSpeed);
 
         if (!CanPreformActions) return;
 
-        rb.MovePosition(transform.position + Vector3.ClampMagnitude(toTarget, 10f) * Time.fixedDeltaTime * speed);
+        rb.MovePosition(transform.position + Vector3.ClampMagnitude(toTargetFromDistance, 10f) * Time.fixedDeltaTime * speed);
 
         if (toTarget.sqrMagnitude < standingRange * standingRange)
         {
@@ -76,7 +78,7 @@ public class BoxingBot : MonoBehaviour, IBoxer
                     gloves[i].SetGlove(true, 0f, stamina);
                 }
             }
-        }
+        } 
     }
 
     public void ResetGloves(float x)
