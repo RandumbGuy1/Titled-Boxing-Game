@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] MenuSway menuSway;
+    [SerializeField] GameObject main;
+    [SerializeField] GameObject settings;
+
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -12,12 +16,9 @@ public class MainMenu : MonoBehaviour
 
     public void GoToSettingsMenu()
     {
-        SceneManager.LoadScene("SettingsMenu");
-    }
-
-    public void GoToMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
+        menuSway.InSettings = !menuSway.InSettings;
+        settings.SetActive(!settings.activeSelf);
+        main.SetActive(!main.activeSelf);
     }
 
     public void QuitGame()

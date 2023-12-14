@@ -22,6 +22,14 @@ public class CameraIdleSway
 		HeadSwayOffset = Vector3.Lerp(HeadSwayOffset, LissajousCurve(headSwayScroller) * swayAmount, 5f * Time.deltaTime);
 	}
 
+	public void IdleCameraSway()
+	{
+		if (!enabled) return;
+
+		headSwayScroller += Time.deltaTime * swayFrequency;
+		HeadSwayOffset = Vector3.Lerp(HeadSwayOffset, LissajousCurve(headSwayScroller) * swayAmount, 5f * Time.deltaTime);
+	}
+
 	private Vector3 LissajousCurve(float Time)
 	{
 		return new Vector3(Mathf.Sin(Time), 1f * Mathf.Sin(2f * Time + Mathf.PI));

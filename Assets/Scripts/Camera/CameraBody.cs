@@ -42,8 +42,9 @@ public class CameraBody : MonoBehaviour
 
     void Update()
     {
-        player.PlayerCam.fieldOfView = camFov.FOVUpdate(player);
+        if (player == null) return;
 
+        player.PlayerCam.fieldOfView = camFov.FOVUpdate(player);
         camSprintEffect.SpeedLines(player);
         camIdleSway.IdleCameraSway(player);
         camHeadBob.BobUpdate(player);
