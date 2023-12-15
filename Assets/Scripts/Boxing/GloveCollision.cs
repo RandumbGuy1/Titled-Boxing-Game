@@ -77,6 +77,12 @@ public class GloveCollision : MonoBehaviour
     Vector3 endPunchPos = Vector3.zero;
     public void HandleGloves(Transform handPosition, Vector3 forward)
     {
+        if (rb)
+        {
+            Active = false;
+            return;
+        }
+
         punchElapsed += Time.deltaTime;
         overExtendDelay = Mathf.Max(1f, overExtendDelay -= Time.deltaTime);
 
@@ -111,6 +117,22 @@ public class GloveCollision : MonoBehaviour
         {
             stamina.TakeStamina(staminaCost);
         }
+    }
+
+    Rigidbody rb = null;
+    public void Ragdoll(bool active = false)
+    {
+        if (!active)
+        {
+            gloveCollider.isTrigger = false;
+            rb = gameObject.AddComponent<Rigidbody>();
+            rb.drag = 1f;
+            return;
+        }
+
+        gloveCollider.isTrigger = true;
+        Destroy(rb);
+        rb = null;
     }
 
     float EaseInQuad(float x)

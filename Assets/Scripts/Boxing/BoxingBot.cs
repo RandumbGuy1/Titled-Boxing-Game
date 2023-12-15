@@ -85,4 +85,10 @@ public class BoxingBot : MonoBehaviour, IBoxer
     {
         foreach (GloveCollision glove in gloves) glove.SetGlove(false);
     }
+
+    public void Disable()
+    {
+        rb.freezeRotation = false;
+
+    }
 }

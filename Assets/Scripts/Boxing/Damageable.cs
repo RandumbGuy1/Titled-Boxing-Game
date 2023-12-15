@@ -19,6 +19,7 @@ public class Damageable : MonoBehaviour
     public event DamageEntity OnPlayerDamage;
     public UnityEvent<float> OnPlayerDamageEffects;
     public UnityEvent<float> OnPlayerCounter;
+    public UnityEvent OnPlayerDeath;
 
     void Start()
     {
@@ -36,7 +37,7 @@ public class Damageable : MonoBehaviour
             if (Health <= 0f)
             {
                 smoothHealth = Health / maxHealth;
-                gameObject.SetActive(false);
+                OnPlayerDeath?.Invoke();
             }
         };
     }

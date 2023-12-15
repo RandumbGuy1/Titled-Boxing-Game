@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4283330000835505269}
   - component: {fileID: 4283330000835505275}
   - component: {fileID: 4283330000835505272}
+  - component: {fileID: 1167641004466228564}
   m_Layer: 0
   m_Name: Ariel
   m_TagString: Untagged
@@ -143,6 +144,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnPlayerDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1167641004466228564}
+        m_TargetAssemblyTypeName: BoxerRagdoll, Assembly-CSharp
+        m_MethodName: Ragdoll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4283330000835505271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +246,18 @@ MonoBehaviour:
   cam: {fileID: 0}
   shieldDisplay: {fileID: 0}
   player: {fileID: 0}
+--- !u!114 &1167641004466228564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283330000835505263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e176742324d143108ac41bdb4bad920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4283330002063807795
 GameObject:
   m_ObjectHideFlags: 0
