@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5180,30 +5180,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 308099436577943798, guid: c6bb691ae367146debff814e0084848f,
-        type: 3}
-      propertyPath: punchDelay
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 308099436577943798, guid: c6bb691ae367146debff814e0084848f,
-        type: 3}
-      propertyPath: punchDamage
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 308099436577943798, guid: c6bb691ae367146debff814e0084848f,
-        type: 3}
-      propertyPath: punchForwardTime
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 308099437981328095, guid: c6bb691ae367146debff814e0084848f,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3b39f4c041b984071a6b73b90c66cecc, type: 2}
     - target: {fileID: 4283330000835505263, guid: c6bb691ae367146debff814e0084848f,
         type: 3}
       propertyPath: m_Name
-      value: boogle
+      value: Ariel
       objectReference: {fileID: 0}
     - target: {fileID: 4283330000835505264, guid: c6bb691ae367146debff814e0084848f,
         type: 3}
@@ -5330,41 +5310,6 @@ PrefabInstance:
       propertyPath: shieldDisplay
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 4283330002217834327, guid: c6bb691ae367146debff814e0084848f,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 58b13f0d9a836e340b3ada69b43895dc, type: 2}
-    - target: {fileID: 7951587933201737315, guid: c6bb691ae367146debff814e0084848f,
-        type: 3}
-      propertyPath: punchDelay
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7951587933201737315, guid: c6bb691ae367146debff814e0084848f,
-        type: 3}
-      propertyPath: punchForce
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7951587933201737315, guid: c6bb691ae367146debff814e0084848f,
-        type: 3}
-      propertyPath: punchDamage
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7951587933201737315, guid: c6bb691ae367146debff814e0084848f,
-        type: 3}
-      propertyPath: punchBackTime
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7951587933201737315, guid: c6bb691ae367146debff814e0084848f,
-        type: 3}
-      propertyPath: punchForwardTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7951587933556204932, guid: c6bb691ae367146debff814e0084848f,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3b39f4c041b984071a6b73b90c66cecc, type: 2}
     m_RemovedComponents:
     - {fileID: 4283330000835505268, guid: c6bb691ae367146debff814e0084848f, type: 3}
     - {fileID: 4283330000835505274, guid: c6bb691ae367146debff814e0084848f, type: 3}
