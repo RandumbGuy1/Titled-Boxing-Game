@@ -69,4 +69,11 @@ public class BoxingGloves : MonoBehaviour, IBoxer
     {
         foreach (GloveCollision glove in gloves) glove.SetGlove(false);
     }
+
+    public void Disable()
+    {
+        player.PlayerMovement.GoLimp(100f);
+        for (int i = 0; i < gloves.Length && i < handPositions.Length; i++) gloves[i].Ragdoll();
+        enabled = false;
+    }
 }

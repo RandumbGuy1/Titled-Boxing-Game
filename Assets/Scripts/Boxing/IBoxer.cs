@@ -14,4 +14,6 @@ public interface IBoxer
     public StaminaController Stamina { get; }
     public StunController Stun { get; }
     public BlockController Block { get; }
+
+    public void Disable();
 }
