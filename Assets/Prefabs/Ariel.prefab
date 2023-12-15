@@ -92,9 +92,9 @@ MonoBehaviour:
   gloves:
   - {fileID: 7951587933201737315}
   - {fileID: 308099436577943798}
-  speed: 1
-  turnSpeed: 10
-  standingRange: 6
+  speed: 3
+  turnSpeed: 15
+  standingRange: 5
   target: {fileID: 0}
   health: {fileID: 4283330000835505270}
   stamina: {fileID: 4283330000835505271}
