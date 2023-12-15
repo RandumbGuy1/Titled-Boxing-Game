@@ -53,6 +53,8 @@ public class BoxingGloves : MonoBehaviour, IBoxer
 
     void HandlePunching(int button)
     {
+        if (!enabled) return;
+
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++)
         {
             gloves[i].HandleGloves(handPositions[i], player.Orientation.forward);
@@ -71,8 +73,11 @@ public class BoxingGloves : MonoBehaviour, IBoxer
     }
 
     public void Disable()
-    {
-        player.PlayerMovement.GoLimp(100f);
+    { 
+        player.PlayerMovement.enabled = false;
+        player.PlayerMovement.Rb.freezeRotation = false;
+        player.PlayerInput.enabled = false;
+
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++) gloves[i].Ragdoll();
         enabled = false;
     }

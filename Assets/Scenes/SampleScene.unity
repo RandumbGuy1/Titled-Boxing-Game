@@ -5216,7 +5216,7 @@ PrefabInstance:
     - target: {fileID: 4283330000835505264, guid: c6bb691ae367146debff814e0084848f,
         type: 3}
       propertyPath: speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4283330000835505264, guid: c6bb691ae367146debff814e0084848f,
         type: 3}
@@ -5230,8 +5230,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283330000835505264, guid: c6bb691ae367146debff814e0084848f,
         type: 3}
+      propertyPath: turnSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283330000835505264, guid: c6bb691ae367146debff814e0084848f,
+        type: 3}
       propertyPath: standingRange
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4283330000835505267, guid: c6bb691ae367146debff814e0084848f,
         type: 3}
@@ -5292,6 +5297,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ragdoll
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283330000835505270, guid: c6bb691ae367146debff814e0084848f,
+        type: 3}
+      propertyPath: maxHealth
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4283330000835505270, guid: c6bb691ae367146debff814e0084848f,
         type: 3}

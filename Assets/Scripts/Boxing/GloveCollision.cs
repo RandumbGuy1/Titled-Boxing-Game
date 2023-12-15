@@ -119,11 +119,16 @@ public class GloveCollision : MonoBehaviour
         }
     }
 
+    Transform prevParent = null;
     Rigidbody rb = null;
     public void Ragdoll(bool active = false)
     {
         if (!active)
         {
+            if (rb) return;
+
+            prevParent = transform.parent;
+            transform.parent = null;
             gloveCollider.isTrigger = false;
             rb = gameObject.AddComponent<Rigidbody>();
             rb.drag = 1f;
@@ -133,6 +138,7 @@ public class GloveCollision : MonoBehaviour
         gloveCollider.isTrigger = true;
         Destroy(rb);
         rb = null;
+        transform.parent = prevParent;
     }
 
     float EaseInQuad(float x)
