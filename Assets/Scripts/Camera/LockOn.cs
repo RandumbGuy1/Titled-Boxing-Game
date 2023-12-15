@@ -13,7 +13,6 @@ public class LockOn : MonoBehaviour
     [Header("Outline Settings")]
     [SerializeField] private float thickness;
     [SerializeField] private Color color;
-
     public Transform LockOnTarget => lockOnTarget;
 
     private void Awake()
@@ -46,6 +45,7 @@ public class LockOn : MonoBehaviour
             }
 
             if (currOutline != null) Destroy(currOutline);
+
             lockOnTarget = hit.collider.transform;
             currOutline = lockOnTarget.gameObject.AddComponent<Outline>();
             currOutline.OutlineMode = Outline.Mode.OutlineVisible;
@@ -53,6 +53,7 @@ public class LockOn : MonoBehaviour
             currOutline.OutlineWidth = thickness;
 
             display.SetHealthAndStamina(lockOnTarget.gameObject);
+
             return;
         }
 

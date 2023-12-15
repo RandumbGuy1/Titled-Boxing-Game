@@ -23,6 +23,8 @@ public class BlockController : MonoBehaviour
     {
         blockElapsed += Time.deltaTime;
 
+        if (!shieldDisplay) return;
+
         shieldDisplay.rectTransform.position = cam.WorldToScreenPoint(transform.position);
         shieldDisplay.color = Color.Lerp(shieldDisplay.color, Blocking ? Color.white : Color.clear, Time.deltaTime * 10f);
     }
