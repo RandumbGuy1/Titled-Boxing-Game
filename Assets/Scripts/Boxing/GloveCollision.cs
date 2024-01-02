@@ -19,6 +19,7 @@ public class GloveCollision : MonoBehaviour
     [SerializeField] float punchForwardTime;
     [SerializeField] float punchBackTime;
     [SerializeField] float punchDelay;
+    [SerializeField] AudioClip[] throwClips;
 
     [Header("Glove GFX Settings")]
     [SerializeField] Vector3 startRot;
@@ -116,6 +117,7 @@ public class GloveCollision : MonoBehaviour
         if (active && stamina != null)
         {
             stamina.TakeStamina(staminaCost);
+            AudioManager.Instance.PlayOnce(throwClips, transform.position);
         }
     }
 

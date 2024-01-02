@@ -77,7 +77,9 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource PlayOnce(AudioClip[] clips, Vector3 sourcePos, float volumeMultiplier = 1f)
     {
-        int newSoundIndex = Mathf.RoundToInt(Random.Range(0, clips.Length - 1));
+        if (clips.Length == 0) return null;
+
+        int newSoundIndex = Mathf.RoundToInt(Random.Range(0, clips.Length));
         AudioClip clip = clips[newSoundIndex];
 
         if (!SoundDictionary.ContainsKey(clip)) return null;
