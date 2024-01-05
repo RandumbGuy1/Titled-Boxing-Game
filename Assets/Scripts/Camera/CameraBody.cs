@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
 using System;
+using Unity.Netcode;
 
-public class CameraBody : MonoBehaviour
+public class CameraBody : NetworkBehaviour
 {
     [SerializeField] private CameraFOV camFov;
     [SerializeField] private CameraIdleSway camIdleSway;
@@ -38,6 +39,14 @@ public class CameraBody : MonoBehaviour
 
         player.PlayerInput.OnMouseInput += camLookSettings.LookUpdate;
         player.PlayerMovement.OnPlayerLand += camHeadBob.BobOnce;
+    }
+
+    private void OnNetworkInstantiate()
+    {
+        if (IsOwner)
+        {
+            player.PlayerCam.enabled = true;
+        }
     }
 
     void Update()

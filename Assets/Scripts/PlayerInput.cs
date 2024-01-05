@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : NetworkBehaviour
 {
     public delegate void ReceieveVector2Input(Vector2 input);
     public delegate void ReceieveBoolInput(bool input);
@@ -39,6 +40,11 @@ public class PlayerInput : MonoBehaviour
     public KeyCode InteractKey => interactKey;
     public KeyCode ToggleLockOnKey => toggleLockOnKey;
     public KeyCode PauseMenuKey => pauseMenuKey;
+
+    private void OnNetworkInstantiate()
+    {
+        if (!IsOwner) Destroy(this);
+    }
 
     void Update()
     {
