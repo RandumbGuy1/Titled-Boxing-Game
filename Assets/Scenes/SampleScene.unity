@@ -8234,7 +8234,7 @@ MonoBehaviour:
   punchRange: 3.5
   punchForwardTime: 0.2
   punchBackTime: 0.15
-  punchDelay: 0.1
+  punchDelay: 0.2
   throwClips: []
   startRot: {x: 0, y: 0, z: 0}
   hitRot: {x: 0.40557975, y: 0.579228, z: -0.579228, w: -0.40557975}
@@ -8651,8 +8651,8 @@ MonoBehaviour:
   gloves:
   - {fileID: 737181754550003851}
   - {fileID: 6928189002397154846}
-  speed: 3
-  turnSpeed: 15
+  speed: 3.5
+  turnSpeed: 5
   standingRange: 5
   target: {fileID: 79618413}
   health: {fileID: 6850599624479957662}
