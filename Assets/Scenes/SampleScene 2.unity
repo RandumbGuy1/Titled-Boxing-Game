@@ -1073,6 +1073,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire
       objectReference: {fileID: 0}
+    - target: {fileID: 1171126083118947367, guid: 95f44306b8f424650973daf5f120ecdc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95f44306b8f424650973daf5f120ecdc, type: 3}
 --- !u!1 &129926871
@@ -1525,7 +1530,7 @@ PrefabInstance:
     - target: {fileID: 5358340754807780370, guid: eb9dbdcbe789444cba18c3420546775b,
         type: 3}
       propertyPath: m_Name
-      value: Kaza Jizo 1
+      value: Kaza Jizo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb9dbdcbe789444cba18c3420546775b, type: 3}
@@ -4487,6 +4492,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1171126083118947367, guid: 95f44306b8f424650973daf5f120ecdc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95f44306b8f424650973daf5f120ecdc, type: 3}
 --- !u!1 &832575517
@@ -4814,7 +4824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895407528}
   m_LocalRotation: {x: -0.00000008429329, y: 0.70934325, z: 0.000000084293404, w: -0.7048632}
-  m_LocalPosition: {x: -1.3, y: 34.2, z: 1}
+  m_LocalPosition: {x: -1.3, y: 41.7, z: 1}
   m_LocalScale: {x: 130, y: 1, z: 130}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6932,6 +6942,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1171126083118947367, guid: 95f44306b8f424650973daf5f120ecdc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95f44306b8f424650973daf5f120ecdc, type: 3}
 --- !u!1 &1596212124
@@ -7669,6 +7684,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fire (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171126083118947367, guid: 95f44306b8f424650973daf5f120ecdc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95f44306b8f424650973daf5f120ecdc, type: 3}

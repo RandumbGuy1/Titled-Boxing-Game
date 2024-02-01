@@ -8215,6 +8215,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3576865398981513366, guid: 90dc2bf0fb9534992bafd3fb3394885d,
         type: 3}
+    - target: {fileID: 3350716989025148853, guid: 0e61ee74a122341738de53f8f42f3549,
+        type: 3}
+      propertyPath: punchDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350716989025148853, guid: 0e61ee74a122341738de53f8f42f3549,
+        type: 3}
+      propertyPath: punchForwardTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4944673732349807303, guid: 0e61ee74a122341738de53f8f42f3549,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -8226,6 +8236,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3576865398981513366, guid: 90dc2bf0fb9534992bafd3fb3394885d,
         type: 3}
+    - target: {fileID: 4944673733102635296, guid: 0e61ee74a122341738de53f8f42f3549,
+        type: 3}
+      propertyPath: punchDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944673733102635296, guid: 0e61ee74a122341738de53f8f42f3549,
+        type: 3}
+      propertyPath: punchForwardTime
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4944673733102635296, guid: 0e61ee74a122341738de53f8f42f3549,
         type: 3}
       propertyPath: punchClips.Array.data[0]
