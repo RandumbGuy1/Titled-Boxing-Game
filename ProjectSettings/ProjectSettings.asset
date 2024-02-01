@@ -884,11 +884,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: 8ee6b40e-e2e2-4d1e-b980-c0559366df72
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Titled Boxing Game (1)
+  organizationId: randumbguy
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

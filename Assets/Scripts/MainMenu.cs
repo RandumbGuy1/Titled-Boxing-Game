@@ -6,23 +6,29 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] MenuSway menuSway;
-    [SerializeField] GameObject main;
-    [SerializeField] GameObject settings;
+    [SerializeField] GameObject[] menus;
 
-    public void PlayGame()
+    public void PlayGame(int index)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + index);
     }
 
-    public void GoToSettingsMenu()
+    public void GoToMenu(int index)
     {
-        menuSway.InSettings = !menuSway.InSettings;
-        settings.SetActive(!settings.activeSelf);
-        main.SetActive(!main.activeSelf);
+        for (int i = 0; i < menus.Length; i++) menus[i].SetActive(i == index);
+
+        menuSway.MenuState = (MainMenuState) index;
     }
 
     public void QuitGame()
     {
         Application.Quit();
     }
+}
+
+public enum MainMenuState
+{
+    Main = 0,
+    Settings = 1,
+    LevelSelect = 2,
 }
