@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.28266346, g: 0.57097477, b: 0.79505783, a: 1}
+  m_IndirectSpecularColor: {r: 0.28263396, g: 0.5706712, b: 0.7945487, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -387,9 +387,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e8d35aa22654eeda49789965532946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnFrameInput:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 79618414}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: SetFrameInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 79618419}
+        m_TargetAssemblyTypeName: BoxingGloves, Assembly-CSharp
+        m_MethodName: HandlePunching
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 79618429}
+        m_TargetAssemblyTypeName: BlockController, Assembly-CSharp
+        m_MethodName: SetBlock
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   jumpKey: 304
-  crouchKey: 32
-  interactKey: 102
+  rollKey: 32
+  slipKeys: 
+  blockKey: 102
   toggleLockOnKey: 9
   pauseMenuKey: 27
 --- !u!114 &79618416
@@ -711,7 +751,6 @@ MonoBehaviour:
   blockEndLag: 0.3
   cam: {fileID: 330585545}
   shieldDisplay: {fileID: 544650442}
-  player: {fileID: 79618416}
 --- !u!114 &79618430
 MonoBehaviour:
   m_ObjectHideFlags: 0
