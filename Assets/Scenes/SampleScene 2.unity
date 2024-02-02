@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.0034717766, g: 0.024900146, b: 0.15363325, a: 1}
+  m_IndirectSpecularColor: {r: 0.0034765177, g: 0.02481033, b: 0.15351745, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4136,7 +4136,7 @@ PrefabInstance:
     - target: {fileID: 662798925160111072, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 662798925160111072, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}
@@ -5346,7 +5346,7 @@ PrefabInstance:
     - target: {fileID: 662798925160111072, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 662798925160111072, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}
@@ -8607,7 +8607,7 @@ PrefabInstance:
     - target: {fileID: 662798925160111072, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 662798925160111072, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}
@@ -8771,7 +8771,7 @@ PrefabInstance:
     - target: {fileID: 662798925160111072, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 662798925160111072, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}

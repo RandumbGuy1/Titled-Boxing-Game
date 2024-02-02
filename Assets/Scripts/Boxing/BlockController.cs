@@ -7,17 +7,10 @@ public class BlockController : MonoBehaviour
     [SerializeField] Camera cam;
     [SerializeField] Image shieldDisplay;
 
-    [SerializeField] PlayerRef player;
-
     private float blockElapsed = 0f;
 
     public bool Blocking { get; set; } = false;
     public bool JustStoppedBlocking => blockElapsed < blockEndLag;
-
-    void Start()
-    {
-        if (player != null) player.PlayerInput.OnInteractInput += SetBlock;
-    }
 
     void Update()
     {
@@ -29,18 +22,12 @@ public class BlockController : MonoBehaviour
         shieldDisplay.color = Color.Lerp(shieldDisplay.color, Blocking ? Color.white : Color.clear, Time.deltaTime * 10f);
     }
 
-    public void SetBlock(bool press)
+    public void SetBlock(FrameInput input)
     {
-        if (JustStoppedBlocking)
-        {
-            return;
-        }
+        bool press = input.BlockInput;
 
-        if (!press && Blocking)
-        {
-            blockElapsed = 0f;
-        }
-
+        if (JustStoppedBlocking) return;
+        if (!press && Blocking) blockElapsed = 0f;
         Blocking = press;
     }
 }

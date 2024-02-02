@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
         player.PlayerInput.OnMoveInput += ReceiveMoveInput;
         player.PlayerInput.OnJumpInput += ReceiveJumpInput;
-        player.PlayerInput.OnCrouchInput += ReceiveCrouchInput;
+        player.PlayerInput.RollInput += ReceiveCrouchInput;
 
         OnPlayerLand += (float vel) =>
         {
