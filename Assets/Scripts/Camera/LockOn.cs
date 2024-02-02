@@ -17,7 +17,7 @@ public class LockOn : MonoBehaviour
 
     private void Awake()
     {
-        player.PlayerInput.OnLockOnInput += DetectLockOn;
+        player.PlayerInput.OnLockInput += DetectLockOn;
 
         if (lockOnTarget != null)
         {

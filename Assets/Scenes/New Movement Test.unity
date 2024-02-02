@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -299,7 +299,6 @@ GameObject:
   - component: {fileID: 79618428}
   - component: {fileID: 79618429}
   - component: {fileID: 79618430}
-  - component: {fileID: 79618431}
   m_Layer: 3
   m_Name: Player Collider
   m_TagString: Player1
@@ -346,7 +345,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79618409}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ac6838d779d47e198867d401237d34, type: 3}
   m_Name: 
@@ -388,9 +387,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e8d35aa22654eeda49789965532946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnFrameInput:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 79618414}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: SetFrameInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 79618429}
+        m_TargetAssemblyTypeName: BlockController, Assembly-CSharp
+        m_MethodName: SetBlock
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 79618419}
+        m_TargetAssemblyTypeName: BoxingGloves, Assembly-CSharp
+        m_MethodName: HandlePunching
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   jumpKey: 304
-  crouchKey: 32
-  interactKey: 102
+  rollKey: 32
+  slipKeys: 
+  blockKey: 102
   toggleLockOnKey: 9
   pauseMenuKey: 27
 --- !u!114 &79618416
@@ -712,7 +751,6 @@ MonoBehaviour:
   blockEndLag: 0.3
   cam: {fileID: 330585545}
   shieldDisplay: {fileID: 544650442}
-  player: {fileID: 79618416}
 --- !u!114 &79618430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,18 +761,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e176742324d143108ac41bdb4bad920, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &79618431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 79618409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5067da923b505ac4bbc69f6f3639e16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &87813936

@@ -16,6 +16,9 @@ public class PlayerInput : MonoBehaviour
     public bool PauseToggle { get; private set; }
 
     public UnityEvent<FrameInput> OnFrameInput;
+    public event ReceieveVector2Input OnMouseInput;
+    public event ReceieveBoolInput OnLockInput;
+    public event ReceieveBoolInput OnPauseToggle;
 
     [Header("Movement Keybinds")]
     [SerializeField] private KeyCode jumpKey;
@@ -38,8 +41,13 @@ public class PlayerInput : MonoBehaviour
     void Update()
     {
         PauseToggle = Input.GetKeyDown(pauseMenuKey);
+        OnPauseToggle?.Invoke(PauseToggle);
+
         LockOnInput = Input.GetKeyDown(toggleLockOnKey);
+        OnLockInput?.Invoke(LockOnInput);
+
         MouseInput = new Vector2(Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"));
+        OnMouseInput?.Invoke(MouseInput);
 
         PlayerFrameInput.SetInput(
             new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
@@ -83,7 +91,7 @@ public class PlayerInput : MonoBehaviour
     }
 }
 
-public struct FrameInput {
+public class FrameInput {
     public Vector2 MoveInput { get; private set; }
     public bool JumpInput { get; private set; }
     public bool JumpHoldInput { get; private set; }

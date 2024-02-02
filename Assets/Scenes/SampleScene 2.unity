@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.0034765177, g: 0.02481033, b: 0.15351745, a: 1}
+  m_IndirectSpecularColor: {r: 0.0034645246, g: 0.024900015, b: 0.15359038, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -387,9 +387,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e8d35aa22654eeda49789965532946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnFrameInput:
+    m_PersistentCalls:
+      m_Calls: []
   jumpKey: 304
-  crouchKey: 32
-  interactKey: 102
+  rollKey: 0
+  slipKeys: 
+  blockKey: 0
   toggleLockOnKey: 9
   pauseMenuKey: 27
 --- !u!114 &79618416
@@ -711,7 +715,6 @@ MonoBehaviour:
   blockEndLag: 0.3
   cam: {fileID: 330585545}
   shieldDisplay: {fileID: 544650442}
-  player: {fileID: 79618416}
 --- !u!114 &79618430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4276,7 +4279,7 @@ PrefabInstance:
     - target: {fileID: 662798925160111078, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}
       propertyPath: m_Name
-      value: snow (3)
+      value: Ember
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 573c476c60d414bdc9a1a1e6856d7bc3, type: 3}
@@ -5486,7 +5489,7 @@ PrefabInstance:
     - target: {fileID: 662798925160111078, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}
       propertyPath: m_Name
-      value: snow
+      value: Ember
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 573c476c60d414bdc9a1a1e6856d7bc3, type: 3}
@@ -8747,7 +8750,7 @@ PrefabInstance:
     - target: {fileID: 662798925160111078, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}
       propertyPath: m_Name
-      value: snow (2)
+      value: Ember
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 573c476c60d414bdc9a1a1e6856d7bc3, type: 3}
@@ -8911,7 +8914,7 @@ PrefabInstance:
     - target: {fileID: 662798925160111078, guid: 573c476c60d414bdc9a1a1e6856d7bc3,
         type: 3}
       propertyPath: m_Name
-      value: snow (1)
+      value: Ember
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 573c476c60d414bdc9a1a1e6856d7bc3, type: 3}

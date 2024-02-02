@@ -235,14 +235,14 @@ MonoBehaviour:
   gloveCollider: {fileID: 2258936283989325234}
   punchDamage: 10
   punchStun: 0.25
-  punchForce: 5
+  punchForce: 120
   punchClips:
   - {fileID: 8300000, guid: 5ee2e7dc3057c2a41ab26fe41b086609, type: 3}
   - {fileID: 8300000, guid: 3be47e4a5790d5245ace2243945e6813, type: 3}
   - {fileID: 8300000, guid: d211b9ea34268af4599810ed7ae8cb5c, type: 3}
   - {fileID: 8300000, guid: 6a2b8180c89db9c4bba23519f4e06afe, type: 3}
   staminaCost: 25
-  punchRange: 3.5
+  punchRange: 5.5
   punchForwardTime: 0.2
   punchBackTime: 0.15
   punchDelay: 0.2
@@ -598,9 +598,9 @@ MonoBehaviour:
   gloves:
   - {fileID: 2258936283989325235}
   - {fileID: 8450577275666096934}
-  speed: 4.5
+  speed: 3.5
   turnSpeed: 5
-  standingRange: 5
+  standingRange: 7
   target: {fileID: 0}
   health: {fileID: 5364240693541470118}
   stamina: {fileID: 5364240693541470119}
@@ -751,7 +751,6 @@ MonoBehaviour:
   blockEndLag: 0.3
   cam: {fileID: 0}
   shieldDisplay: {fileID: 0}
-  player: {fileID: 0}
 --- !u!114 &7004406676242226820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,14 +914,14 @@ MonoBehaviour:
   gloveCollider: {fileID: 8450577275666096935}
   punchDamage: 15
   punchStun: 0.35
-  punchForce: 15
+  punchForce: 180
   punchClips:
   - {fileID: 8300000, guid: 5ee2e7dc3057c2a41ab26fe41b086609, type: 3}
   - {fileID: 8300000, guid: 3be47e4a5790d5245ace2243945e6813, type: 3}
   - {fileID: 8300000, guid: d211b9ea34268af4599810ed7ae8cb5c, type: 3}
   - {fileID: 8300000, guid: 6a2b8180c89db9c4bba23519f4e06afe, type: 3}
   staminaCost: 35
-  punchRange: 3.25
+  punchRange: 5.25
   punchForwardTime: 0.3
   punchBackTime: 0.15
   punchDelay: 0.3

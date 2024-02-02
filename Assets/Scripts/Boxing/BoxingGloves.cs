@@ -46,7 +46,7 @@ public class BoxingGloves : MonoBehaviour, IBoxer
         }
     }
 
-    void HandlePunching(FrameInput input)
+    public void HandlePunching(FrameInput input)
     {
         int button = input.PunchInput;
         if (!enabled) return;
