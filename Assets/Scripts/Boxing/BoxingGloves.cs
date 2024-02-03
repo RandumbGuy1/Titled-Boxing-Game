@@ -72,7 +72,7 @@ public class BoxingGloves : MonoBehaviour, IBoxer
     { 
         player.PlayerMovement.enabled = false;
         player.PlayerMovement.Rb.freezeRotation = false;
-        player.PlayerInput.enabled = false;
+        player.PlayerInput.Enabled = false;
 
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++) gloves[i].Ragdoll();
         enabled = false;

@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class PlayerInput : MonoBehaviour
 {
+    public bool Enabled { get; set; } = true;
+
     public delegate void ReceieveVector2Input(Vector2 input);
     public delegate void ReceieveBoolInput(bool input);
     public delegate void ReceieveIntInput(int input);
@@ -42,6 +44,8 @@ public class PlayerInput : MonoBehaviour
     {
         PauseToggle = Input.GetKeyDown(pauseMenuKey);
         OnPauseToggle?.Invoke(PauseToggle);
+
+        if (!Enabled) return;
 
         LockOnInput = Input.GetKeyDown(toggleLockOnKey);
         OnLockInput?.Invoke(LockOnInput);

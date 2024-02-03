@@ -15,6 +15,7 @@ public class PauseController : MonoBehaviour
         if (!pause) return;
 
         paused = !paused;
+        Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
 
         GameManager.Instance.SetState(paused ? GameState.Paused : GameState.Gameplay);
         pauseMenu.SetActive(paused);

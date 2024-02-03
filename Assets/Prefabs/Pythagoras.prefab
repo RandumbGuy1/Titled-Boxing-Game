@@ -235,7 +235,7 @@ MonoBehaviour:
   gloveCollider: {fileID: 2258936283989325234}
   punchDamage: 10
   punchStun: 0.25
-  punchForce: 120
+  punchForce: 60
   punchClips:
   - {fileID: 8300000, guid: 5ee2e7dc3057c2a41ab26fe41b086609, type: 3}
   - {fileID: 8300000, guid: 3be47e4a5790d5245ace2243945e6813, type: 3}
@@ -914,7 +914,7 @@ MonoBehaviour:
   gloveCollider: {fileID: 8450577275666096935}
   punchDamage: 15
   punchStun: 0.35
-  punchForce: 180
+  punchForce: 90
   punchClips:
   - {fileID: 8300000, guid: 5ee2e7dc3057c2a41ab26fe41b086609, type: 3}
   - {fileID: 8300000, guid: 3be47e4a5790d5245ace2243945e6813, type: 3}
