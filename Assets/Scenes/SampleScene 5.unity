@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -612,9 +612,9 @@ MonoBehaviour:
     spatialBlend: 0
     looping: 0
     playOnAwake: 0
-  - clip: {fileID: 8300000, guid: 40a227af653860e498b74ebe176b8d42, type: 3}
+  - clip: {fileID: 8300000, guid: 00e8513cc837be543aa71fec48cd4b26, type: 3}
     soundCapacity: 1
-    volume: 0.615
+    volume: 0.05
     pitch: 1
     spatialBlend: 0
     looping: 1
@@ -726,14 +726,14 @@ MonoBehaviour:
     playOnAwake: 0
   - clip: {fileID: 8300000, guid: d3063ac17db0ccc43abb94668719f55f, type: 3}
     soundCapacity: 5
-    volume: 0.388
+    volume: 0.15
     pitch: 1
     spatialBlend: 1
     looping: 0
     playOnAwake: 0
   - clip: {fileID: 8300000, guid: e27d3a054f14c3945b0c33ee3068dc0f, type: 3}
     soundCapacity: 5
-    volume: 0.464
+    volume: 0.2
     pitch: 1
     spatialBlend: 1
     looping: 0
@@ -1253,7 +1253,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1296,7 +1296,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 12244
+  m_ColorTemperature: 13964
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -3704,7 +3704,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 3771.4
   m_Range: 167
   m_SpotAngle: 70.26807
