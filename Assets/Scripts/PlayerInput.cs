@@ -1,65 +1,78 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerInput : MonoBehaviour
 {
+    public bool Enabled { get; set; } = true;
+
     public delegate void ReceieveVector2Input(Vector2 input);
     public delegate void ReceieveBoolInput(bool input);
     public delegate void ReceieveIntInput(int input);
     public delegate void ReceieveFloatInput(float input);
 
-    public event ReceieveVector2Input OnMoveInput;
+    public FrameInput PlayerFrameInput { get; private set; } = new FrameInput();
+    public Vector2 MouseInput { get; private set; }
+    public bool LockOnInput { get; private set; }
+    public bool PauseToggle { get; private set; }
+
+    public UnityEvent<FrameInput> OnFrameInput;
     public event ReceieveVector2Input OnMouseInput;
-
-    public event ReceieveBoolInput OnJumpInput;
-    public event ReceieveBoolInput OnJumpHoldInput;
-    public event ReceieveBoolInput OnCrouchInput;
-    public event ReceieveBoolInput OnInteractInput;
-
-    public event ReceieveBoolInput OnLockOnInput;
+    public event ReceieveBoolInput OnLockInput;
     public event ReceieveBoolInput OnPauseToggle;
-
-    public event ReceieveIntInput OnMouseButtonDownInput;
-    public event ReceieveIntInput OnMouseButtonInput;
 
     [Header("Movement Keybinds")]
     [SerializeField] private KeyCode jumpKey;
-    [SerializeField] private KeyCode crouchKey;
+    [SerializeField] private KeyCode rollKey;
+    [SerializeField] private List<KeyCode> slipKeys = new List<KeyCode>();
 
     [Header("Interact Keybinds")]
-    [SerializeField] private KeyCode interactKey;
+    [SerializeField] private KeyCode blockKey;
 
     [Header("UI Keybinds")]
     [SerializeField] private KeyCode toggleLockOnKey;
     [SerializeField] private KeyCode pauseMenuKey;
 
     public KeyCode JumpKey => jumpKey;
-    public KeyCode CrouchKey => crouchKey;
-    public KeyCode InteractKey => interactKey;
+    public KeyCode RollKey => rollKey;
+    public KeyCode BlockKey => blockKey;
     public KeyCode ToggleLockOnKey => toggleLockOnKey;
     public KeyCode PauseMenuKey => pauseMenuKey;
 
     void Update()
     {
-        OnPauseToggle?.Invoke(Input.GetKeyDown(pauseMenuKey));
+        PauseToggle = Input.GetKeyDown(pauseMenuKey);
+        OnPauseToggle?.Invoke(PauseToggle);
 
-        OnMoveInput?.Invoke(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
-        OnMouseInput?.Invoke(new Vector2(Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X")));
+        if (!Enabled) return;
 
-        OnJumpInput?.Invoke(Input.GetKeyDown(jumpKey));
-        OnJumpHoldInput?.Invoke(Input.GetKey(jumpKey));
-        OnCrouchInput?.Invoke(Input.GetKeyDown(crouchKey));
+        LockOnInput = Input.GetKeyDown(toggleLockOnKey);
+        OnLockInput?.Invoke(LockOnInput);
 
-        OnLockOnInput?.Invoke(Input.GetKeyDown(toggleLockOnKey));
+        MouseInput = new Vector2(Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"));
+        OnMouseInput?.Invoke(MouseInput);
 
-        OnMouseButtonDownInput?.Invoke(MouseButtonDown());
-        OnMouseButtonInput?.Invoke(MouseButton());
+        PlayerFrameInput.SetInput(
+            new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
+            Input.GetKeyDown(jumpKey),
+            Input.GetKey(jumpKey),
+            Input.GetKeyDown(rollKey),
+            IterateKeys(slipKeys),
+            Input.GetKey(blockKey),
+            MouseButtonDown(),
+            MouseButton());
 
-        OnInteractInput?.Invoke(Input.GetKey(interactKey));
+        OnFrameInput?.Invoke(PlayerFrameInput);
     }
 
-    int IterateKeyBinds(List<KeyCode> keys)
+    int IterateKeyDowns(List<KeyCode> keys)
+    {
+        foreach (KeyCode key in keys) if (Input.GetKeyDown(key)) return keys.IndexOf(key);
+        return -1;
+    }
+
+    int IterateKeys(List<KeyCode> keys)
     {
         foreach (KeyCode key in keys) if (Input.GetKeyDown(key)) return keys.IndexOf(key);
         return -1;
@@ -79,5 +92,36 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) return 1;
         if (Input.GetMouseButtonDown(2)) return 2;
         return -1;
+    }
+}
+
+public class FrameInput {
+    public Vector2 MoveInput { get; private set; }
+    public bool JumpInput { get; private set; }
+    public bool JumpHoldInput { get; private set; }
+    public bool RollInput { get; private set; }
+    public int SlipInput { get; private set; }
+    public bool BlockInput { get; private set; }
+    public int PunchInput { get; private set; }
+    public int PunchHoldInput { get; private set; }
+
+    public void SetInput(
+        Vector2 moveInput,
+        bool jumpInput,
+        bool jumpHoldInput,
+        bool rollInput,
+        int slipInput,
+        bool blockInput,
+        int punchInput,
+        int punchHoldInput)
+    {
+        MoveInput = moveInput;
+        JumpInput = jumpInput;
+        JumpHoldInput = jumpHoldInput;
+        RollInput = rollInput;
+        SlipInput = slipInput;
+        BlockInput = blockInput;
+        PunchInput = punchInput;
+        PunchHoldInput = punchHoldInput;
     }
 }

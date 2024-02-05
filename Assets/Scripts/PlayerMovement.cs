@@ -94,10 +94,6 @@ public class PlayerMovement : MonoBehaviour
     {
         playerHeight = player.CapsuleCol.height;
 
-        player.PlayerInput.OnMoveInput += ReceiveMoveInput;
-        player.PlayerInput.OnJumpInput += ReceiveJumpInput;
-        player.PlayerInput.OnCrouchInput += ReceiveCrouchInput;
-
         OnPlayerLand += (float vel) =>
         {
             rb.AddForceAtPosition((player.Orientation.forward + (Random.insideUnitSphere * 0.2f)).normalized * vel, transform.position + transform.up, ForceMode.Impulse);
@@ -107,6 +103,14 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         MovePlayer();
+    }
+
+    public void SetFrameInput(FrameInput input)
+    {
+        Input = input.MoveInput;
+        Moving = input.MoveInput != Vector2.zero && !Crouching;
+        ReceiveJumpInput(input.JumpInput);
+        ReceiveCrouchInput(input.RollInput);
     }
 
     private void MovePlayer()
@@ -213,10 +217,11 @@ public class PlayerMovement : MonoBehaviour
         timeSinceLastSlide = slideBoostCooldown;
 
         player.Gloves.Stamina.TakeStamina(dashStaminaCost, true);
-        player.Gloves.Block.SetBlock(false);
+        player.Gloves.Block.Blocking = false;
 
         Crouching = true;
     }
+
     private void UpdateCrouch()
     {
         float targetScale = Crouching ? crouchHeight : playerHeight;
@@ -276,12 +281,6 @@ public class PlayerMovement : MonoBehaviour
         if (!player.Gloves.CanPreformActions || player.Gloves.Block.Blocking || !player.Gloves.CanPunch) return inactiveSpeed;
 
         return maxSpeed * (Grounded ? 1f : 1.15f);
-    }
-
-    private void ReceiveMoveInput(Vector2 input)
-    {
-        Input = input;
-        Moving = input != Vector2.zero && !Crouching;
     }
 
     public void GoLimp(float seconds)

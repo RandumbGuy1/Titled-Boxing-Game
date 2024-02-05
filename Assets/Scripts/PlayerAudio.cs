@@ -20,8 +20,6 @@ public class PlayerAudio : MonoBehaviour
 
     void Awake()
     {
-        player.PlayerInput.OnMoveInput += CalculateFootsteps;
-
         player.PlayerMovement.OnPlayerLand += (float magnitude) => { AudioManager.Instance.PlayOnce(playerLandClip, transform.position); };
 
         player.PlayerMovement.OnPlayerMove += (bool input) => {
@@ -36,14 +34,14 @@ public class PlayerAudio : MonoBehaviour
         };
     }
     bool toggle = false;
-    private void CalculateFootsteps(Vector2 input)
+    private void CalculateFootsteps(FrameInput input)
     {
         if (!player.CameraBody.CamHeadBob.Bobbing)
         {
             footstepDistance = 0f;
             return;
         }
-
+        
         float walkMagnitude = player.PlayerMovement.Magnitude;
         walkMagnitude = Mathf.Clamp(walkMagnitude, 0f, 20f);
 

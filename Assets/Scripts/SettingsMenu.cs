@@ -5,8 +5,7 @@ using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour
 {
     [Header("Menus")]
-    [SerializeField] private GameObject videoMenu;
-    [SerializeField] private GameObject audioMenu;
+    [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject controlsMenu;
 
     [Header("Refrences")]
@@ -17,8 +16,7 @@ public class SettingsMenu : MonoBehaviour
     {
         menus = new List<GameObject>
         {
-            videoMenu,
-            audioMenu,
+            settingsMenu,
             controlsMenu,
         };
  
@@ -54,22 +52,10 @@ public class SettingsMenu : MonoBehaviour
         player.CameraBody.CamHeadBob.Enable(isOn);
     }
 
-    public void SetVideoMenu()
+    public void SetMenu(int i)
     {
-        videoMenu.SetActive(!videoMenu.activeInHierarchy);
-        CloseMenus(videoMenu);
-    }
-
-    public void SetAudioMenu()
-    {
-        audioMenu.SetActive(!audioMenu.activeInHierarchy);
-        CloseMenus(audioMenu);
-    }
-
-    public void SetControlsMenu()
-    {
-        controlsMenu.SetActive(!controlsMenu.activeInHierarchy);
-        CloseMenus(controlsMenu);
+        menus[i].SetActive(true);
+        CloseMenus(menus[i]);
     }
 
     public void CloseMenus(GameObject avoid = null)

@@ -38,11 +38,6 @@ public class BoxingGloves : MonoBehaviour, IBoxer
     public StunController Stun => stun;
     public BlockController Block => block;
 
-    void Start()
-    {
-        player.PlayerInput.OnMouseButtonDownInput += HandlePunching;
-    }
-
     void FixedUpdate()
     {
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++)
@@ -51,8 +46,9 @@ public class BoxingGloves : MonoBehaviour, IBoxer
         }
     }
 
-    void HandlePunching(int button)
+    public void HandlePunching(FrameInput input)
     {
+        int button = input.PunchInput;
         if (!enabled) return;
 
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++)
@@ -67,7 +63,7 @@ public class BoxingGloves : MonoBehaviour, IBoxer
         player.PlayerMovement.Rb.velocity *= 0f;
     }
 
-    public void ResetGloves(float x)
+    public void ResetGloves()
     {
         foreach (GloveCollision glove in gloves) glove.SetGlove(false);
     }
@@ -76,7 +72,7 @@ public class BoxingGloves : MonoBehaviour, IBoxer
     { 
         player.PlayerMovement.enabled = false;
         player.PlayerMovement.Rb.freezeRotation = false;
-        player.PlayerInput.enabled = false;
+        player.PlayerInput.Enabled = false;
 
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++) gloves[i].Ragdoll();
         enabled = false;
