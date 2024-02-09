@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
@@ -276,6 +276,7 @@ GameObject:
   - component: {fileID: 61239691}
   - component: {fileID: 61239690}
   - component: {fileID: 61239689}
+  - component: {fileID: 61239692}
   m_Layer: 0
   m_Name: Spot Light (5)
   m_TagString: Untagged
@@ -315,13 +316,13 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1062.44
+  m_Intensity: 0
   m_Range: 179
-  m_SpotAngle: 136.91333
-  m_InnerSpotAngle: 99.38529
+  m_SpotAngle: 102.71789
+  m_InnerSpotAngle: 66.50506
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -372,15 +373,30 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61239688}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.16, y: 19.48, z: -0.12}
+  m_LocalRotation: {x: 0.7000235, y: -0.08684744, z: -0.10535613, w: 0.7009457}
+  m_LocalPosition: {x: 6.5, y: 19.48, z: -0.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 101825878}
   m_Father: {fileID: 0}
   m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 74.378, y: -88.968, z: -90.482}
+--- !u!114 &61239692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61239688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd74799edf7aa244883376b2d3aa95c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flicker: {fileID: 61239690}
+  amplitude: 1500
+  frequency: 10
 --- !u!1 &62198305
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +553,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101825877}
   m_LocalRotation: {x: 0.4689044, y: 0.61594975, z: -0.6296051, w: -0.06581873}
-  m_LocalPosition: {x: 1.2, y: 0.3, z: -2}
+  m_LocalPosition: {x: 0.2, y: 0.3, z: -1.7}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
