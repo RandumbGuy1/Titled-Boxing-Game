@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MenuSway : MonoBehaviour
 {
+    [SerializeField] private Transform pivot;
+    [SerializeField] private float rotateSpeed;
     [SerializeField] private Vector3 settingsPos;    [SerializeField] private Vector3 settingsRot;
 
     [Space(10)]
@@ -18,7 +20,7 @@ public class MenuSway : MonoBehaviour
     void Start()
     {
         startPos = transform.localPosition;
-        startRot = transform.eulerAngles;
+        startRot = transform.localEulerAngles;
     }
 
     // Update is called once per frame
@@ -29,16 +31,17 @@ public class MenuSway : MonoBehaviour
         switch (MenuState)
         {
             case MainMenuState.Settings:
-                transform.position = Vector3.Lerp(transform.position, settingsPos, Time.deltaTime * 8f);
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(settingsRot + idleSway.HeadSwayOffset), Time.deltaTime * 8f);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, settingsPos, Time.deltaTime * 8f);
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(settingsRot + idleSway.HeadSwayOffset), Time.deltaTime * 8f);
                 break;
             case MainMenuState.LevelSelect:
-                transform.position = Vector3.Lerp(transform.position, levelSelectPos, Time.deltaTime * 8f);
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(levelSelectRot + idleSway.HeadSwayOffset), Time.deltaTime * 8f);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, levelSelectPos, Time.deltaTime * 8f);
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(levelSelectRot + idleSway.HeadSwayOffset), Time.deltaTime * 8f);
                 break;
             default:
-                transform.position = Vector3.Lerp(transform.position, startPos, Time.deltaTime * 8f);
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(startRot + idleSway.HeadSwayOffset), Time.deltaTime * 8f);
+                pivot.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, startPos, Time.deltaTime * 8f);
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(startRot + idleSway.HeadSwayOffset), Time.deltaTime * 8f);
                 break;
         }
 

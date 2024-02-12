@@ -13,6 +13,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + index);
     }
 
+    public void GoToScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
+
     public void GoToMenu(int index)
     {
         for (int i = 0; i < menus.Length; i++) menus[i].SetActive(i == index);
