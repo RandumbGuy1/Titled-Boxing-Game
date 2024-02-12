@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PauseController : MonoBehaviour
 {
+    [SerializeField] private GameObject gameUI;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private PlayerRef player;
     private bool paused = false;
@@ -19,6 +20,7 @@ public class PauseController : MonoBehaviour
 
         GameManager.Instance.SetState(paused ? GameState.Paused : GameState.Gameplay);
         pauseMenu.SetActive(paused);
+        gameUI.SetActive(!paused);
     }
 
     public void UnPause()
