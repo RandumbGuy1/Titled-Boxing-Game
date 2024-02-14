@@ -8,7 +8,6 @@ public class CoinExplode : MonoBehaviour
     [SerializeField] AudioClip coinSpawn;
 
     [SerializeField] float explosionForce;
-    [SerializeField] float explosionRadius;
 
     [SerializeField] private GameObject ariCoin;
     [SerializeField] private GameObject beastBill;

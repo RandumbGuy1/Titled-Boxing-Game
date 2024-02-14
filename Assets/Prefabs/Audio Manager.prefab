@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7122289844981017552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7122289844981017559}
+  - component: {fileID: 7122289844981017558}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7122289844981017559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122289844981017552}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -22.470116, y: 5.699091, z: 33.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7122289844981017558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122289844981017552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 237dd306649474081ae27f4c7b626487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundInstancePrefab: {fileID: 2670725041675076724, guid: 24272a491a3154e819cce0fadc37180b,
+    type: 3}
+  sounds:
+  - clip: {fileID: 8300000, guid: d6edde39fa804634b93942163aa48139, type: 3}
+    soundCapacity: 1
+    volume: 0.2
+    pitch: 1
+    spatialBlend: 0
+    looping: 1
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: 6edde85c44a256541b39bcee86f9e6e4, type: 3}
+    soundCapacity: 5
+    volume: 0.2
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: 53ea7f78d5620e74aaa163053032c505, type: 3}
+    soundCapacity: 5
+    volume: 0.5
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: 5ee2e7dc3057c2a41ab26fe41b086609, type: 3}
+    soundCapacity: 5
+    volume: 0.4
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: 3be47e4a5790d5245ace2243945e6813, type: 3}
+    soundCapacity: 5
+    volume: 0.4
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: d211b9ea34268af4599810ed7ae8cb5c, type: 3}
+    soundCapacity: 5
+    volume: 0.4
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: 6a2b8180c89db9c4bba23519f4e06afe, type: 3}
+    soundCapacity: 5
+    volume: 0.4
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: 7dbf58e5b04764825a9c6dce8b209128, type: 3}
+    soundCapacity: 1
+    volume: 0.1
+    pitch: 1
+    spatialBlend: 0
+    looping: 1
+    playOnAwake: 1
+  - clip: {fileID: 8300000, guid: 0773cec74862a514c866d92abb41555e, type: 3}
+    soundCapacity: 1
+    volume: 0.4
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: ceffdcd973014461ca03ea58f9c0bbb7, type: 3}
+    soundCapacity: 2
+    volume: 0.6
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: dab43f9d0eae8a34c976c07da83c3c54, type: 3}
+    soundCapacity: 50
+    volume: 0.4
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: b058043fdabc15c45b9353cc021be1b6, type: 3}
+    soundCapacity: 20
+    volume: 0.4
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: 33fdaccf26a9478459f8eedd64fd32f0, type: 3}
+    soundCapacity: 20
+    volume: 0.4
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0

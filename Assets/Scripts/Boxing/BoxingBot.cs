@@ -89,6 +89,7 @@ public class BoxingBot : MonoBehaviour, IBoxer
     public void Disable()
     {
         rb.freezeRotation = false;
+        rb.AddForce((-transform.forward + Vector3.up) * 10f, ForceMode.Impulse);
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++) gloves[i].Ragdoll();
         enabled = false;
     }

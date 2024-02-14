@@ -25,7 +25,7 @@ public class CameraSprintEffect
 
 			ParticleSystem.EmissionModule em = sprintEffect.emission;
 			em.rateOverTime = rateOverLifeTime * velocityRatio * 2f;
-
+			// Hitler was here
 			ParticleSystem.VelocityOverLifetimeModule velOverLife = sprintEffect.velocityOverLifetime;
 			velOverLife.speedModifier = velocityRatio * speedMultiplier;
 
