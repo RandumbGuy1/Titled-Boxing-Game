@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 62198307}
   - component: {fileID: 62198306}
   - component: {fileID: 62198309}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,6 +289,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1135991981930856165, guid: b592f85b881ba45ef9672a36c08aebf7,
         type: 3}
+      propertyPath: hitLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135991981930856165, guid: b592f85b881ba45ef9672a36c08aebf7,
+        type: 3}
       propertyPath: punchForwardTime
       value: 0.2
       objectReference: {fileID: 0}
@@ -301,6 +306,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551361254940308720, guid: b592f85b881ba45ef9672a36c08aebf7,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551361254940308720, guid: b592f85b881ba45ef9672a36c08aebf7,
+        type: 3}
+      propertyPath: OnPlayerDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551361254940308720, guid: b592f85b881ba45ef9672a36c08aebf7,
+        type: 3}
+      propertyPath: OnPlayerDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551361254940308720, guid: b592f85b881ba45ef9672a36c08aebf7,
+        type: 3}
+      propertyPath: OnPlayerDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1366552362}
+    - target: {fileID: 6551361254940308720, guid: b592f85b881ba45ef9672a36c08aebf7,
+        type: 3}
+      propertyPath: OnPlayerDeath.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551361254940308720, guid: b592f85b881ba45ef9672a36c08aebf7,
+        type: 3}
+      propertyPath: OnPlayerDeath.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SpawnCoins
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551361254940308720, guid: b592f85b881ba45ef9672a36c08aebf7,
+        type: 3}
+      propertyPath: OnPlayerDeath.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CoinExplode, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551361254940308720, guid: b592f85b881ba45ef9672a36c08aebf7,
+        type: 3}
+      propertyPath: OnPlayerDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6551361254940308725, guid: b592f85b881ba45ef9672a36c08aebf7,
         type: 3}
@@ -371,6 +416,11 @@ PrefabInstance:
         type: 3}
       propertyPath: punchRange
       value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7340017912386840688, guid: b592f85b881ba45ef9672a36c08aebf7,
+        type: 3}
+      propertyPath: hitLayer.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7340017912386840688, guid: b592f85b881ba45ef9672a36c08aebf7,
         type: 3}
@@ -538,7 +588,7 @@ GameObject:
   - component: {fileID: 261172922}
   - component: {fileID: 261172921}
   - component: {fileID: 261172924}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -838,6 +888,27 @@ MonoBehaviour:
     spatialBlend: 1
     looping: 0
     playOnAwake: 0
+  - clip: {fileID: 8300000, guid: dab43f9d0eae8a34c976c07da83c3c54, type: 3}
+    soundCapacity: 50
+    volume: 0.4
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: b058043fdabc15c45b9353cc021be1b6, type: 3}
+    soundCapacity: 20
+    volume: 0.4
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
+  - clip: {fileID: 8300000, guid: 33fdaccf26a9478459f8eedd64fd32f0, type: 3}
+    soundCapacity: 20
+    volume: 0.4
+    pitch: 1
+    spatialBlend: 1
+    looping: 0
+    playOnAwake: 0
 --- !u!1 &312359792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1101,7 @@ GameObject:
   - component: {fileID: 337829747}
   - component: {fileID: 337829746}
   - component: {fileID: 337829749}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1127,7 +1198,7 @@ GameObject:
   - component: {fileID: 378378206}
   - component: {fileID: 378378205}
   - component: {fileID: 378378204}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1436,7 +1507,7 @@ GameObject:
   - component: {fileID: 417230750}
   - component: {fileID: 417230749}
   - component: {fileID: 417230752}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1713,7 +1784,7 @@ GameObject:
   - component: {fileID: 467468583}
   - component: {fileID: 467468582}
   - component: {fileID: 467468585}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1810,7 +1881,7 @@ GameObject:
   - component: {fileID: 484965289}
   - component: {fileID: 484965288}
   - component: {fileID: 484965291}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1907,7 +1978,7 @@ GameObject:
   - component: {fileID: 515663391}
   - component: {fileID: 515663390}
   - component: {fileID: 515663393}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2327,7 +2398,7 @@ GameObject:
   - component: {fileID: 694003663}
   - component: {fileID: 694003662}
   - component: {fileID: 694003665}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3018,6 +3089,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &904528361 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6551361254940308713, guid: b592f85b881ba45ef9672a36c08aebf7,
+    type: 3}
+  m_PrefabInstance: {fileID: 64639427}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &905459599
 GameObject:
   m_ObjectHideFlags: 0
@@ -3158,7 +3235,7 @@ GameObject:
   - component: {fileID: 914683636}
   - component: {fileID: 914683635}
   - component: {fileID: 914683634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3449,7 +3526,7 @@ GameObject:
   - component: {fileID: 1004400998}
   - component: {fileID: 1004400997}
   - component: {fileID: 1004400996}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3546,7 +3623,7 @@ GameObject:
   - component: {fileID: 1005783102}
   - component: {fileID: 1005783101}
   - component: {fileID: 1005783104}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3916,7 +3993,7 @@ GameObject:
   - component: {fileID: 1182929537}
   - component: {fileID: 1182929536}
   - component: {fileID: 1182929539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4257,6 +4334,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 64639427}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1366552362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904528361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945e3ceff0e56734f81f8018f582bf39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cashSpawn: {fileID: 8300000, guid: b058043fdabc15c45b9353cc021be1b6, type: 3}
+  coinSpawn: {fileID: 8300000, guid: dab43f9d0eae8a34c976c07da83c3c54, type: 3}
+  explosionForce: 10
+  explosionRadius: 1
+  ariCoin: {fileID: 6562096438343674948, guid: f28e92e1020bfc249b37c5834ccacefa, type: 3}
+  beastBill: {fileID: 1349939896323856189, guid: d761db670dcf5f64980adbfffaea8bf5,
+    type: 3}
+  itemCount: 10
+  beastBillChance: 10
 --- !u!1 &1382286978
 GameObject:
   m_ObjectHideFlags: 0
@@ -4398,7 +4496,7 @@ GameObject:
   - component: {fileID: 1429172116}
   - component: {fileID: 1429172115}
   - component: {fileID: 1429172114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5006,7 +5104,7 @@ GameObject:
   - component: {fileID: 1596212126}
   - component: {fileID: 1596212125}
   - component: {fileID: 1596212128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5397,7 +5495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1681628862
 Transform:
   m_ObjectHideFlags: 0
@@ -5439,7 +5537,7 @@ GameObject:
   - component: {fileID: 1696327610}
   - component: {fileID: 1696327609}
   - component: {fileID: 1696327612}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5667,6 +5765,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4205839504008080422, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
+        type: 3}
+      propertyPath: punchDelay
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205839504008080422, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
+        type: 3}
+      propertyPath: punchRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205839504008080422, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
+        type: 3}
+      propertyPath: punchBackTime
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205839504008080422, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
+        type: 3}
+      propertyPath: punchForwardTime
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 8031855848921377695, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
         type: 3}
       propertyPath: player
@@ -5707,6 +5825,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8031855850663217846, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
+        type: 3}
+      propertyPath: maxstaminaHp
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 8031855850663217848, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
         type: 3}
       propertyPath: postProcess
@@ -5722,6 +5845,26 @@ PrefabInstance:
       propertyPath: postProcess
       value: 
       objectReference: {fileID: 832575520}
+    - target: {fileID: 8031855850680020250, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
+        type: 3}
+      propertyPath: color.b
+      value: 0.2688679
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031855850680020250, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
+        type: 3}
+      propertyPath: color.g
+      value: 0.2688679
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031855850680020250, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
+        type: 3}
+      propertyPath: color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031855850680020250, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
+        type: 3}
+      propertyPath: thickness
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8031855850680020250, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
         type: 3}
       propertyPath: lockOnTarget

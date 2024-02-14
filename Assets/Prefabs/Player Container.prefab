@@ -3499,6 +3499,7 @@ GameObject:
   - component: {fileID: 8031855850663217853}
   - component: {fileID: 8031855850663217852}
   - component: {fileID: 8031855850663217855}
+  - component: {fileID: 5383743606340249191}
   m_Layer: 3
   m_Name: Player Collider
   m_TagString: Player1
@@ -3962,6 +3963,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e176742324d143108ac41bdb4bad920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5383743606340249191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8031855850663217832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3104a90be5374be45b52586b226cfbd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  pickupRange: 1
 --- !u!1 &8031855850680020246
 GameObject:
   m_ObjectHideFlags: 0
