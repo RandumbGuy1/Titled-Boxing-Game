@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8360dcb7a33796541a3dd62f1ee36a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinValue: 50
   pickupEffect: {fileID: 4030057093064698186, guid: 498926af9f5d1b949915b58f31bd7dca,
     type: 3}
   pickupSound: {fileID: 8300000, guid: 33fdaccf26a9478459f8eedd64fd32f0, type: 3}
