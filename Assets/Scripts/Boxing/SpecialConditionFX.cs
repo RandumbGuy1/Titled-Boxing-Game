@@ -3,7 +3,8 @@ using TMPro;
 
 public class SpecialConditionFX : MonoBehaviour
 {
-    [SerializeField] private PlayerRef player;
+    [SerializeField] private bool useLockOn;
+    [SerializeField] private PlayerRef player; 
     [SerializeField] private PostProcessController postProcess;
 
     [SerializeField] AudioClip clip;
@@ -23,7 +24,7 @@ public class SpecialConditionFX : MonoBehaviour
             effectText.color = effectColor;
         }
 
-        if (effect) Instantiate(effect, transform.position, Quaternion.identity);
+        if (effect) Instantiate(effect, useLockOn ? player.LockOn.LockOnTarget.position : transform.position, Quaternion.identity);
         if (player) player.CameraBody.CamShaker.ShakeOnce(new PerlinShake(ShakeData.Create(20f, 6f, 0.7f, 10f)));
         if (textShake) textShake.ShakeOnce(new PerlinShake(ShakeData.Create(40f, 6f, 0.7f, 10f)));
         if (postProcess)
@@ -32,6 +33,6 @@ public class SpecialConditionFX : MonoBehaviour
             postProcess.VignetteIntensity.SetValue(0.4f, 3f, true);
         }
 
-        AudioManager.Instance.PlayOnce(clip, transform.position );
+        AudioManager.Instance.PlayOnce(clip, useLockOn ? player.LockOn.LockOnTarget.position : transform.position);
     }
 }

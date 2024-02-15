@@ -1371,7 +1371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a677426b112b51247bfe83bd3b673380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  useLockOn: 1
+  player: {fileID: 8031855850663217841}
   postProcess: {fileID: 0}
   clip: {fileID: 8300000, guid: 0773cec74862a514c866d92abb41555e, type: 3}
   effect: {fileID: 4030057093064698186, guid: 579947f454d298347b8b1ade58f40dd7, type: 3}
@@ -3906,7 +3907,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a677426b112b51247bfe83bd3b673380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  useLockOn: 0
+  player: {fileID: 8031855850663217841}
   postProcess: {fileID: 0}
   clip: {fileID: 8300000, guid: ceffdcd973014461ca03ea58f9c0bbb7, type: 3}
   effect: {fileID: 4030057093064698186, guid: 282a6c66c6aee4bd393a3199d8bb74a7, type: 3}
@@ -4036,6 +4038,7 @@ MonoBehaviour:
   rendering: {fileID: 8031855849057794284}
   capsuleCol: {fileID: 8031855850663217835}
   gloves: {fileID: 8031855850663217842}
+  lockOn: {fileID: 8031855850680020250}
 --- !u!114 &8031855850663217845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4289,6 +4292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a677426b112b51247bfe83bd3b673380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useLockOn: 0
   player: {fileID: 8031855850663217841}
   postProcess: {fileID: 0}
   clip: {fileID: 0}
@@ -4309,6 +4313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a677426b112b51247bfe83bd3b673380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useLockOn: 0
   player: {fileID: 8031855850663217841}
   postProcess: {fileID: 0}
   clip: {fileID: 8300000, guid: 0773cec74862a514c866d92abb41555e, type: 3}
@@ -4329,6 +4334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a677426b112b51247bfe83bd3b673380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useLockOn: 0
   player: {fileID: 8031855850663217841}
   postProcess: {fileID: 0}
   clip: {fileID: 8300000, guid: ceffdcd973014461ca03ea58f9c0bbb7, type: 3}

@@ -11,6 +11,7 @@ public class PlayerRef : MonoBehaviour
     [SerializeField] private MeshRenderer rendering;
     [SerializeField] private CapsuleCollider capsuleCol;
     [SerializeField] private BoxingGloves gloves;
+    [SerializeField] private LockOn lockOn;
 
     public CapsuleCollider CapsuleCol => capsuleCol;
     public MeshRenderer Rendering => rendering;
@@ -19,6 +20,7 @@ public class PlayerRef : MonoBehaviour
     public CameraBody CameraBody => cameraBody;
     public Camera PlayerCam => playerCam;
     public Transform Orientation => orientation;
+    public LockOn LockOn => lockOn;
 
     public BoxingGloves Gloves => gloves;
 
