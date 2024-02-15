@@ -4535,7 +4535,7 @@ MonoBehaviour:
   player: {fileID: 8031855850663217841}
   lockOnLayer:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 520
   display: {fileID: 8031855850680020253}
   thickness: 8
   color: {r: 1, g: 0, b: 0, a: 1}
@@ -6210,6 +6210,11 @@ PrefabInstance:
       propertyPath: punchForce
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 4555363806734254087, guid: 014bf08eb322d4922b4623d3c96812b9,
+        type: 3}
+      propertyPath: hitLayer.m_Bits
+      value: 521
+      objectReference: {fileID: 0}
     - target: {fileID: 4555363806734254104, guid: 014bf08eb322d4922b4623d3c96812b9,
         type: 3}
       propertyPath: m_Name
@@ -6431,6 +6436,11 @@ PrefabInstance:
         type: 3}
       propertyPath: punchForce
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136373200338076478, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
+        type: 3}
+      propertyPath: hitLayer.m_Bits
+      value: 521
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d062cc38b31a54a3983f9e2c09d7bdf8, type: 3}
