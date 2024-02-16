@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DrawRope : MonoBehaviour
 {
+    [SerializeField] float segmentMass;
+    [SerializeField] float strength;
+    [SerializeField] float dampening;
     [SerializeField] LineRenderer lineRenderer;
     [SerializeField] bool useChildren = false;
     [SerializeField] Transform[] points = new Transform[0];
@@ -26,6 +29,9 @@ public class DrawRope : MonoBehaviour
         {
             SpringToZero spring = points[i].GetComponent<SpringToZero>();
             if (spring) springs[i] = spring;
+
+            Rigidbody rb = points[i].GetComponent<Rigidbody>();
+            rb.mass = segmentMass;
         }
     }
 
@@ -34,7 +40,7 @@ public class DrawRope : MonoBehaviour
         for (int i = 0; i < points.Length; i++)
         {
             lineRenderer.SetPosition(i, points[i].position);
-            if (springs[i]) springs[i].UpdateSpring();
+            if (springs[i]) springs[i].UpdateSpring(strength, dampening);
         }
     }
 }

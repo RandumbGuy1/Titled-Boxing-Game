@@ -24,4 +24,11 @@ public class SpringToZero : MonoBehaviour
         rb.AddForce((toStart * strength) - (rb.velocity * dampening));
         rb.AddTorque(axis * ((startRot.y - transform.rotation.y) * strength * 5f - (rb.angularVelocity.y * dampening)));
     }
+
+    public void UpdateSpring(float strength, float dampening)
+    {
+        Vector3 toStart = startPos - transform.position;
+        rb.AddForce((toStart * strength) - (rb.velocity * dampening));
+        rb.AddTorque(axis * ((startRot.y - transform.rotation.y) * strength * 5f - (rb.angularVelocity.y * dampening)));
+    }
 }

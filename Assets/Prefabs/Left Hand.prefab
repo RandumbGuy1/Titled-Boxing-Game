@@ -126,7 +126,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6136373200338076473}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
@@ -162,6 +162,7 @@ MonoBehaviour:
   punchForwardTime: 0.2
   punchBackTime: 0.15
   punchDelay: 0.1
+  throwClips: []
   startRot: {x: 0, y: 0, z: 0}
   hitRot: {x: 0.40557975, y: 0.579228, z: -0.579228, w: -0.40557975}
   gfx: {fileID: 6136373199581151446}

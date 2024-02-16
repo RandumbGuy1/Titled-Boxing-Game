@@ -3996,7 +3996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inactiveSpeed: 3
-  acceleration: 20
+  acceleration: 35
   maxSpeed: 8
   jumpForce: 20
   dashStaminaCost: 30
@@ -6224,7 +6224,7 @@ PrefabInstance:
     - target: {fileID: 4555363806734254087, guid: 014bf08eb322d4922b4623d3c96812b9,
         type: 3}
       propertyPath: hitLayer.m_Bits
-      value: 1545
+      value: 521
       objectReference: {fileID: 0}
     - target: {fileID: 4555363806734254104, guid: 014bf08eb322d4922b4623d3c96812b9,
         type: 3}
@@ -6451,7 +6451,7 @@ PrefabInstance:
     - target: {fileID: 6136373200338076478, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
         type: 3}
       propertyPath: hitLayer.m_Bits
-      value: 1545
+      value: 521
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d062cc38b31a54a3983f9e2c09d7bdf8, type: 3}
