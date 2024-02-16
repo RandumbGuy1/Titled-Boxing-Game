@@ -1371,8 +1371,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a677426b112b51247bfe83bd3b673380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useLockOn: 1
-  player: {fileID: 8031855850663217841}
+  target: {fileID: 0}
+  shakeIntensity: 0
+  shaker: {fileID: 0}
   postProcess: {fileID: 0}
   clip: {fileID: 8300000, guid: 0773cec74862a514c866d92abb41555e, type: 3}
   effect: {fileID: 4030057093064698186, guid: 579947f454d298347b8b1ade58f40dd7, type: 3}
@@ -3907,8 +3908,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a677426b112b51247bfe83bd3b673380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useLockOn: 0
-  player: {fileID: 8031855850663217841}
+  target: {fileID: 0}
+  shakeIntensity: 10
+  shaker: {fileID: 8031855850680020249}
   postProcess: {fileID: 0}
   clip: {fileID: 8300000, guid: ceffdcd973014461ca03ea58f9c0bbb7, type: 3}
   effect: {fileID: 4030057093064698186, guid: 282a6c66c6aee4bd393a3199d8bb74a7, type: 3}
@@ -4292,8 +4294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a677426b112b51247bfe83bd3b673380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useLockOn: 0
-  player: {fileID: 8031855850663217841}
+  target: {fileID: 8031855850663217836}
+  shakeIntensity: 20
+  shaker: {fileID: 8031855850680020249}
   postProcess: {fileID: 0}
   clip: {fileID: 0}
   effect: {fileID: 0}
@@ -4313,8 +4316,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a677426b112b51247bfe83bd3b673380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useLockOn: 0
-  player: {fileID: 8031855850663217841}
+  target: {fileID: 8031855850663217836}
+  shakeIntensity: 10
+  shaker: {fileID: 8031855850680020249}
   postProcess: {fileID: 0}
   clip: {fileID: 8300000, guid: 0773cec74862a514c866d92abb41555e, type: 3}
   effect: {fileID: 4030057093064698186, guid: 579947f454d298347b8b1ade58f40dd7, type: 3}
@@ -4334,8 +4338,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a677426b112b51247bfe83bd3b673380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useLockOn: 0
-  player: {fileID: 8031855850663217841}
+  target: {fileID: 8031855850663217836}
+  shakeIntensity: 20
+  shaker: {fileID: 8031855850680020249}
   postProcess: {fileID: 0}
   clip: {fileID: 8300000, guid: ceffdcd973014461ca03ea58f9c0bbb7, type: 3}
   effect: {fileID: 4030057093064698186, guid: 282a6c66c6aee4bd393a3199d8bb74a7, type: 3}
@@ -6219,7 +6224,7 @@ PrefabInstance:
     - target: {fileID: 4555363806734254087, guid: 014bf08eb322d4922b4623d3c96812b9,
         type: 3}
       propertyPath: hitLayer.m_Bits
-      value: 521
+      value: 1545
       objectReference: {fileID: 0}
     - target: {fileID: 4555363806734254104, guid: 014bf08eb322d4922b4623d3c96812b9,
         type: 3}
@@ -6446,7 +6451,7 @@ PrefabInstance:
     - target: {fileID: 6136373200338076478, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
         type: 3}
       propertyPath: hitLayer.m_Bits
-      value: 521
+      value: 1545
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d062cc38b31a54a3983f9e2c09d7bdf8, type: 3}

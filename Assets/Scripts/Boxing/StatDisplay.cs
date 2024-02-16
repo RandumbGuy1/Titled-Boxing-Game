@@ -45,8 +45,16 @@ public class StatDisplay : MonoBehaviour
         staminaSlider.gameObject.SetActive(stamina);
         shieldDisplay.gameObject.SetActive(block);
 
-        if (health) stamina.OnStaminaBreakEffects.AddListener(staminaFX.Trigger);
-        if (stamina) health.OnPlayerCounter.AddListener(counterFX.Trigger);
+        if (health)
+        {
+            stamina.OnStaminaBreakEffects.AddListener(staminaFX.Trigger);
+            staminaFX.SetTarget(subject.transform);
+        }
+        if (stamina)
+        {
+            health.OnPlayerCounter.AddListener(counterFX.Trigger);
+            counterFX.SetTarget(subject.transform);
+        }
 
         this.health = health;
         this.stamina = stamina;

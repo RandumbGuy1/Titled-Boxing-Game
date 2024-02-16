@@ -3,8 +3,9 @@ using TMPro;
 
 public class SpecialConditionFX : MonoBehaviour
 {
-    [SerializeField] private bool useLockOn;
-    [SerializeField] private PlayerRef player; 
+    [SerializeField] private Transform target;
+    [SerializeField] private float shakeIntensity = 20f;
+    [SerializeField] private CameraShaker shaker; 
     [SerializeField] private PostProcessController postProcess;
 
     [SerializeField] AudioClip clip;
@@ -16,16 +17,20 @@ public class SpecialConditionFX : MonoBehaviour
     [SerializeField] private TextMeshProUGUI effectText;
     [SerializeField] private CameraShaker textShake;
 
+    public void SetTarget(Transform target) => this.target = target;
+
     public void Trigger(float power)
     {
+        if (target == null) target = transform;
+
         if (effectText)
         {
             effectText.text = effectName;
             effectText.color = effectColor;
         }
 
-        if (effect) Instantiate(effect, useLockOn ? player.LockOn.LockOnTarget.position : transform.position, Quaternion.identity);
-        if (player) player.CameraBody.CamShaker.ShakeOnce(new PerlinShake(ShakeData.Create(20f, 6f, 0.7f, 10f)));
+        if (effect) Instantiate(effect, target.position, Quaternion.identity);
+        if (shaker) shaker.ShakeOnce(new PerlinShake(ShakeData.Create(shakeIntensity, 6f, 0.7f, 10f)));
         if (textShake) textShake.ShakeOnce(new PerlinShake(ShakeData.Create(40f, 6f, 0.7f, 10f)));
         if (postProcess)
         {
@@ -33,6 +38,6 @@ public class SpecialConditionFX : MonoBehaviour
             postProcess.VignetteIntensity.SetValue(0.4f, 3f, true);
         }
 
-        AudioManager.Instance.PlayOnce(clip, useLockOn ? player.LockOn.LockOnTarget.position : transform.position);
+        AudioManager.Instance.PlayOnce(clip, target.position);
     }
 }

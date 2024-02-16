@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8995953507800380774}
   - component: {fileID: 8995953507800380773}
   - component: {fileID: 8995953507800380772}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8995953507808793619}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Corner Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 8995953507901942099}
   - component: {fileID: 8995953507901942098}
   - component: {fileID: 8995953507901942097}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 8995953507926870084}
   - component: {fileID: 8995953507926870107}
   - component: {fileID: 8995953507926870106}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -735,7 +735,7 @@ GameObject:
   - component: {fileID: 8995953508081693852}
   - component: {fileID: 8995953508081693843}
   - component: {fileID: 8995953508081693842}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -833,7 +833,7 @@ GameObject:
   - component: {fileID: 8995953508094099445}
   - component: {fileID: 8995953508094099444}
   - component: {fileID: 8995953508094099403}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -931,7 +931,7 @@ GameObject:
   - component: {fileID: 8995953508108024010}
   - component: {fileID: 8995953508108024009}
   - component: {fileID: 8995953508108024008}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1029,7 +1029,7 @@ GameObject:
   - component: {fileID: 8995953508121798801}
   - component: {fileID: 8995953508121798800}
   - component: {fileID: 8995953508121798807}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1128,7 +1128,7 @@ GameObject:
   - component: {fileID: 8995953508127965183}
   - component: {fileID: 8995953508127965182}
   - component: {fileID: 8995953508127965181}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1418,7 +1418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8995953508190148556}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Corner Arm (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1457,7 +1457,7 @@ GameObject:
   - component: {fileID: 8995953508195246781}
   - component: {fileID: 8995953508195246780}
   - component: {fileID: 8995953508195246771}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1556,7 +1556,7 @@ GameObject:
   - component: {fileID: 8995953508324673908}
   - component: {fileID: 8995953508324673867}
   - component: {fileID: 8995953508324673866}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1753,7 +1753,7 @@ GameObject:
   - component: {fileID: 8995953508389459252}
   - component: {fileID: 8995953508389459211}
   - component: {fileID: 8995953508389459210}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1947,7 +1947,7 @@ GameObject:
   - component: {fileID: 8995953508514624968}
   - component: {fileID: 8995953508514624975}
   - component: {fileID: 8995953508514624974}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2046,7 +2046,7 @@ GameObject:
   - component: {fileID: 8995953508545733360}
   - component: {fileID: 8995953508545733367}
   - component: {fileID: 8995953508545733366}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2374,7 +2374,7 @@ GameObject:
   - component: {fileID: 8995953508818145982}
   - component: {fileID: 8995953508818145981}
   - component: {fileID: 8995953508818145980}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2472,7 +2472,7 @@ GameObject:
   - component: {fileID: 8995953508834348235}
   - component: {fileID: 8995953508834348234}
   - component: {fileID: 8995953508834348233}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2602,7 +2602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8995953508912762032}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Corner Arm (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2738,7 +2738,7 @@ GameObject:
   - component: {fileID: 8995953508943954761}
   - component: {fileID: 8995953508943954760}
   - component: {fileID: 8995953508943954767}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2837,7 +2837,7 @@ GameObject:
   - component: {fileID: 8995953508953118034}
   - component: {fileID: 8995953508953118033}
   - component: {fileID: 8995953508953118032}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2935,7 +2935,7 @@ GameObject:
   - component: {fileID: 8995953509016620803}
   - component: {fileID: 8995953509016620802}
   - component: {fileID: 8995953509016620801}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3034,7 +3034,7 @@ GameObject:
   - component: {fileID: 8995953509030107940}
   - component: {fileID: 8995953509030107963}
   - component: {fileID: 8995953509030107962}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3132,7 +3132,7 @@ GameObject:
   - component: {fileID: 8995953509082594406}
   - component: {fileID: 8995953509082594405}
   - component: {fileID: 8995953509082594404}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3327,7 +3327,7 @@ GameObject:
   - component: {fileID: 8995953509183770027}
   - component: {fileID: 8995953509183770026}
   - component: {fileID: 8995953509183770025}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3425,7 +3425,7 @@ GameObject:
   - component: {fileID: 8995953509199539682}
   - component: {fileID: 8995953509199539681}
   - component: {fileID: 8995953509199539680}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3523,7 +3523,7 @@ GameObject:
   - component: {fileID: 8995953509258128272}
   - component: {fileID: 8995953509258128279}
   - component: {fileID: 8995953509258128278}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3655,7 +3655,7 @@ GameObject:
   - component: {fileID: 8995953509283226105}
   - component: {fileID: 8995953509283226104}
   - component: {fileID: 8995953509283226111}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3753,7 +3753,7 @@ GameObject:
   - component: {fileID: 8995953509325694781}
   - component: {fileID: 8995953509325694780}
   - component: {fileID: 8995953509325694771}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3852,7 +3852,7 @@ GameObject:
   - component: {fileID: 8995953509403724587}
   - component: {fileID: 8995953509403724586}
   - component: {fileID: 8995953509403724585}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3992,7 +3992,7 @@ GameObject:
   - component: {fileID: 8995953509432691285}
   - component: {fileID: 8995953509432691284}
   - component: {fileID: 8995953509432691243}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4220,7 +4220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8995953509542911272}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Corner Arm (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4259,7 +4259,7 @@ GameObject:
   - component: {fileID: 8995953509623016969}
   - component: {fileID: 8995953509623016968}
   - component: {fileID: 8995953509623016975}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4358,7 +4358,7 @@ GameObject:
   - component: {fileID: 8995953509626804594}
   - component: {fileID: 8995953509626804593}
   - component: {fileID: 8995953509626804592}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4457,7 +4457,7 @@ GameObject:
   - component: {fileID: 8995953509665716002}
   - component: {fileID: 8995953509665716001}
   - component: {fileID: 8995953509665716000}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4652,7 +4652,7 @@ GameObject:
   - component: {fileID: 8995953509673851079}
   - component: {fileID: 8995953509673851078}
   - component: {fileID: 8995953509673851077}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4847,7 +4847,7 @@ GameObject:
   - component: {fileID: 8995953509701666927}
   - component: {fileID: 8995953509701666926}
   - component: {fileID: 8995953509701666925}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pole (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5176,7 +5176,7 @@ GameObject:
   - component: {fileID: 8995953509798801932}
   - component: {fileID: 8995953509798801923}
   - component: {fileID: 8995953509798801922}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5273,7 +5273,7 @@ GameObject:
   - component: {fileID: 8995953509803349493}
   - component: {fileID: 8995953509803349492}
   - component: {fileID: 8995953509803349451}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5371,7 +5371,7 @@ GameObject:
   - component: {fileID: 8995953509829729300}
   - component: {fileID: 8995953509829730283}
   - component: {fileID: 8995953509829730282}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5567,7 +5567,7 @@ GameObject:
   - component: {fileID: 8995953509869766122}
   - component: {fileID: 8995953509869766121}
   - component: {fileID: 8995953509869766120}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
