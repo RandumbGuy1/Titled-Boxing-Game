@@ -1578,12 +1578,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8031855849057794282}
-  m_LocalRotation: {x: -0, y: -0, z: 4.827835e-16, w: 1}
+  m_LocalRotation: {x: 3.5240965e-16, y: -0, z: 4.827835e-16, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8031855850554516474}
+  m_Father: {fileID: 8031855850663217836}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8031855849057794287
@@ -3509,7 +3509,6 @@ Transform:
   m_Children:
   - {fileID: 8031855849472980028}
   - {fileID: 8031855849801260286}
-  - {fileID: 8031855849057794285}
   m_Father: {fileID: 8031855850663217836}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3966,6 +3965,7 @@ Transform:
   m_Children:
   - {fileID: 8031855849093432965}
   - {fileID: 8031855850554516474}
+  - {fileID: 8031855849057794285}
   m_Father: {fileID: 8031855850860956853}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4295,7 +4295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8031855850663217836}
-  shakeIntensity: 20
+  shakeIntensity: 7.5
   shaker: {fileID: 8031855850680020249}
   postProcess: {fileID: 0}
   clip: {fileID: 0}
@@ -4339,7 +4339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8031855850663217836}
-  shakeIntensity: 20
+  shakeIntensity: 15
   shaker: {fileID: 8031855850680020249}
   postProcess: {fileID: 0}
   clip: {fileID: 8300000, guid: ceffdcd973014461ca03ea58f9c0bbb7, type: 3}
