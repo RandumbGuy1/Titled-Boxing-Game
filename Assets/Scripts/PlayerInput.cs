@@ -34,6 +34,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private KeyCode toggleLockOnKey;
     [SerializeField] private KeyCode pauseMenuKey;
 
+    [Header("Refrences")]
+    [SerializeField] private Transform orientation;
+
     public KeyCode JumpKey => jumpKey;
     public KeyCode RollKey => rollKey;
     public KeyCode BlockKey => blockKey;
@@ -53,8 +56,12 @@ public class PlayerInput : MonoBehaviour
         MouseInput = new Vector2(Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"));
         OnMouseInput?.Invoke(MouseInput);
 
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+
         PlayerFrameInput.SetInput(
-            new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
+            orientation.TransformDirection(x, 0, y),
+            new Vector2(x, y),
             Input.GetKeyDown(jumpKey),
             Input.GetKey(jumpKey),
             Input.GetKeyDown(rollKey),
@@ -96,6 +103,7 @@ public class PlayerInput : MonoBehaviour
 }
 
 public class FrameInput {
+    public Vector3 MoveDir { get; private set; }
     public Vector2 MoveInput { get; private set; }
     public bool JumpInput { get; private set; }
     public bool JumpHoldInput { get; private set; }
@@ -106,6 +114,7 @@ public class FrameInput {
     public int PunchHoldInput { get; private set; }
 
     public void SetInput(
+        Vector3 moveDir,
         Vector2 moveInput,
         bool jumpInput,
         bool jumpHoldInput,
@@ -115,6 +124,7 @@ public class FrameInput {
         int punchInput,
         int punchHoldInput)
     {
+        MoveDir = moveDir;
         MoveInput = moveInput;
         JumpInput = jumpInput;
         JumpHoldInput = jumpHoldInput;
