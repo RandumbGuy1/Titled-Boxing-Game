@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class BoxerMovement : MonoBehaviour
@@ -20,10 +21,9 @@ public class BoxerMovement : MonoBehaviour
     [SerializeField] private float slideBoostCooldown;
     private float crouchElapsed = 0f;
     private float playerHeight = 0f;
-    private float timeSinceLastSlide = 0f;
     private Vector2 crouchVel = Vector2.zero;
 
-    public bool Rolling => State == BoxerState.Rolling;
+    public bool Rolling => State == BoxerMoveState.Rolling;
     public Vector3 CrouchOffset => (playerHeight - capsuleCol.height) * transform.localScale.y * Vector3.down;
 
     [Header("Friction Settings")]
@@ -32,7 +32,7 @@ public class BoxerMovement : MonoBehaviour
     [SerializeField] private int counterThresold;
     private Vector2Int readyToCounter = Vector2Int.zero;
 
-    public BoxerState State { get; private set; } = BoxerState.Moving;
+    public BoxerMoveState State { get; private set; } = BoxerMoveState.Moving;
     private FrameInput input;
 
     private bool grounded = false;
@@ -47,17 +47,17 @@ public class BoxerMovement : MonoBehaviour
         }
     }
 
-    public PlayerInput.ReceieveFloatInput OnGroundHit;
-    public PlayerInput.ReceieveBoolInput OnRoll;
+    public UnityEvent<float> OnJump;
+    public UnityEvent<float> OnGroundHit;
+    public UnityEvent<bool> OnRoll;
 
     public float Magnitude { get; private set; }
     public Vector3 RelativeVel { get; private set; }
     public Vector3 Velocity { get; private set; }
-
-    [Header("Boxer Refrences")]
-    [SerializeField] private BoxingController gloves;
+    public float VelToMaxRatio => Mathf.Clamp01(Magnitude / (maxSpeed * 1.5f));
 
     [Header("Refrences")]
+    [SerializeField] private BoxingController gloves;
     [SerializeField] private MeshRenderer gfx;
     [SerializeField] private RigidbodyHover hover;
     [SerializeField] private Transform orientation;
@@ -115,32 +115,22 @@ public class BoxerMovement : MonoBehaviour
         Magnitude = rb.velocity.magnitude;
         Velocity = rb.velocity;
 
-        if (rb.velocity.y <= 0f) //Extra Gravity
-            rb.AddForce((1.7f - 1f) * Physics.gravity.y * Vector3.up, ForceMode.Acceleration);
+        if (rb.velocity.y <= 0f) rb.AddForce((1.7f - 1f) * Physics.gravity.y * Vector3.up, ForceMode.Acceleration);
 
         UpdateSpring(20, 2);
         Friction();
 
         switch (State)
         {
-            case BoxerState.Moving:
+            case BoxerMoveState.Moving:
                 float movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
                 ClampSpeed(maxSpeed, movementMultiplier);
                 rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
                 break;
-            case BoxerState.Slipping:
+            case BoxerMoveState.Slipping:
 
                 break;
-            case BoxerState.Punching:
-                movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f) * 0.1f;
-                ClampSpeed(inactiveSpeed, movementMultiplier);
-                rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
-
-                break;
-            case BoxerState.Rolling:
-
-                break;
-            case BoxerState.Blocking:
+            case BoxerMoveState.Rolling:
 
                 break;
         }
@@ -180,7 +170,7 @@ public class BoxerMovement : MonoBehaviour
 
             if (crouchElapsed > 0.2f)
             {
-                State = BoxerState.Moving;
+                State = BoxerMoveState.Moving;
                 crouchElapsed = 0f;
                 return;
             }
@@ -196,12 +186,11 @@ public class BoxerMovement : MonoBehaviour
         OnRoll?.Invoke(rolling);
 
         rb.AddForce(5f * slideBoostSpeed * (Grounded ? 0.8f : 0.1f) * input.MoveDir.normalized, ForceMode.Impulse);
-        timeSinceLastSlide = slideBoostCooldown;
 
         gloves.Stamina.TakeStamina(dashStaminaCost, true);
         gloves.Block.Blocking = false;
 
-        State = BoxerState.Rolling;
+        State = BoxerMoveState.Rolling;
     }
 
     private void UpdateRoll()
@@ -222,13 +211,4 @@ public class BoxerMovement : MonoBehaviour
         gfx.transform.localPosition = capsuleCol.center;
         gfx.transform.localScale = new Vector3(1f, capsuleCol.height * 0.5f, 1f);
     }
-}
-
-public enum BoxerState
-{
-    Moving,
-    Slipping,
-    Punching,
-    Rolling,
-    Blocking,
 }

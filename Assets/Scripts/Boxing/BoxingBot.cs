@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class BoxingBot : MonoBehaviour, IBoxer
 {
+    public BoxerMoveState MoveState { get; }
+    public BoxerAttackState AttackState { get; }
+
     [Header("AI Settings")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] Transform[] handPositions = new Transform[2];

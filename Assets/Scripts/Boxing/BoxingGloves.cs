@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class BoxingGloves : MonoBehaviour, IBoxer
 {
+    public BoxerMoveState MoveState { get; }
+    public BoxerAttackState AttackState { get; }
+
     [SerializeField] Damageable health;
     [SerializeField] StaminaController stamina;
     [SerializeField] StunController stun;

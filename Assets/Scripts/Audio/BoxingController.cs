@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BoxingController : MonoBehaviour, IBoxer
 {
+    public BoxerMoveState MoveState => movement.State;
+    public BoxerAttackState AttackState { get; private set; }
+
     [SerializeField] Damageable health;
     [SerializeField] StaminaController stamina;
     [SerializeField] StunController stun;

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public interface IBoxer
 {
+    public BoxerMoveState MoveState { get; }
+    public BoxerAttackState AttackState { get; }
+
     public bool Punching { get; }
     public bool CanPunch { get; }
-    public bool CanDash { get;  }
-    // sun tzu was here
+    public bool CanDash { get; }
+    
     public bool CanPreformActions { get; }
 
     public Damageable Health { get; }
@@ -17,3 +20,17 @@ public interface IBoxer
 
     public void Disable();
 }
+
+public enum BoxerMoveState
+{
+    Moving,
+    Slipping,
+    Rolling,
+}
+
+public enum BoxerAttackState
+{
+    Punching,
+    Blocking,
+}
+

@@ -44,7 +44,7 @@ public class CameraBody : MonoBehaviour
     {
         if (player == null) return;
 
-        player.PlayerCam.fieldOfView = camFov.FOVUpdate(player);
+        player.PlayerCam.fieldOfView = camFov.FOVUpdate(player.PlayerMovement.Magnitude, player.PlayerMovement.MagToMaxRatio);
         camSprintEffect.SpeedLines(player);
         camIdleSway.IdleCameraSway(player);
         camHeadBob.BobUpdate(player);
@@ -52,7 +52,7 @@ public class CameraBody : MonoBehaviour
     }
 
     float angle = 0f;
-    float getLockOnAngleDelta()
+    float GetLockOnAngleDelta()
     {
         if (lockOn.LockOnTarget == null) return angle;
 
@@ -64,12 +64,10 @@ public class CameraBody : MonoBehaviour
 
     void LateUpdate()
     {
-        smoothDeltaRotation = Vector3.Lerp(smoothDeltaRotation, deltaRotation, Time.deltaTime * 25f);
-
         //Apply Rotations And Positions
         {
-            transform.rotation = Quaternion.Euler(camLookSettings.SmoothRotation.x, getLockOnAngleDelta() + camLookSettings.SmoothRotation.y, 0);
-            player.Orientation.rotation = Quaternion.Euler(0, getLockOnAngleDelta() + camLookSettings.SmoothRotation.y, 0);
+            transform.rotation = Quaternion.Euler(camLookSettings.SmoothRotation.x, GetLockOnAngleDelta() + camLookSettings.SmoothRotation.y, 0);
+            player.Orientation.rotation = Quaternion.Euler(0, GetLockOnAngleDelta() + camLookSettings.SmoothRotation.y, 0);
 
             //Camera effects rotation
             player.PlayerCam.transform.localRotation = Quaternion.Euler(ToEuler(camHeadBob.ViewBobOffset) + Vector3.forward * camHeadBob.TiltSway + camShaker.Offset + camIdleSway.HeadSwayOffset);
@@ -101,23 +99,5 @@ public class CameraBody : MonoBehaviour
         if (euler.z > 180) euler.x -= 360;
 
         return euler;
-    }
-
-    private Vector3 deltaRotation = Vector3.zero;
-    private Vector3 smoothDeltaRotation = Vector3.zero;
-
-    public void SetMoveCamera(bool move)
-    {
-        if (CanMoveCamera == move) return;
-             
-        CanMoveCamera = move;
-
-        if (CanMoveCamera) player.PlayerInput.OnMouseInput += camLookSettings.LookUpdate;
-        else player.PlayerInput.OnMouseInput -= camLookSettings.LookUpdate;
-    }
-
-    public void LookAt(Vector3 fromTo)
-    {
-        deltaRotation.y += Vector3.SignedAngle(player.Orientation.forward, fromTo, Vector3.up);
     }
 }
