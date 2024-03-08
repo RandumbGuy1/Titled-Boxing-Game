@@ -16,25 +16,20 @@ public class PlayerAudio : MonoBehaviour
     private float footstepDistance;
 
     [Header("Refrences")]
-    [SerializeField] private PlayerRef player;
+    [SerializeField] private BoxingController player;
 
     void Awake()
     {
-        player.PlayerMovement.OnPlayerLand += (float magnitude) => { AudioManager.Instance.PlayOnce(playerLandClip, transform.position); };
+        player.Movement.OnGroundHit.AddListener((float magnitude) => { AudioManager.Instance.PlayOnce(playerLandClip, transform.position); });
 
-        player.PlayerMovement.OnPlayerMove += (bool input) => {
-            if (!player.PlayerMovement.Grounded || input) return;
-            AudioManager.Instance.PlayOnce(footStepClip2, transform.position, footStepVolumeMultiplier);
-        };
-
-        player.PlayerMovement.OnPlayerCrouch += (bool input) =>
+        player.Movement.OnRoll.AddListener((bool input) =>
         {
-            if (!player.PlayerMovement.Grounded) return;
+            if (!player.Movement.Grounded) return;
             AudioManager.Instance.PlayOnce(playerCrouchClip, transform.position);
-        };
+        });
     }
     bool toggle = false;
-    private void CalculateFootsteps(FrameInput input)
+    public void CalculateFootsteps(FrameInput input)
     {
         if (!player.CameraBody.CamHeadBob.Bobbing)
         {
@@ -42,7 +37,7 @@ public class PlayerAudio : MonoBehaviour
             return;
         }
         
-        float walkMagnitude = player.PlayerMovement.Magnitude;
+        float walkMagnitude = player.Movement.Magnitude;
         walkMagnitude = Mathf.Clamp(walkMagnitude, 0f, 20f);
 
         footstepDistance += walkMagnitude * Time.deltaTime * footStepFrequency;

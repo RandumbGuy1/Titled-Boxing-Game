@@ -13,8 +13,6 @@ public class CameraLook
 	[SerializeField] private float upClampAngle;
 	[SerializeField] private float downClampAngle;
 
-	[SerializeField] private LockOn lockOn;
-
 	private Vector2 rotation;
 	public Vector2 SmoothRotation { get; private set; }
 	public Vector2 RotationDelta { get; set; }

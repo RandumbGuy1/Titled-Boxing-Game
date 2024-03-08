@@ -49,7 +49,7 @@ MonoBehaviour:
   sounds:
   - clip: {fileID: 8300000, guid: d6edde39fa804634b93942163aa48139, type: 3}
     soundCapacity: 1
-    volume: 0.2
+    volume: 0
     pitch: 1
     spatialBlend: 0
     looping: 1

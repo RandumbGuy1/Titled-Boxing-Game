@@ -5,7 +5,7 @@ public class LockOn : MonoBehaviour
     [Header("Lock On Settings")]
     [SerializeField] private float lockOnRadius;
     [SerializeField] private Transform lockOnTarget;
-    [SerializeField] private PlayerRef player;
+    [SerializeField] private BoxingController player;
     [SerializeField] private LayerMask lockOnLayer;
     [SerializeField] private StatDisplay display;
     private Outline currOutline = null;
@@ -17,7 +17,7 @@ public class LockOn : MonoBehaviour
 
     private void Awake()
     {
-        player.PlayerInput.OnLockInput += DetectLockOn;
+        player.Keys.OnLockInput += DetectLockOn;
 
         if (lockOnTarget != null)
         {
@@ -34,7 +34,7 @@ public class LockOn : MonoBehaviour
     {
         if (!pressed) return;
 
-        if (Physics.SphereCast(player.Orientation.position, lockOnRadius, player.Orientation.forward, out var hit, 15f, lockOnLayer))
+        if (Physics.SphereCast(player.transform.position, lockOnRadius, player.Orientation.forward, out var hit, 15f, lockOnLayer))
         {
             if (lockOnTarget == hit.collider.transform)
             {

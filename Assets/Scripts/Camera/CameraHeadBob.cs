@@ -26,9 +26,9 @@ public class CameraHeadBob
     public Vector3 ViewBobOffset { get; private set; }
     public Vector3 ViewBobSnapOffset { get; private set; }
 
-    public void BobUpdate(PlayerRef player)
+    public void BobUpdate(BoxingController player)
     {
-        viewBobTimer = player.PlayerMovement.Grounded && (player.PlayerMovement.Magnitude > 0.5f && player.PlayerMovement.Moving)
+        viewBobTimer = player.Movement.Grounded && (player.Movement.Magnitude > 0.5f && player.Keys.PlayerFrameInput.MoveDir.sqrMagnitude > 0f)
             ? viewBobTimer + Time.deltaTime * viewBobSpeed : 0f;
 
         if (!enabled) return;
@@ -42,8 +42,7 @@ public class CameraHeadBob
             HarmonicMotion.CalcDampedSpringMotionParams(viewBobDampingRatio, viewBobAngularFrequency));
         ViewBobOffset = smoothHeadBob;
 
-        //Calculate Tilt
-        float tilt = Mathf.Clamp((player.PlayerMovement.Input.x * maxTilt * 0.75f + player.CameraBody.CamLookSettings.RotationDelta.y * maxTilt), -maxTilt, maxTilt);    
+        float tilt = Mathf.Clamp(player.Keys.PlayerFrameInput.MoveInput.x * maxTilt * 0.75f + player.CameraBody.CamLookSettings.RotationDelta.y * maxTilt, -maxTilt, maxTilt);    
         TiltSway = Mathf.SmoothDamp(TiltSway, -tilt, ref tiltVel, tiltSmoothTime);   
     }
 

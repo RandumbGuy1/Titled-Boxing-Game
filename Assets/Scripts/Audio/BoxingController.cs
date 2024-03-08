@@ -7,16 +7,29 @@ public class BoxingController : MonoBehaviour, IBoxer
     public BoxerMoveState MoveState => movement.State;
     public BoxerAttackState AttackState { get; private set; }
 
+    [SerializeField] Transform[] handPositions = new Transform[2];
+    [SerializeField] GloveCollision[] gloves = new GloveCollision[2];
+
+    [Header("Player Refrences")]
     [SerializeField] Damageable health;
     [SerializeField] StaminaController stamina;
     [SerializeField] StunController stun;
     [SerializeField] BlockController block;
-
-    [SerializeField] Transform[] handPositions = new Transform[2];
-    [SerializeField] GloveCollision[] gloves = new GloveCollision[2];
-
     [SerializeField] BoxerMovement movement;
-    [SerializeField] Transform orientation;
+    [SerializeField] private BoxingController controller;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private CameraBody cameraBody;
+    [SerializeField] private Camera playerCam;
+    [SerializeField] private Transform orientation;
+    [SerializeField] private MeshRenderer gfx;
+    [SerializeField] private CapsuleCollider capsuleCol;
+    public BoxingController Controller => controller;
+    public CapsuleCollider CapsuleCol => capsuleCol;
+    public MeshRenderer Gfx => gfx;
+    public PlayerInput Keys => playerInput;
+    public CameraBody CameraBody => cameraBody;
+    public Camera PlayerCam => playerCam;
+    public Transform Orientation => orientation;
 
     public bool CanPreformActions => !movement.Rolling && !stamina.RanOutofStamina && !stun.InStun;
     public bool CanDash => !stamina.RanOutofStamina && !stun.InStun;
@@ -46,6 +59,8 @@ public class BoxingController : MonoBehaviour, IBoxer
     public StunController Stun => stun;
     public BlockController Block => block;
 
+    public BoxerMovement Movement => movement;
+
     void FixedUpdate()
     {
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++)
@@ -57,7 +72,7 @@ public class BoxingController : MonoBehaviour, IBoxer
     public void HandlePunching(FrameInput input)
     {
         int button = input.PunchInput;
-        if (!enabled) return;
+        if (!enabled || gloves.Length <= 0) return;
 
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++)
         {

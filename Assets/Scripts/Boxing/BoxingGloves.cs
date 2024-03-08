@@ -5,6 +5,7 @@ public class BoxingGloves : MonoBehaviour, IBoxer
     public BoxerMoveState MoveState { get; }
     public BoxerAttackState AttackState { get; }
 
+    [SerializeField] BoxerMovement movement;
     [SerializeField] Damageable health;
     [SerializeField] StaminaController stamina;
     [SerializeField] StunController stun;
@@ -40,6 +41,8 @@ public class BoxingGloves : MonoBehaviour, IBoxer
     public StaminaController Stamina => stamina;
     public StunController Stun => stun;
     public BlockController Block => block;
+
+    public BoxerMovement Movement => movement;
 
     void FixedUpdate()
     {

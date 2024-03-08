@@ -9,7 +9,6 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private GameObject controlsMenu;
 
     [Header("Refrences")]
-    [SerializeField] private PlayerRef player;
     private List<GameObject> menus = new List<GameObject>();
 
     void Awake()
@@ -40,16 +39,6 @@ public class SettingsMenu : MonoBehaviour
     public void SetFullScreen(bool isOn)
     {
         Screen.fullScreen = isOn;
-    }
-
-    public void ToggleIdleSway(bool isOn)
-    {
-        player.CameraBody.CamIdleSway.Enable(isOn);
-    }
-
-    public void ToggleHeadBob(bool isOn)
-    {
-        player.CameraBody.CamHeadBob.Enable(isOn);
     }
 
     public void SetMenu(int i)

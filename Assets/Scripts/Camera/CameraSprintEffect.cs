@@ -8,9 +8,11 @@ public class CameraSprintEffect
 	[SerializeField] private AudioClip sprintClip;
 	private AudioSource windSource = null;
 
-	public void SpeedLines(PlayerRef player)
+	public void SpeedLines(BoxingController player)
 	{
-		if (player.PlayerMovement.Magnitude >= 1f)
+		float magnitude = player.Movement.Magnitude;
+
+		if (magnitude >= 1f)
 		{
 			if (!sprintEffect.isPlaying)
             {
@@ -18,14 +20,14 @@ public class CameraSprintEffect
 				windSource = AudioManager.Instance.PlayOnce(sprintClip, player.transform.position);
 			}
 
-			float velocityRatio = player.PlayerMovement.Magnitude / 15f;
+			float velocityRatio = magnitude / 15f;
 
-			float rateOverLifeTime = Mathf.Max(Vector3.Angle(player.PlayerMovement.Velocity, player.PlayerCam.transform.forward) * 0.15f, 1f);
-			rateOverLifeTime = player.PlayerMovement.Magnitude * velocityRatio / rateOverLifeTime;
+			float rateOverLifeTime = Mathf.Max(Vector3.Angle(player.Movement.Velocity, player.PlayerCam.transform.forward) * 0.15f, 1f);
+			rateOverLifeTime = magnitude * velocityRatio / rateOverLifeTime;
 
 			ParticleSystem.EmissionModule em = sprintEffect.emission;
 			em.rateOverTime = rateOverLifeTime * velocityRatio * 2f;
-			// Hitler was here
+
 			ParticleSystem.VelocityOverLifetimeModule velOverLife = sprintEffect.velocityOverLifetime;
 			velOverLife.speedModifier = velocityRatio * speedMultiplier;
 

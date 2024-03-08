@@ -6,10 +6,11 @@ using UnityEngine;
 public class BoxerMovement : MonoBehaviour
 {
     [Header("General Movement Settings")]
-    [SerializeField] private float inactiveSpeed = 2f;
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float uprightStrength = 20f;
+    [SerializeField] private float uprightDampening = 2f;
 
     [Header("Crouch Settings")]
     [SerializeField] private float dashStaminaCost = 10f;
@@ -50,6 +51,7 @@ public class BoxerMovement : MonoBehaviour
     public UnityEvent<float> OnJump;
     public UnityEvent<float> OnGroundHit;
     public UnityEvent<bool> OnRoll;
+    public UnityEvent<bool> OnMove;
 
     public float Magnitude { get; private set; }
     public Vector3 RelativeVel { get; private set; }
@@ -117,7 +119,7 @@ public class BoxerMovement : MonoBehaviour
 
         if (rb.velocity.y <= 0f) rb.AddForce((1.7f - 1f) * Physics.gravity.y * Vector3.up, ForceMode.Acceleration);
 
-        UpdateSpring(20, 2);
+        UpdateSpring(uprightStrength, uprightDampening);
         Friction();
 
         switch (State)
