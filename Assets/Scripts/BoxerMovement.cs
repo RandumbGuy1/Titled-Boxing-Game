@@ -128,9 +128,12 @@ public class BoxerMovement : MonoBehaviour
                 float movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
                 ClampSpeed(maxSpeed, movementMultiplier);
                 rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
+
+                if (input.SlipInput != -1)
+                    rb.AddTorque(orientation.forward * (input.SlipInput == 0 ? 1 : -1) * 2.5f, ForceMode.Impulse);
                 break;
             case BoxerMoveState.Slipping:
-
+                
                 break;
             case BoxerMoveState.Rolling:
 

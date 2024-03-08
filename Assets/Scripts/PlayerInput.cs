@@ -81,7 +81,7 @@ public class PlayerInput : MonoBehaviour
 
     int IterateKeys(List<KeyCode> keys)
     {
-        foreach (KeyCode key in keys) if (Input.GetKeyDown(key)) return keys.IndexOf(key);
+        foreach (KeyCode key in keys) if (Input.GetKey(key)) return keys.IndexOf(key);
         return -1;
     }
 
