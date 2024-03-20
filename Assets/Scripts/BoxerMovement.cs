@@ -11,6 +11,8 @@ public class BoxerMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float uprightStrength = 20f;
     [SerializeField] private float uprightDampening = 2f;
+    public int SlipDirection => slipInput;
+    private int slipInput = 0;
 
     [Header("Crouch Settings")]
     [SerializeField] private float dashStaminaCost = 10f;
@@ -59,8 +61,9 @@ public class BoxerMovement : MonoBehaviour
     public float VelToMaxRatio => Mathf.Clamp01(Magnitude / (maxSpeed * 1.5f));
 
     [Header("Refrences")]
+    [SerializeField] private Transform slipPivot;
     [SerializeField] private BoxingController gloves;
-    [SerializeField] private MeshRenderer gfx;
+    [SerializeField] private Transform gfx;
     [SerializeField] private RigidbodyHover hover;
     [SerializeField] private Transform orientation;
     [SerializeField] private Rigidbody rb;
@@ -68,9 +71,11 @@ public class BoxerMovement : MonoBehaviour
 
     public Rigidbody Rb => rb;
 
+    Vector3 gfxOffset = Vector3.zero;
     void Awake()
     {
         playerHeight = capsuleCol.height;
+        gfxOffset = gfx.localPosition;
     }
 
     void FixedUpdate()
@@ -129,14 +134,19 @@ public class BoxerMovement : MonoBehaviour
                 ClampSpeed(maxSpeed, movementMultiplier);
                 rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
 
-                if (input.SlipInput != -1)
-                    rb.AddTorque(orientation.forward * (input.SlipInput == 0 ? 1 : -1) * 2.5f, ForceMode.Impulse);
+                slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.fixedDeltaTime * 15f);
+
                 break;
             case BoxerMoveState.Slipping:
-                
+                movementMultiplier = Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
+                ClampSpeed(maxSpeed * 0.5f, movementMultiplier);
+                rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
+
+                float slipAngle = slipInput * 45f;
+                slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, slipAngle), Time.fixedDeltaTime * 15f);
                 break;
             case BoxerMoveState.Rolling:
-
+                slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.fixedDeltaTime * 15f);
                 break;
         }
     }
@@ -144,7 +154,7 @@ public class BoxerMovement : MonoBehaviour
     public void UpdateSpring(float strength, float dampening)
     {
         rb.AddTorque(Vector3.right * ((0 - rb.rotation.x) * strength * 5f - (rb.angularVelocity.x * dampening)));
-        rb.AddTorque(Vector3.up * ((0 - rb.rotation.y) * strength * 5f - (rb.angularVelocity.y * dampening)));
+        rb.AddTorque(Vector3.up * ((0 - rb.rotation.y) * strength - (rb.angularVelocity.y * dampening)));
         rb.AddTorque(Vector3.forward * ((0 - rb.rotation.z) * strength * 5f - (rb.angularVelocity.z * dampening)));
     }
 
@@ -156,6 +166,33 @@ public class BoxerMovement : MonoBehaviour
 
         ReceiveJumpInput(input.JumpInput);
         ReceiveRollInput(input.RollInput);
+
+        switch (State)
+        {
+            case BoxerMoveState.Moving:
+                if (input.SlipInput != -1)
+                {
+                    State = BoxerMoveState.Slipping;
+                    slipInput = input.SlipInput == 0 ? 1 : -1;
+                }
+                break;
+            case BoxerMoveState.Slipping:
+                if (input.SlipInput != -1)
+                {
+                    int newSlipInput = input.SlipInput == 0 ? 1 : -1;
+                    if (slipInput == newSlipInput)
+                    {
+                        State = BoxerMoveState.Moving;
+                        break;
+                    }
+
+                    slipInput = newSlipInput;
+                }
+                break;
+            case BoxerMoveState.Rolling:
+
+                break;
+        }
     }
 
     private void ReceiveJumpInput(bool jumping)
@@ -213,7 +250,7 @@ public class BoxerMovement : MonoBehaviour
         capsuleCol.height = Mathf.SmoothDamp(capsuleCol.height, targetScale, ref crouchVel.x, crouchSmoothTime);
         capsuleCol.center = new Vector3(0, Mathf.SmoothDamp(capsuleCol.center.y, targetCenter, ref crouchVel.y, crouchSmoothTime), 0);
 
-        gfx.transform.localPosition = capsuleCol.center;
+        gfx.transform.localPosition = capsuleCol.center + gfxOffset;
         gfx.transform.localScale = new Vector3(1f, capsuleCol.height * 0.5f, 1f);
     }
 }

@@ -65,7 +65,7 @@ public class PlayerInput : MonoBehaviour
             Input.GetKeyDown(jumpKey),
             Input.GetKey(jumpKey),
             Input.GetKeyDown(rollKey),
-            IterateKeys(slipKeys),
+            IterateKeyDowns(slipKeys),
             Input.GetKey(blockKey),
             MouseButtonDown(),
             MouseButton());
