@@ -34,11 +34,14 @@ public class GloveCollision : MonoBehaviour
     public bool Active { get; set; } = false;
     public bool CanPunch => punchElapsed >= punchBackTime + punchDelay * overExtendDelay;
 
+    Vector3 lastPos = Vector3.zero;
     public void DetectCollisions(Transform thrower)
     {
-        Vector3 gloveTravel = transform.position - thrower.position;
-        if (Active && Physics.SphereCast(thrower.position, gloveCollider.radius * 0.5f, gloveTravel, out var hit, gloveTravel.magnitude, hitLayer))
+        //Detection
+        Vector3 gloveTravel = transform.position - lastPos;
+        if (Active && Physics.SphereCast(transform.position - gloveTravel * 20f, gloveCollider.radius * 0.5f, gloveTravel, out var hit, gloveTravel.magnitude * 20f, hitLayer))
         {
+            //Damage Logic
             PlayerRef player = hit.collider.gameObject.GetComponent<PlayerRef>();
             if (player != null && player.PlayerMovement.Crouching) return;
 
@@ -50,7 +53,11 @@ public class GloveCollision : MonoBehaviour
             hitSomething = true;
 
             Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
-            if (rb != null) rb.AddForce(-hit.normal * punchForce, ForceMode.Impulse);
+            if (rb != null)
+            {
+                rb.AddForce(-hit.normal * punchForce, ForceMode.Impulse);
+                rb.AddTorque(-hit.normal * punchForce, ForceMode.Impulse);
+            }
             
             IBoxer boxer = hit.collider.GetComponent<IBoxer>();
             if (boxer != null)
@@ -73,6 +80,8 @@ public class GloveCollision : MonoBehaviour
                 boxer.Stun.Stun((hit.point - thrower.position).normalized, punchStun);
             }
         }
+
+        lastPos = transform.position;
     }
 
     Vector3 endPunchPos = Vector3.zero;
@@ -99,13 +108,13 @@ public class GloveCollision : MonoBehaviour
             }
 
             endPunchPos = handPosition.position + forward * punchRange;
-            gfx.localRotation = Quaternion.Lerp(gfx.localRotation, hitRot, Time.deltaTime * 15f);
+            gfx.localRotation = Quaternion.Slerp(gfx.localRotation, hitRot, EaseInQuad(punchElapsed / punchForwardTime));
             transform.position = Vector3.Lerp(handPosition.position, endPunchPos, EaseInQuad(punchElapsed / punchForwardTime));
             return;
         }
 
         transform.position = Vector3.Lerp(endPunchPos, handPosition.position, punchElapsed / punchBackTime);
-        gfx.localRotation = Quaternion.Lerp(gfx.localRotation, Quaternion.Euler(startRot), Time.deltaTime * 15f);
+        gfx.localRotation = Quaternion.Slerp(gfx.localRotation, Quaternion.Euler(startRot), EaseInQuad(punchElapsed / punchForwardTime));
     }
 
     public void SetGlove(bool active = true, float punchElapsed = 0f, StaminaController stamina = null)

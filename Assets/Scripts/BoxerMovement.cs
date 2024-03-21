@@ -11,6 +11,10 @@ public class BoxerMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float uprightStrength = 20f;
     [SerializeField] private float uprightDampening = 2f;
+
+    [Header("Slipping Settings")]
+    [SerializeField] private float rotationSmoothSpeed;
+    [SerializeField] private float slipStaminaCost = 10f;
     public int SlipDirection => slipInput;
     private int slipInput = 0;
 
@@ -62,12 +66,13 @@ public class BoxerMovement : MonoBehaviour
 
     [Header("Refrences")]
     [SerializeField] private Transform slipPivot;
-    [SerializeField] private BoxingController gloves;
     [SerializeField] private Transform gfx;
     [SerializeField] private RigidbodyHover hover;
     [SerializeField] private Transform orientation;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private CapsuleCollider capsuleCol;
+
+    private IBoxer boxer;
 
     public Rigidbody Rb => rb;
 
@@ -76,11 +81,13 @@ public class BoxerMovement : MonoBehaviour
     {
         playerHeight = capsuleCol.height;
         gfxOffset = gfx.localPosition;
+
+        boxer = GetComponent<IBoxer>();
     }
 
     void FixedUpdate()
     {
-        if (input == null) return;
+        //if (input == null) return;
 
         void ClampSpeed(float maxSpeed, float movementMultiplier)
         {
@@ -125,6 +132,8 @@ public class BoxerMovement : MonoBehaviour
         if (rb.velocity.y <= 0f) rb.AddForce((1.7f - 1f) * Physics.gravity.y * Vector3.up, ForceMode.Acceleration);
 
         UpdateSpring(uprightStrength, uprightDampening);
+
+        if (input == null) return;
         Friction();
 
         switch (State)
@@ -134,19 +143,15 @@ public class BoxerMovement : MonoBehaviour
                 ClampSpeed(maxSpeed, movementMultiplier);
                 rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
 
-                slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.fixedDeltaTime * 15f);
-
                 break;
             case BoxerMoveState.Slipping:
                 movementMultiplier = Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
                 ClampSpeed(maxSpeed * 0.5f, movementMultiplier);
                 rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
 
-                float slipAngle = slipInput * 45f;
-                slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, slipAngle), Time.fixedDeltaTime * 15f);
                 break;
             case BoxerMoveState.Rolling:
-                slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.fixedDeltaTime * 15f);
+                
                 break;
         }
     }
@@ -170,16 +175,25 @@ public class BoxerMovement : MonoBehaviour
         switch (State)
         {
             case BoxerMoveState.Moving:
-                if (input.SlipInput != -1)
+                slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
+
+                if (input.SlipInput != -1 && !boxer.Stamina.RanOutofStamina)
                 {
                     State = BoxerMoveState.Slipping;
                     slipInput = input.SlipInput == 0 ? 1 : -1;
+
+                    boxer.Stamina.TakeStamina(slipStaminaCost, true);
                 }
                 break;
             case BoxerMoveState.Slipping:
-                if (input.SlipInput != -1)
+                float slipAngle = slipInput * 45f;
+                slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, slipAngle), Time.deltaTime * rotationSmoothSpeed);
+
+                if (input.SlipInput != -1 && !boxer.Stamina.RanOutofStamina)
                 {
                     int newSlipInput = input.SlipInput == 0 ? 1 : -1;
+                    boxer.Stamina.TakeStamina(slipStaminaCost, true);
+
                     if (slipInput == newSlipInput)
                     {
                         State = BoxerMoveState.Moving;
@@ -190,7 +204,7 @@ public class BoxerMovement : MonoBehaviour
                 }
                 break;
             case BoxerMoveState.Rolling:
-
+                slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
                 break;
         }
     }
@@ -208,7 +222,7 @@ public class BoxerMovement : MonoBehaviour
 
         if (Rolling)
         {
-            if (gloves.Stamina.RanOutofStamina) rb.velocity = Vector3.zero;
+            if (boxer.Stamina.RanOutofStamina) rb.velocity = Vector3.zero;
 
             if (crouchElapsed > 0.2f)
             {
@@ -223,14 +237,14 @@ public class BoxerMovement : MonoBehaviour
 
         slideBoostCooldown = Mathf.Max(0f, slideBoostCooldown - Time.deltaTime);
 
-        if (!rolling || slideBoostCooldown > 0f || !gloves.CanPreformActions) return;
+        if (!rolling || slideBoostCooldown > 0f || !boxer.CanPreformActions) return;
 
         OnRoll?.Invoke(rolling);
 
         rb.AddForce(5f * slideBoostSpeed * (Grounded ? 0.8f : 0.1f) * input.MoveDir.normalized, ForceMode.Impulse);
 
-        gloves.Stamina.TakeStamina(dashStaminaCost, true);
-        gloves.Block.Blocking = false;
+        boxer.Stamina.TakeStamina(dashStaminaCost, true);
+        boxer.Block.Blocking = false;
 
         State = BoxerMoveState.Rolling;
     }
