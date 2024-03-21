@@ -154,7 +154,7 @@ public class BoxerMovement : MonoBehaviour
     public void UpdateSpring(float strength, float dampening)
     {
         rb.AddTorque(Vector3.right * ((0 - rb.rotation.x) * strength * 5f - (rb.angularVelocity.x * dampening)));
-        rb.AddTorque(Vector3.up * ((0 - rb.rotation.y) * strength - (rb.angularVelocity.y * dampening)));
+        rb.AddTorque(Vector3.up * ((0 - rb.rotation.y) * strength * 5f - (rb.angularVelocity.y * dampening)));
         rb.AddTorque(Vector3.forward * ((0 - rb.rotation.z) * strength * 5f - (rb.angularVelocity.z * dampening)));
     }
 

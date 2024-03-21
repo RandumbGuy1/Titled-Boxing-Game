@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.029290695, g: 0.03873025, b: 0.047135748, a: 1}
+  m_IndirectSpecularColor: {r: 0.02920554, g: 0.03863617, b: 0.047038265, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7951,18 +7951,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554792461}
   m_CullTransparentMesh: 1
---- !u!114 &1556865599 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8031855849878630689, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
-    type: 3}
-  m_PrefabInstance: {fileID: 580810727}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1580405565
 GameObject:
   m_ObjectHideFlags: 0
@@ -10205,7 +10193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 150
-  healthBar: {fileID: 1556865599}
+  healthBar: {fileID: 1638757244}
   OnPlayerDamageEffects:
     m_PersistentCalls:
       m_Calls:
@@ -10332,7 +10320,7 @@ MonoBehaviour:
   maxStaminaRecharge: 500
   staminaBreakRegainSpeed: 100
   maxstaminaHp: 100
-  slider: {fileID: 2071304343}
+  slider: {fileID: 2070462539}
   OnStaminaBreakEffects:
     m_PersistentCalls:
       m_Calls:
@@ -10737,18 +10725,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2071304343 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8031855850891576238, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
-    type: 3}
-  m_PrefabInstance: {fileID: 580810727}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2081062591
 GameObject:
   m_ObjectHideFlags: 0
