@@ -87,8 +87,6 @@ public class BoxerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //if (input == null) return;
-
         void ClampSpeed(float maxSpeed, float movementMultiplier)
         {
             Vector3 vel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
@@ -124,6 +122,13 @@ public class BoxerMovement : MonoBehaviour
             readyToCounter.y = input.MoveInput.y == 0f ? readyToCounter.y + 1 : 0;
         }
 
+        void UpdateSpring(float strength, float dampening)
+        {
+            rb.AddTorque(Vector3.right * ((0 - rb.rotation.x) * strength * 5f - (rb.angularVelocity.x * dampening)));
+            rb.AddTorque(Vector3.up * ((0 - rb.rotation.y) * strength * 5f - (rb.angularVelocity.y * dampening)));
+            rb.AddTorque(Vector3.forward * ((0 - rb.rotation.z) * strength * 5f - (rb.angularVelocity.z * dampening)));
+        }
+
         Grounded = hover.Intersecting;
         RelativeVel = orientation.InverseTransformDirection(rb.velocity);
         Magnitude = rb.velocity.magnitude;
@@ -134,6 +139,7 @@ public class BoxerMovement : MonoBehaviour
         UpdateSpring(uprightStrength, uprightDampening);
 
         if (input == null) return;
+
         Friction();
 
         switch (State)
@@ -153,14 +159,12 @@ public class BoxerMovement : MonoBehaviour
             case BoxerMoveState.Rolling:
                 
                 break;
+            case BoxerMoveState.Stunned:
+                movementMultiplier = Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
+                ClampSpeed(maxSpeed * 0.5f, movementMultiplier);
+                rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
+                break;
         }
-    }
-
-    public void UpdateSpring(float strength, float dampening)
-    {
-        rb.AddTorque(Vector3.right * ((0 - rb.rotation.x) * strength * 5f - (rb.angularVelocity.x * dampening)));
-        rb.AddTorque(Vector3.up * ((0 - rb.rotation.y) * strength * 5f - (rb.angularVelocity.y * dampening)));
-        rb.AddTorque(Vector3.forward * ((0 - rb.rotation.z) * strength * 5f - (rb.angularVelocity.z * dampening)));
     }
 
     public void SendFrameInput(FrameInput input)
@@ -216,6 +220,7 @@ public class BoxerMovement : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
     }
+
     private void ReceiveRollInput(bool rolling)
     {
         UpdateRoll();

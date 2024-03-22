@@ -39,7 +39,7 @@ public class GloveCollision : MonoBehaviour
     {
         //Detection
         Vector3 gloveTravel = transform.position - lastPos;
-        if (Active && Physics.SphereCast(transform.position - gloveTravel * 20f, gloveCollider.radius * 0.5f, gloveTravel, out var hit, gloveTravel.magnitude * 20f, hitLayer))
+        if (Active && Physics.SphereCast(transform.position - gloveTravel * 3.5f, gloveCollider.radius * 0.5f, gloveTravel, out var hit, gloveTravel.magnitude * 3.5f, hitLayer))
         {
             //Damage Logic
             PlayerRef player = hit.collider.gameObject.GetComponent<PlayerRef>();

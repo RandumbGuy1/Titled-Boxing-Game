@@ -27,6 +27,7 @@ public enum BoxerMoveState
     Moving,
     Slipping,
     Rolling,
+    Stunned,
 }
 
 public enum BoxerAttackState
