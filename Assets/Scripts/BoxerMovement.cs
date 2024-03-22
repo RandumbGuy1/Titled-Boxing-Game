@@ -31,6 +31,7 @@ public class BoxerMovement : MonoBehaviour
     private Vector2 crouchVel = Vector2.zero;
 
     public bool Rolling => State == BoxerMoveState.Rolling;
+    public bool RanOutofStamina => State == BoxerMoveState.StaminaDepleted;
     public Vector3 CrouchOffset => (playerHeight - capsuleCol.height) * transform.localScale.y * Vector3.down;
 
     [Header("Friction Settings")]
@@ -39,7 +40,7 @@ public class BoxerMovement : MonoBehaviour
     [SerializeField] private int counterThresold;
     private Vector2Int readyToCounter = Vector2Int.zero;
 
-    public BoxerMoveState State { get; private set; } = BoxerMoveState.Moving;
+    public BoxerMoveState State { get; set; } = BoxerMoveState.Moving;
     private FrameInput input;
 
     private bool grounded = false;
@@ -157,9 +158,15 @@ public class BoxerMovement : MonoBehaviour
 
                 break;
             case BoxerMoveState.Rolling:
-                
+                movementMultiplier = Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
+                ClampSpeed(maxSpeed * 2f, movementMultiplier);
                 break;
             case BoxerMoveState.Stunned:
+                movementMultiplier = Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
+                ClampSpeed(maxSpeed * 0.5f, movementMultiplier);
+                rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
+                break;
+            case BoxerMoveState.StaminaDepleted:
                 movementMultiplier = Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
                 ClampSpeed(maxSpeed * 0.5f, movementMultiplier);
                 rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
@@ -167,20 +174,60 @@ public class BoxerMovement : MonoBehaviour
         }
     }
 
+    BoxerMoveState prevMoveState;
     public void SendFrameInput(FrameInput input)
     {
         if (!enabled) return;
-
         this.input = input;
 
-        ReceiveJumpInput(input.JumpInput);
-        ReceiveRollInput(input.RollInput);
+        void UpdateRoll()
+        {
+            float targetScale = Rolling ? crouchHeight : playerHeight;
+            float targetCenter = (targetScale - playerHeight) * 0.5f;
+
+            if (capsuleCol.height == targetScale && capsuleCol.center.y == targetCenter) return;
+            if (Mathf.Abs(targetScale - capsuleCol.height) < 0.01f && Mathf.Abs(targetCenter - capsuleCol.center.y) < 0.01f)
+            {
+                capsuleCol.height = targetScale;
+                capsuleCol.center = Vector3.one * targetCenter;
+            }
+
+            capsuleCol.height = Mathf.SmoothDamp(capsuleCol.height, targetScale, ref crouchVel.x, crouchSmoothTime);
+            capsuleCol.center = new Vector3(0, Mathf.SmoothDamp(capsuleCol.center.y, targetCenter, ref crouchVel.y, crouchSmoothTime), 0);
+
+            gfx.transform.localPosition = capsuleCol.center + gfxOffset;
+            gfx.transform.localScale = new Vector3(1f, capsuleCol.height * 0.5f, 1f);
+        }
+
+        void RollInput()
+        {
+            if (!input.RollInput) return;
+
+            OnRoll?.Invoke(input.RollInput);
+            rb.AddForce(5f * slideBoostSpeed * (Grounded ? 0.8f : 0.1f) * input.MoveDir.normalized, ForceMode.Impulse);
+
+            boxer.Block.Blocking = false;
+            State = BoxerMoveState.Rolling;
+
+            boxer.Stamina.TakeStamina(dashStaminaCost, true);
+        }
+
+        void ReceiveJumpInput()
+        {
+            if (!Grounded || !input.JumpInput) return;
+
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            rb.AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
+        }
+
+        UpdateRoll();
 
         switch (State)
         {
             case BoxerMoveState.Moving:
                 slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
 
+                //Slip Input
                 if (input.SlipInput != -1 && !boxer.Stamina.RanOutofStamina)
                 {
                     State = BoxerMoveState.Slipping;
@@ -188,11 +235,16 @@ public class BoxerMovement : MonoBehaviour
 
                     boxer.Stamina.TakeStamina(slipStaminaCost, true);
                 }
+
+                RollInput();
+                ReceiveJumpInput();
                 break;
+
             case BoxerMoveState.Slipping:
                 float slipAngle = slipInput * 45f;
                 slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, slipAngle), Time.deltaTime * rotationSmoothSpeed);
 
+                //Slip Input
                 if (input.SlipInput != -1 && !boxer.Stamina.RanOutofStamina)
                 {
                     int newSlipInput = input.SlipInput == 0 ? 1 : -1;
@@ -206,70 +258,35 @@ public class BoxerMovement : MonoBehaviour
 
                     slipInput = newSlipInput;
                 }
+
+                RollInput();
+                ReceiveJumpInput();
                 break;
+
             case BoxerMoveState.Rolling:
                 slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
+
+                if (crouchElapsed > 0.2f)
+                {
+                    State = BoxerMoveState.Moving;
+                    crouchElapsed = 0f;
+                    return;
+                }
+
+                crouchElapsed += Time.deltaTime;
+                break;
+
+            case BoxerMoveState.Stunned:
+                slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
+                break;
+
+            case BoxerMoveState.StaminaDepleted:
+                slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
+
+                if (prevMoveState != State) rb.velocity = Vector3.zero;
                 break;
         }
-    }
 
-    private void ReceiveJumpInput(bool jumping)
-    {
-        if (!Grounded || !jumping) return;
-
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        rb.AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
-    }
-
-    private void ReceiveRollInput(bool rolling)
-    {
-        UpdateRoll();
-
-        if (Rolling)
-        {
-            if (boxer.Stamina.RanOutofStamina) rb.velocity = Vector3.zero;
-
-            if (crouchElapsed > 0.2f)
-            {
-                State = BoxerMoveState.Moving;
-                crouchElapsed = 0f;
-                return;
-            }
-
-            crouchElapsed += Time.deltaTime;
-            return;
-        }
-
-        slideBoostCooldown = Mathf.Max(0f, slideBoostCooldown - Time.deltaTime);
-
-        if (!rolling || slideBoostCooldown > 0f || !boxer.CanPreformActions) return;
-
-        OnRoll?.Invoke(rolling);
-
-        rb.AddForce(5f * slideBoostSpeed * (Grounded ? 0.8f : 0.1f) * input.MoveDir.normalized, ForceMode.Impulse);
-
-        boxer.Stamina.TakeStamina(dashStaminaCost, true);
-        boxer.Block.Blocking = false;
-
-        State = BoxerMoveState.Rolling;
-    }
-
-    private void UpdateRoll()
-    {
-        float targetScale = Rolling ? crouchHeight : playerHeight;
-        float targetCenter = (targetScale - playerHeight) * 0.5f;
-
-        if (capsuleCol.height == targetScale && capsuleCol.center.y == targetCenter) return;
-        if (Mathf.Abs(targetScale - capsuleCol.height) < 0.01f && Mathf.Abs(targetCenter - capsuleCol.center.y) < 0.01f)
-        {
-            capsuleCol.height = targetScale;
-            capsuleCol.center = Vector3.one * targetCenter;
-        }
-
-        capsuleCol.height = Mathf.SmoothDamp(capsuleCol.height, targetScale, ref crouchVel.x, crouchSmoothTime);
-        capsuleCol.center = new Vector3(0, Mathf.SmoothDamp(capsuleCol.center.y, targetCenter, ref crouchVel.y, crouchSmoothTime), 0);
-
-        gfx.transform.localPosition = capsuleCol.center + gfxOffset;
-        gfx.transform.localScale = new Vector3(1f, capsuleCol.height * 0.5f, 1f);
+        prevMoveState = State;
     }
 }

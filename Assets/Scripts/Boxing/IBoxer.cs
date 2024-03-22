@@ -7,12 +7,6 @@ public interface IBoxer
     public BoxerMoveState MoveState { get; }
     public BoxerAttackState AttackState { get; }
 
-    public bool Punching { get; }
-    public bool CanPunch { get; }
-    public bool CanDash { get; }
-
-    public bool CanPreformActions { get; }
-
     public BoxerMovement Movement { get; }
     public Damageable Health { get; }
     public StaminaController Stamina { get; }
@@ -28,11 +22,13 @@ public enum BoxerMoveState
     Slipping,
     Rolling,
     Stunned,
+    StaminaDepleted,
 }
 
 public enum BoxerAttackState
 {
     Punching,
     Blocking,
+    Idle,
 }
 

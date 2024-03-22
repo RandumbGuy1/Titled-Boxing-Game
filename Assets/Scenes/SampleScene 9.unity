@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.029290695, g: 0.03873025, b: 0.047135748, a: 1}
+  m_IndirectSpecularColor: {r: 0.02920554, g: 0.03863617, b: 0.047038265, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3698,14 +3698,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 688705413}
-  m_LocalRotation: {x: 2.471328e-16, y: 0.39581016, z: 0.00000004718424, w: 0.9183324}
-  m_LocalPosition: {x: -20.11, y: 4.0499997, z: -16.04}
+  m_LocalRotation: {x: -1.0035467e-15, y: -0.58949435, z: -0.000000070273195, w: 0.8077726}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 683781851}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 46.633, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -72.242, z: 0}
 --- !u!198 &722564189 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3938640828726998662, guid: 6f33921cf84354dbea3dcd7da50e5cfb,
@@ -10538,8 +10538,8 @@ MonoBehaviour:
   crouchMaxSpeed: 50
   crouchHeight: 0.7
   crouchSmoothTime: 0.1
-  slideBoostSpeed: 5
-  slideBoostCooldown: 0.2
+  slideBoostSpeed: 3
+  slideBoostCooldown: 0.4
   friction: 8
   frictionMultiplier: 1
   counterThresold: 2
@@ -10768,6 +10768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9965906d29133c749bdd7c95290a2440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movement: {fileID: 1974632260}
   maxStaminaRecharge: 500
   staminaBreakRegainSpeed: 100
   maxstaminaHp: 100

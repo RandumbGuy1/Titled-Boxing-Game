@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
+    [SerializeField] private BoxingController boxer;
     [SerializeField] private float blockEndLag = 0.3f;
     [SerializeField] Camera cam;
     [SerializeField] Image shieldDisplay;
@@ -24,10 +25,16 @@ public class BlockController : MonoBehaviour
 
     public void SetBlock(FrameInput input)
     {
-        bool press = input.BlockInput;
+        bool blocking = input.BlockInput;
+
+        switch (boxer.AttackState)
+        {
+            case BoxerAttackState.Punching:
+
+        }
 
         if (JustStoppedBlocking) return;
-        if (!press && Blocking) blockElapsed = 0f;
-        Blocking = press;
+        if (!blocking && Blocking) blockElapsed = 0f;
+        Blocking = blocking;
     }
 }
