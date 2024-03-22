@@ -20,7 +20,7 @@ public class CameraBody : MonoBehaviour
     [Header("Refrences")]
     [SerializeField] private Transform targetHead;
 
-    [SerializeField] private BoxingController player;
+    [SerializeField] private Player player;
 
     [SerializeField] private CameraShaker camShaker;
     [SerializeField] private LockOn lockOn;

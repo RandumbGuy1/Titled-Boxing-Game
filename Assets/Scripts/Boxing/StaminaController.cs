@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class StaminaController : MonoBehaviour
 {
-    [SerializeField] private BoxerMovement movement;
+    [SerializeField] private BoxingController boxer;
     [SerializeField] private float maxStaminaRecharge = 100f;
     [SerializeField] private float staminaBreakRegainSpeed = 0f;
     [SerializeField] private float maxstaminaHp;
@@ -27,13 +27,13 @@ public class StaminaController : MonoBehaviour
 
     void Update()
     {
-        staminaHp = Mathf.Min(staminaHp + Time.deltaTime * staminaMulti * (movement.RanOutofStamina ? staminaBreakRegainSpeed : 1f), maxstaminaHp);
-        staminaMulti = movement.RanOutofStamina ? 1f : Mathf.SmoothDamp(staminaMulti, maxStaminaRecharge, ref vel, 5f);
+        staminaHp = Mathf.Min(staminaHp + Time.deltaTime * staminaMulti * (boxer.Movement.RanOutofStamina ? staminaBreakRegainSpeed : 1f), maxstaminaHp);
+        staminaMulti = boxer.Movement.RanOutofStamina ? 1f : Mathf.SmoothDamp(staminaMulti, maxStaminaRecharge, ref vel, 5f);
         smoothStamina = Mathf.Lerp(smoothStamina, staminaHp, 15f * Time.deltaTime);
 
         if (slider) slider.value = SliderValue;
 
-        if (movement.RanOutofStamina && SliderValue >= 0.99f) movement.State = BoxerMoveState.Moving;
+        if (boxer.Movement.RanOutofStamina && SliderValue >= 0.99f) boxer.SetMoveState(BoxerMoveState.Moving);
     }
 
     public void TakeStamina(float stamina, bool dontStun = false)
@@ -52,7 +52,7 @@ public class StaminaController : MonoBehaviour
             staminaHp = 0f;
             OnStaminaBreakEffects?.Invoke(1f);
 
-            movement.State = BoxerMoveState.StaminaDepleted;
+            boxer.SetMoveState(BoxerMoveState.StaminaDepleted);
         }
     }
 }

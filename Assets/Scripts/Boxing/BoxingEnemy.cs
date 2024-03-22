@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BoxingEnemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public FrameInput EnemyFrameInput { get; private set; } = new FrameInput();
+    public UnityEvent<FrameInput> OnFrameInput;
 
-    // Update is called once per frame
+    [SerializeField] Transform target;
+    [SerializeField] Transform orientation;
+
     void Update()
     {
-        
+        EnemyFrameInput.SetInput(
+            Vector3.zero,
+            Vector2.zero,
+            false,
+            false,
+            false,
+            -1,
+            false,
+            -1,
+            -1);
+
+        OnFrameInput?.Invoke(EnemyFrameInput);
+
+        orientation.LookAt(target);
     }
 }

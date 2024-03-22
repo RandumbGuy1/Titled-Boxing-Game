@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("General Movement Settings")]
-    [SerializeField] private float inactiveSpeed = 2f;
+    //[SerializeField] private float inactiveSpeed = 2f;
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpForce;
@@ -191,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Crouching)
         {
-            if (player.Gloves.Stamina.RanOutofStamina)
+            //if (player.Gloves.Stamina.RanOutofStamina)
             {
                 rb.velocity = Vector3.zero;
             }
@@ -217,7 +217,7 @@ public class PlayerMovement : MonoBehaviour
         timeSinceLastSlide = slideBoostCooldown;
 
         player.Gloves.Stamina.TakeStamina(dashStaminaCost, true);
-        player.Gloves.Block.Blocking = false;
+       // player.Gloves.Block.Blocking = false;
 
         Crouching = true;
     }
@@ -278,7 +278,7 @@ public class PlayerMovement : MonoBehaviour
     private float GetMaxSpeed()
     {
         if (Crouching) return crouchMaxSpeed;
-        if (!player.Gloves.CanPreformActions || player.Gloves.Block.Blocking || !player.Gloves.CanPunch) return inactiveSpeed;
+        //if (!player.Gloves.CanPreformActions || player.Gloves.Block.Blocking || !player.Gloves.CanPunch) return inactiveSpeed;
 
         return maxSpeed * (Grounded ? 1f : 1.15f);
     }

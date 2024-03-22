@@ -10,7 +10,6 @@ public class BlockController : MonoBehaviour
 
     private float blockElapsed = 0f;
 
-    public bool Blocking { get; set; } = false;
     public bool JustStoppedBlocking => blockElapsed < blockEndLag;
 
     void Update()
@@ -20,21 +19,35 @@ public class BlockController : MonoBehaviour
         if (!shieldDisplay) return;
 
         shieldDisplay.rectTransform.position = cam.WorldToScreenPoint(transform.position);
-        shieldDisplay.color = Color.Lerp(shieldDisplay.color, Blocking ? Color.white : Color.clear, Time.deltaTime * 10f);
+        shieldDisplay.color = Color.Lerp(shieldDisplay.color, boxer.Blocking ? Color.white : Color.clear, Time.deltaTime * 10f);
     }
 
     public void SetBlock(FrameInput input)
     {
         bool blocking = input.BlockInput;
 
+        if (JustStoppedBlocking) return;
+
         switch (boxer.AttackState)
         {
-            case BoxerAttackState.Punching:
+            case BoxerAttackState.Idle:
+                if (blocking) boxer.SetAttackState(BoxerAttackState.Blocking);
+                break;
+            case BoxerAttackState.Blocking:
+                if (blocking) return;
 
+                boxer.SetAttackState(BoxerAttackState.Idle);
+                blockElapsed = 0f;
+                
+                break;
+            default:
+                break;
         }
-
-        if (JustStoppedBlocking) return;
-        if (!blocking && Blocking) blockElapsed = 0f;
-        Blocking = blocking;
     }
+
+    public void DisableBlock()
+    {
+        boxer.SetAttackState(BoxerAttackState.Idle);
+        blockElapsed = 0f;
+    } 
 }

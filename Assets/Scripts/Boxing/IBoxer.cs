@@ -5,7 +5,14 @@ using UnityEngine;
 public interface IBoxer
 {
     public BoxerMoveState MoveState { get; }
+    public void SetMoveState(BoxerMoveState newState);
+
     public BoxerAttackState AttackState { get; }
+    public void SetAttackState(BoxerAttackState newState);
+
+    public bool Punching => AttackState == BoxerAttackState.Punching;
+    public bool Idle => AttackState == BoxerAttackState.Idle;
+    public bool Blocking => AttackState == BoxerAttackState.Blocking;
 
     public BoxerMovement Movement { get; }
     public Damageable Health { get; }

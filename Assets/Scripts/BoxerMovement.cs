@@ -30,8 +30,10 @@ public class BoxerMovement : MonoBehaviour
     private float playerHeight = 0f;
     private Vector2 crouchVel = Vector2.zero;
 
-    public bool Rolling => State == BoxerMoveState.Rolling;
-    public bool RanOutofStamina => State == BoxerMoveState.StaminaDepleted;
+    public bool Rolling => MoveState == BoxerMoveState.Rolling;
+    public bool Stunned => MoveState == BoxerMoveState.Stunned;
+    public bool RanOutofStamina => MoveState == BoxerMoveState.StaminaDepleted;
+
     public Vector3 CrouchOffset => (playerHeight - capsuleCol.height) * transform.localScale.y * Vector3.down;
 
     [Header("Friction Settings")]
@@ -40,7 +42,7 @@ public class BoxerMovement : MonoBehaviour
     [SerializeField] private int counterThresold;
     private Vector2Int readyToCounter = Vector2Int.zero;
 
-    public BoxerMoveState State { get; set; } = BoxerMoveState.Moving;
+    public BoxerMoveState MoveState { get; set; } = BoxerMoveState.Moving;
     private FrameInput input;
 
     private bool grounded = false;
@@ -66,14 +68,13 @@ public class BoxerMovement : MonoBehaviour
     public float VelToMaxRatio => Mathf.Clamp01(Magnitude / (maxSpeed * 1.5f));
 
     [Header("Refrences")]
+    [SerializeField] private BoxingController boxer;
     [SerializeField] private Transform slipPivot;
     [SerializeField] private Transform gfx;
     [SerializeField] private RigidbodyHover hover;
     [SerializeField] private Transform orientation;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private CapsuleCollider capsuleCol;
-
-    private IBoxer boxer;
 
     public Rigidbody Rb => rb;
 
@@ -82,8 +83,6 @@ public class BoxerMovement : MonoBehaviour
     {
         playerHeight = capsuleCol.height;
         gfxOffset = gfx.localPosition;
-
-        boxer = GetComponent<IBoxer>();
     }
 
     void FixedUpdate()
@@ -143,7 +142,7 @@ public class BoxerMovement : MonoBehaviour
 
         Friction();
 
-        switch (State)
+        switch (MoveState)
         {
             case BoxerMoveState.Moving:
                 float movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
@@ -203,12 +202,12 @@ public class BoxerMovement : MonoBehaviour
         {
             if (!input.RollInput) return;
 
+            boxer.Block.DisableBlock();
+
             OnRoll?.Invoke(input.RollInput);
             rb.AddForce(5f * slideBoostSpeed * (Grounded ? 0.8f : 0.1f) * input.MoveDir.normalized, ForceMode.Impulse);
 
-            boxer.Block.Blocking = false;
-            State = BoxerMoveState.Rolling;
-
+            MoveState = BoxerMoveState.Rolling;
             boxer.Stamina.TakeStamina(dashStaminaCost, true);
         }
 
@@ -222,15 +221,15 @@ public class BoxerMovement : MonoBehaviour
 
         UpdateRoll();
 
-        switch (State)
+        switch (MoveState)
         {
             case BoxerMoveState.Moving:
                 slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
 
                 //Slip Input
-                if (input.SlipInput != -1 && !boxer.Stamina.RanOutofStamina)
+                if (input.SlipInput != -1)
                 {
-                    State = BoxerMoveState.Slipping;
+                    MoveState = BoxerMoveState.Slipping;
                     slipInput = input.SlipInput == 0 ? 1 : -1;
 
                     boxer.Stamina.TakeStamina(slipStaminaCost, true);
@@ -245,14 +244,14 @@ public class BoxerMovement : MonoBehaviour
                 slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, slipAngle), Time.deltaTime * rotationSmoothSpeed);
 
                 //Slip Input
-                if (input.SlipInput != -1 && !boxer.Stamina.RanOutofStamina)
+                if (input.SlipInput != -1)
                 {
                     int newSlipInput = input.SlipInput == 0 ? 1 : -1;
                     boxer.Stamina.TakeStamina(slipStaminaCost, true);
 
                     if (slipInput == newSlipInput)
                     {
-                        State = BoxerMoveState.Moving;
+                        MoveState = BoxerMoveState.Moving;
                         break;
                     }
 
@@ -268,7 +267,7 @@ public class BoxerMovement : MonoBehaviour
 
                 if (crouchElapsed > 0.2f)
                 {
-                    State = BoxerMoveState.Moving;
+                    MoveState = BoxerMoveState.Moving;
                     crouchElapsed = 0f;
                     return;
                 }
@@ -283,10 +282,10 @@ public class BoxerMovement : MonoBehaviour
             case BoxerMoveState.StaminaDepleted:
                 slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
 
-                if (prevMoveState != State) rb.velocity = Vector3.zero;
+                if (prevMoveState != MoveState) rb.velocity = Vector3.zero;
                 break;
         }
 
-        prevMoveState = State;
+        prevMoveState = MoveState;
     }
 }

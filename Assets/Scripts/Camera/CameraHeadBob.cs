@@ -26,7 +26,7 @@ public class CameraHeadBob
     public Vector3 ViewBobOffset { get; private set; }
     public Vector3 ViewBobSnapOffset { get; private set; }
 
-    public void BobUpdate(BoxingController player)
+    public void BobUpdate(Player player)
     {
         viewBobTimer = player.Movement.Grounded && (player.Movement.Magnitude > 0.5f && player.Keys.PlayerFrameInput.MoveDir.sqrMagnitude > 0f)
             ? viewBobTimer + Time.deltaTime * viewBobSpeed : 0f;

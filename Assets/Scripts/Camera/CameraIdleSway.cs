@@ -13,7 +13,7 @@ public class CameraIdleSway
 	public Vector3 HeadSwayOffset { get; private set; } = Vector3.zero;
 	private float headSwayScroller = 0;
 
-	public void IdleCameraSway(BoxingController player)
+	public void IdleCameraSway(Player player)
 	{
 		if (!enabled) return;
 		if (!player.Movement.Grounded || player.Movement.Magnitude > 5f) return;

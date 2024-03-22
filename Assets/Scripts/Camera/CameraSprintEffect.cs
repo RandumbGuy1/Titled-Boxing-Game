@@ -8,7 +8,7 @@ public class CameraSprintEffect
 	[SerializeField] private AudioClip sprintClip;
 	private AudioSource windSource = null;
 
-	public void SpeedLines(BoxingController player)
+	public void SpeedLines(Player player)
 	{
 		float magnitude = player.Movement.Magnitude;
 

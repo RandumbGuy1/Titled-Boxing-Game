@@ -42,9 +42,6 @@ public class GloveCollision : MonoBehaviour
         if (Active && Physics.SphereCast(transform.position - gloveTravel * 3.5f, gloveCollider.radius * 0.5f, gloveTravel, out var hit, gloveTravel.magnitude * 3.5f, hitLayer))
         {
             //Damage Logic
-            PlayerRef player = hit.collider.gameObject.GetComponent<PlayerRef>();
-            if (player != null && player.PlayerMovement.Crouching) return;
-
             AudioManager.Instance.PlayOnce(punchClips, transform.position);
             Instantiate(hitSpark, hit.point, Quaternion.identity);
 
@@ -59,21 +56,22 @@ public class GloveCollision : MonoBehaviour
                 rb.AddTorque(-hit.normal * punchForce, ForceMode.Impulse);
             }
             
-            IBoxer boxer = hit.collider.GetComponent<IBoxer>();
+            BoxingController boxer = hit.collider.GetComponent<BoxingController>();
             if (boxer != null)
             {
-                if (boxer.Punching)
-                {
-                    boxer.Health.Damage(punchDamage * 1.25f);
-                    boxer.Health.Counter();
-                    boxer.Stun.Stun((hit.point - thrower.position).normalized, punchStun);
-                    return;
-                }
+                print(boxer.AttackState);
 
-                if (boxer.Block.Blocking)
+                switch (boxer.AttackState)
                 {
-                    boxer.Health.Damage(punchDamage * 0.25f);
-                    return;
+                    case BoxerAttackState.Punching:
+                        boxer.Health.Damage(punchDamage * 1.25f);
+                        boxer.Health.Counter();
+                        boxer.Stun.Stun((hit.point - thrower.position).normalized, punchStun);
+                        break;
+
+                    case BoxerAttackState.Blocking:
+                        boxer.Health.Damage(punchDamage * 0.25f);
+                        break;
                 }
 
                 boxer.Health.Damage(punchDamage);
@@ -87,6 +85,7 @@ public class GloveCollision : MonoBehaviour
     Vector3 endPunchPos = Vector3.zero;
     public void HandleGloves(Transform handPosition, Vector3 forward)
     {
+        //Return if physics enabled
         if (rb)
         {
             Active = false;
@@ -123,11 +122,10 @@ public class GloveCollision : MonoBehaviour
         endPunchPos = transform.position;
         Active = active;
 
-        if (active && stamina != null)
-        {
-            stamina.TakeStamina(staminaCost);
-            AudioManager.Instance.PlayOnce(throwClips, transform.position);
-        }
+        if (!active || stamina == null) return;
+
+        stamina.TakeStamina(staminaCost);
+        AudioManager.Instance.PlayOnce(throwClips, transform.position);
     }
 
     Transform prevParent = null;

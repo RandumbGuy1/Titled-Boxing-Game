@@ -2,61 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxingController : MonoBehaviour, IBoxer
+public class BoxingController : MonoBehaviour
 {
-    public BoxerMoveState MoveState => movement.State;
+    public BoxerMoveState MoveState => movement.MoveState;
     public BoxerAttackState AttackState { get; set; }
+
+    public void SetMoveState(BoxerMoveState newState) => movement.MoveState = newState;
+    public void SetAttackState(BoxerAttackState newState) => AttackState = newState;
+
+    public bool Punching => AttackState == BoxerAttackState.Punching;
+    public bool Idle => AttackState == BoxerAttackState.Idle;
+    public bool Blocking => AttackState == BoxerAttackState.Blocking;
 
     [SerializeField] Transform[] handPositions = new Transform[2];
     [SerializeField] GloveCollision[] gloves = new GloveCollision[2];
 
-    [Header("Player Refrences")]
+    [Header("Refrences")]
     [SerializeField] Damageable health;
     [SerializeField] StaminaController stamina;
     [SerializeField] StunController stun;
     [SerializeField] BlockController block;
     [SerializeField] BoxerMovement movement;
-    [SerializeField] private BoxingController controller;
-    [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private CameraBody cameraBody;
-    [SerializeField] private Camera playerCam;
     [SerializeField] private Transform orientation;
-    [SerializeField] private MeshRenderer gfx;
-    [SerializeField] private CapsuleCollider capsuleCol;
-    public BoxingController Controller => controller;
-    public CapsuleCollider CapsuleCol => capsuleCol;
-    public MeshRenderer Gfx => gfx;
-    public PlayerInput Keys => playerInput;
-    public CameraBody CameraBody => cameraBody;
-    public Camera PlayerCam => playerCam;
-    public Transform Orientation => orientation;
-    /*
-    public bool Punching
-    {
-        get
-        {
-            foreach (GloveCollision glove in gloves) if (glove.Active) return true;
-            return false;
-        }
-    }
 
     public bool CanPunch
     {
         get
         {
-            if (block.JustStoppedBlocking || block.Blocking) return false;
-
             foreach (GloveCollision glove in gloves) if (!glove.CanPunch) return false;
             return true;
         }
     }
-    */
 
     public Damageable Health => health;
     public StaminaController Stamina => stamina;
     public StunController Stun => stun;
     public BlockController Block => block;
-
     public BoxerMovement Movement => movement;
 
     void FixedUpdate()
@@ -72,33 +53,33 @@ public class BoxingController : MonoBehaviour, IBoxer
 
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++)
             gloves[i].HandleGloves(handPositions[i], orientation.forward);
-       
-        if (button >= 2 || button < 0) return;
 
-        switch (AttackState)
+        bool PunchCheck()
         {
-            case BoxerAttackState.Idle:
-                switch (movement.State)
-                {
-                    case BoxerMoveState.Moving:
-                        if (!AllGlovesCanPunch()) break;
+            foreach (GloveCollision glove in gloves) if (glove.Active) return true;
+            return false;
+        }
 
-                        gloves[button].SetGlove(true, 0f, stamina);
-                        movement.Rb.velocity *= 0f;
+        if (AttackState == BoxerAttackState.Punching)
+        {
+            if (!PunchCheck()) AttackState = BoxerAttackState.Idle;
+        }
 
-                        AttackState = BoxerAttackState.Punching;
-                        break;
-                    case BoxerMoveState.Slipping:
-                        if (!AllGlovesCanPunch()) break;
+        if (button >= 2 || button < 0 || !CanPunch || !Idle) return;
 
-                        gloves[button].SetGlove(true, 0f, stamina);
-                        movement.Rb.velocity *= 0f;
+        switch (movement.MoveState)
+        {
+            case BoxerMoveState.Moving:
+                gloves[button].SetGlove(true, 0f, stamina);
+                movement.Rb.velocity *= 0f;
 
-                        AttackState = BoxerAttackState.Punching;
-                        break;
-                    default:
-                        break;
-                }
+                AttackState = BoxerAttackState.Punching;
+                break;
+            case BoxerMoveState.Slipping:
+                gloves[button].SetGlove(true, 0f, stamina);
+                movement.Rb.velocity *= 0f;
+
+                AttackState = BoxerAttackState.Punching;
                 break;
             default:
                 break;
@@ -111,12 +92,6 @@ public class BoxingController : MonoBehaviour, IBoxer
         AttackState = BoxerAttackState.Idle;
     }
 
-    public bool AllGlovesCanPunch()
-    {
-        foreach (GloveCollision glove in gloves) if (!glove.CanPunch) return false;
-        return true;
-    }
-
     public void Disable()
     {
         movement.enabled = false;
@@ -124,6 +99,7 @@ public class BoxingController : MonoBehaviour, IBoxer
 
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++) gloves[i].Ragdoll();
         enabled = false;
+        AttackState = BoxerAttackState.Idle;
     }
 }
 

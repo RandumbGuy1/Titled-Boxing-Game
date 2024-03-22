@@ -3,7 +3,10 @@ using UnityEngine;
 public class BoxingBot : MonoBehaviour, IBoxer
 {
     public BoxerMoveState MoveState { get; }
-    public BoxerAttackState AttackState { get; }
+    public BoxerAttackState AttackState { get; set; }
+
+    public void SetMoveState(BoxerMoveState newState) => movement.MoveState = newState;
+    public void SetAttackState(BoxerAttackState newState) => AttackState = newState;
 
     [Header("AI Settings")]
     [SerializeField] private Rigidbody rb;
@@ -24,8 +27,8 @@ public class BoxingBot : MonoBehaviour, IBoxer
     [SerializeField] StunController stun;
     [SerializeField] BlockController block;
 
-    public bool CanPreformActions => !stamina.RanOutofStamina && !stun.InStun;
-    public bool CanDash => !stamina.RanOutofStamina && !stun.InStun;
+    public bool CanPreformActions => !stun.InStun;
+    public bool CanDash => !stun.InStun;
 
     public bool Punching
     {

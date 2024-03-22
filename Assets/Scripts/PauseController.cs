@@ -5,7 +5,7 @@ public class PauseController : MonoBehaviour
 {
     [SerializeField] private GameObject gameUI;
     [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private BoxingController player;
+    [SerializeField] private Player player;
     private bool paused = false;
 
     void Awake() => player.Keys.OnPauseToggle += HandlePause;

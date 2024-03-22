@@ -8,7 +8,7 @@ public class CameraFOV
     private float desiredFov = 20f;
     private float vel = 0f;
 
-    public float FOVUpdate(BoxingController player)
+    public float FOVUpdate(Player player)
     {
         float magnitude = player.Movement.Magnitude;
         float magToMaxRatio = player.Movement.VelToMaxRatio;

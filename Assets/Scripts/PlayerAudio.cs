@@ -16,7 +16,7 @@ public class PlayerAudio : MonoBehaviour
     private float footstepDistance;
 
     [Header("Refrences")]
-    [SerializeField] private BoxingController player;
+    [SerializeField] private Player player;
 
     void Awake()
     {

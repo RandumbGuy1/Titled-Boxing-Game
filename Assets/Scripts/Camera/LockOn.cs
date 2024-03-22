@@ -5,7 +5,7 @@ public class LockOn : MonoBehaviour
     [Header("Lock On Settings")]
     [SerializeField] private float lockOnRadius;
     [SerializeField] private Transform lockOnTarget;
-    [SerializeField] private BoxingController player;
+    [SerializeField] private Player player;
     [SerializeField] private LayerMask lockOnLayer;
     [SerializeField] private StatDisplay display;
     private Outline currOutline = null;

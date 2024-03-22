@@ -3,7 +3,10 @@ using UnityEngine;
 public class BoxingGloves : MonoBehaviour, IBoxer
 {
     public BoxerMoveState MoveState { get; }
-    public BoxerAttackState AttackState { get; }
+    public BoxerAttackState AttackState { get; set; }
+
+    public void SetMoveState(BoxerMoveState newState) => movement.MoveState = newState;
+    public void SetAttackState(BoxerAttackState newState) => AttackState = newState;
 
     [SerializeField] BoxerMovement movement;
     [SerializeField] Damageable health;
@@ -16,8 +19,8 @@ public class BoxingGloves : MonoBehaviour, IBoxer
 
     [SerializeField] PlayerRef player;
 
-    public bool CanPreformActions => !player.PlayerMovement.Crouching && !stamina.RanOutofStamina && !stun.InStun;
-    public bool CanDash => !stamina.RanOutofStamina && !stun.InStun;
+    public bool CanPreformActions => !player.PlayerMovement.Crouching && !stun.InStun;
+    public bool CanDash => !stun.InStun;
 
     public bool Punching
     {
@@ -30,7 +33,7 @@ public class BoxingGloves : MonoBehaviour, IBoxer
 
     public bool CanPunch { get
         {
-            if (block.JustStoppedBlocking || block.Blocking) return false;
+            if (block.JustStoppedBlocking) return false;
 
             foreach (GloveCollision glove in gloves) if (!glove.CanPunch) return false;
             return true;

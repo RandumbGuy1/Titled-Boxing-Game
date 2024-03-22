@@ -9,8 +9,7 @@ public class StatDisplay : MonoBehaviour
     [SerializeField] Camera cam;
 
     [SerializeField] private Damageable health;
-    [SerializeField] private StaminaController stamina;
-    [SerializeField] private BlockController block;
+    [SerializeField] private BoxingController boxer;
 
     [SerializeField] private TextMeshProUGUI entityName;
     [SerializeField] private Slider healthSlider;
@@ -22,12 +21,13 @@ public class StatDisplay : MonoBehaviour
     void Update()
     {
         if (health) healthSlider.value = health.SliderValue;
-        if (stamina) staminaSlider.value = stamina.SliderValue;
 
-        if (block)
+        if (boxer)
         {
-            shieldDisplay.rectTransform.position = cam.WorldToScreenPoint(block.transform.position);
-            shieldDisplay.color = Color.Lerp(shieldDisplay.color, block.Blocking ? Color.white : Color.clear, Time.deltaTime * 10f);
+            staminaSlider.value = boxer.Stamina.SliderValue;
+
+            shieldDisplay.rectTransform.position = cam.WorldToScreenPoint(boxer.transform.position);
+            shieldDisplay.color = Color.Lerp(shieldDisplay.color, boxer.Block ? Color.white : Color.clear, Time.deltaTime * 10f);
         }
         
     }
@@ -35,30 +35,28 @@ public class StatDisplay : MonoBehaviour
     public void SetHealthAndStamina(GameObject subject)
     {
         if (this.health) this.health.OnPlayerCounter.RemoveListener(counterFX.Trigger);
-        if (this.stamina) this.stamina.OnStaminaBreakEffects.RemoveListener(staminaFX.Trigger);
+        if (this.boxer) this.boxer.Stamina.OnStaminaBreakEffects.RemoveListener(staminaFX.Trigger);
 
         Damageable health = subject.GetComponent<Damageable>();
-        StaminaController stamina = subject.GetComponent<StaminaController>();
-        BlockController block = subject.GetComponent<BlockController>();
+        BoxingController boxer = subject.GetComponent<BoxingController>();
 
         healthSlider.gameObject.SetActive(health);
-        staminaSlider.gameObject.SetActive(stamina);
-        shieldDisplay.gameObject.SetActive(block);
+        staminaSlider.gameObject.SetActive(boxer);
+        shieldDisplay.gameObject.SetActive(boxer);
 
         if (health)
-        {
-            stamina.OnStaminaBreakEffects.AddListener(staminaFX.Trigger);
-            staminaFX.SetTarget(subject.transform);
-        }
-        if (stamina)
         {
             health.OnPlayerCounter.AddListener(counterFX.Trigger);
             counterFX.SetTarget(subject.transform);
         }
+        if (boxer)
+        {
+            boxer.Stamina.OnStaminaBreakEffects.AddListener(staminaFX.Trigger);
+            staminaFX.SetTarget(subject.transform);
+        }
 
         this.health = health;
-        this.stamina = stamina;
-        this.block = block;
+        this.boxer = boxer;
         entityName.text = subject.name;
     }
 }
