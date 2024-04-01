@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 131185934}
   - component: {fileID: 131185933}
   - component: {fileID: 131185932}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Player GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2749,6 +2749,7 @@ GameObject:
   - component: {fileID: 506892739}
   - component: {fileID: 506892738}
   - component: {fileID: 506892749}
+  - component: {fileID: 506892750}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -2770,70 +2771,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 150
   healthBar: {fileID: 839243334}
-  OnPlayerDamageEffects:
+  OnDamageEffects:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCounter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SpecialConditionFX, Assembly-CSharp
-        m_MethodName: Trigger
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnPlayerCounter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SpecialConditionFX, Assembly-CSharp
-        m_MethodName: Trigger
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SpecialConditionFX, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 506892742}
+        m_TargetAssemblyTypeName: BoxingController, Assembly-CSharp
+        m_MethodName: ResetGloves
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnPlayerDeath:
+  OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 506892750}
+        m_TargetAssemblyTypeName: BoxerRagdoll, Assembly-CSharp
+        m_MethodName: Ragdoll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2853,8 +2818,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxer: {fileID: 506892742}
   blockEndLag: 0.3
-  cam: {fileID: 802593955}
-  shieldDisplay: {fileID: 97096751}
+  cam: {fileID: 0}
+  shieldDisplay: {fileID: 0}
 --- !u!114 &506892740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3119,6 +3084,18 @@ MonoBehaviour:
         m_CallState: 2
   target: {fileID: 1974632256}
   orientation: {fileID: 1378535329}
+--- !u!114 &506892750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506892737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e176742324d143108ac41bdb4bad920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &539430964
 GameObject:
   m_ObjectHideFlags: 0
@@ -10770,6 +10747,7 @@ GameObject:
   - component: {fileID: 1974632269}
   - component: {fileID: 1974632268}
   - component: {fileID: 1974632272}
+  - component: {fileID: 1974632273}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -10988,7 +10966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 150
   healthBar: {fileID: 1638757244}
-  OnPlayerDamageEffects:
+  OnDamageEffects:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1974632271}
@@ -11003,19 +10981,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnPlayerCounter:
+  OnCounter:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1974632269}
@@ -11030,28 +10996,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SpecialConditionFX, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1974632266}
+        m_TargetAssemblyTypeName: BoxingController, Assembly-CSharp
+        m_MethodName: ResetGloves
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnPlayerDeath:
+  OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1974632273}
+        m_TargetAssemblyTypeName: BoxerRagdoll, Assembly-CSharp
+        m_MethodName: Ragdoll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -11277,6 +11243,18 @@ MonoBehaviour:
   orientation: {fileID: 1451122814}
   gfx: {fileID: 131185933}
   capsuleCol: {fileID: 1974632255}
+--- !u!114 &1974632273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974632253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e176742324d143108ac41bdb4bad920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1979970142 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 871227601627235791, guid: cf95ab9d41c899c45a0b63638334175b,

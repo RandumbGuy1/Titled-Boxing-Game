@@ -95,10 +95,11 @@ public class BoxingController : MonoBehaviour
     public void Disable()
     {
         movement.enabled = false;
-        movement.Rb.freezeRotation = false;
 
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++) gloves[i].Ragdoll();
+
         enabled = false;
+
         AttackState = BoxerAttackState.Idle;
     }
 }

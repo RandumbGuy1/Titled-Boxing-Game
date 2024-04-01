@@ -39,27 +39,13 @@ public class GloveCollision : MonoBehaviour
     {
         //Detection
         Vector3 gloveTravel = transform.position - lastPos;
-        if (Active && Physics.SphereCast(transform.position - gloveTravel * 3.5f, gloveCollider.radius * 0.5f, gloveTravel, out var hit, gloveTravel.magnitude * 3.5f, hitLayer))
+        if (Active && Physics.SphereCast(transform.position - gloveTravel * 4f, gloveCollider.radius * 0.5f, gloveTravel, out var hit, gloveTravel.magnitude * 4f, hitLayer))
         {
             //Damage Logic
-            AudioManager.Instance.PlayOnce(punchClips, transform.position);
-            Instantiate(hitSpark, hit.point, Quaternion.identity);
-
-            SetGlove(false);
-            endPunchPos = transform.position;
-            hitSomething = true;
-
-            Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.AddForce(-hit.normal * punchForce, ForceMode.Impulse);
-                rb.AddTorque(-hit.normal * punchForce, ForceMode.Impulse);
-            }
-            
             BoxingController boxer = hit.collider.GetComponent<BoxingController>();
             if (boxer != null)
             {
-                print(boxer.AttackState);
+                if (boxer.Movement.Rolling || boxer.Movement.SlipDirection != 0) return;
 
                 switch (boxer.AttackState)
                 {
@@ -77,6 +63,20 @@ public class GloveCollision : MonoBehaviour
                 boxer.Health.Damage(punchDamage);
                 boxer.Stun.Stun((hit.point - thrower.position).normalized, punchStun);
             }
+
+            Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddForce(-hit.normal * punchForce, ForceMode.Impulse);
+                rb.AddTorque(-hit.normal * punchForce, ForceMode.Impulse);
+            }
+
+            AudioManager.Instance.PlayOnce(punchClips, transform.position);
+            Instantiate(hitSpark, hit.point, Quaternion.identity);
+
+            SetGlove(false);
+            endPunchPos = transform.position;
+            hitSomething = true;
         }
 
         lastPos = transform.position;

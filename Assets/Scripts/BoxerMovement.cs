@@ -252,6 +252,7 @@ public class BoxerMovement : MonoBehaviour
                     if (slipInput == newSlipInput)
                     {
                         MoveState = BoxerMoveState.Moving;
+                        slipInput = 0;
                         break;
                     }
 
@@ -287,5 +288,11 @@ public class BoxerMovement : MonoBehaviour
         }
 
         prevMoveState = MoveState;
+    }
+
+    public void OnDisable()
+    {
+        hover.enabled = false;
+        rb.AddExplosionForce(50f, transform.position + Vector3.down, 1f, 1f, ForceMode.Impulse);
     }
 }

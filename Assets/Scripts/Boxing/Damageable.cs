@@ -16,28 +16,28 @@ public class Damageable : MonoBehaviour
     public UnitState State { get; private set; } = UnitState.Active;
 
     public delegate void DamageEntity(float damage);
-    public event DamageEntity OnPlayerDamage;
-    public UnityEvent<float> OnPlayerDamageEffects;
-    public UnityEvent<float> OnPlayerCounter;
-    public UnityEvent OnPlayerDeath;
+    public event DamageEntity OnDamage;
+    public UnityEvent<float> OnDamageEffects;
+    public UnityEvent<float> OnCounter;
+    public UnityEvent OnDeath;
 
     void Start()
     {
         Health = maxHealth;
         smoothHealth = maxHealth;
 
-        OnPlayerDamage += (float damage) =>
+        OnDamage += (float damage) =>
         {
             if (State == UnitState.KO || State == UnitState.Inactive) return;
 
             Health = Mathf.Clamp(Health - damage, 0, maxHealth);
-            OnPlayerDamageEffects?.Invoke(damage / Health);
+            OnDamageEffects?.Invoke(damage / Health);
 
             //Death
             if (Health <= 0f)
             {
                 smoothHealth = Health / maxHealth;
-                OnPlayerDeath?.Invoke();
+                OnDeath?.Invoke();
             }
         };
     }
@@ -52,12 +52,12 @@ public class Damageable : MonoBehaviour
 
     public void Damage(float damage)
     {
-        OnPlayerDamage?.Invoke(damage);
+        OnDamage?.Invoke(damage);
     }
 
     public void Counter()
     {
-        OnPlayerCounter?.Invoke(1f);
+        OnCounter?.Invoke(1f);
     }
 }
 

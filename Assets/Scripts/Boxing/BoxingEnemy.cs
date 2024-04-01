@@ -24,8 +24,21 @@ public class BoxingEnemy : MonoBehaviour
             -1,
             -1);
 
-        OnFrameInput?.Invoke(EnemyFrameInput);
+        if (Random.Range(0, 100) < 50f)
+        {
+            EnemyFrameInput.SetInput(
+            Vector3.zero,
+            Vector2.zero,
+            false,
+            false,
+            false,
+            -1,
+            false,
+            0,
+            -1);
+        }
 
+        OnFrameInput?.Invoke(EnemyFrameInput);
         orientation.LookAt(target);
     }
 }

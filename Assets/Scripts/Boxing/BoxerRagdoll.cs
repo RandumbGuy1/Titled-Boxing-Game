@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BoxerRagdoll : MonoBehaviour
 {
-    IBoxer boxer;
+    BoxingController boxer;
 
     void Start()
     {
-        boxer = GetComponent<IBoxer>();
+        boxer = GetComponent<BoxingController>();
     }
 
     public void Ragdoll()

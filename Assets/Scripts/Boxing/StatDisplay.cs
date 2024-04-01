@@ -27,14 +27,14 @@ public class StatDisplay : MonoBehaviour
             staminaSlider.value = boxer.Stamina.SliderValue;
 
             shieldDisplay.rectTransform.position = cam.WorldToScreenPoint(boxer.transform.position);
-            shieldDisplay.color = Color.Lerp(shieldDisplay.color, boxer.Block ? Color.white : Color.clear, Time.deltaTime * 10f);
+            shieldDisplay.color = Color.Lerp(shieldDisplay.color, boxer.Blocking ? Color.white : Color.clear, Time.deltaTime * 10f);
         }
         
     }
 
     public void SetHealthAndStamina(GameObject subject)
     {
-        if (this.health) this.health.OnPlayerCounter.RemoveListener(counterFX.Trigger);
+        if (this.health) this.health.OnCounter.RemoveListener(counterFX.Trigger);
         if (this.boxer) this.boxer.Stamina.OnStaminaBreakEffects.RemoveListener(staminaFX.Trigger);
 
         Damageable health = subject.GetComponent<Damageable>();
@@ -46,7 +46,7 @@ public class StatDisplay : MonoBehaviour
 
         if (health)
         {
-            health.OnPlayerCounter.AddListener(counterFX.Trigger);
+            health.OnCounter.AddListener(counterFX.Trigger);
             counterFX.SetTarget(subject.transform);
         }
         if (boxer)
