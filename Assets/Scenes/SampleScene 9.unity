@@ -2750,6 +2750,7 @@ GameObject:
   - component: {fileID: 506892738}
   - component: {fileID: 506892749}
   - component: {fileID: 506892750}
+  - component: {fileID: 506892751}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -2795,6 +2796,18 @@ MonoBehaviour:
       - m_Target: {fileID: 506892750}
         m_TargetAssemblyTypeName: BoxerRagdoll, Assembly-CSharp
         m_MethodName: Ragdoll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 506892751}
+        m_TargetAssemblyTypeName: CoinExplode, Assembly-CSharp
+        m_MethodName: SpawnCoins
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2861,8 +2874,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxer: {fileID: 506892742}
   maxStaminaRecharge: 500
-  staminaBreakRegainSpeed: 100
-  maxstaminaHp: 100
+  staminaBreakRegainSpeed: 200
+  maxstaminaHp: 200
   slider: {fileID: 1651365086}
   OnStaminaBreakEffects:
     m_PersistentCalls:
@@ -3082,6 +3095,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  distance: 3
   target: {fileID: 1974632256}
   orientation: {fileID: 1378535329}
 --- !u!114 &506892750
@@ -3096,6 +3110,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e176742324d143108ac41bdb4bad920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &506892751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506892737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945e3ceff0e56734f81f8018f582bf39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cashSpawn: {fileID: 8300000, guid: b058043fdabc15c45b9353cc021be1b6, type: 3}
+  coinSpawn: {fileID: 8300000, guid: dab43f9d0eae8a34c976c07da83c3c54, type: 3}
+  explosionForce: 10
+  ariCoin: {fileID: 6562096438343674948, guid: f28e92e1020bfc249b37c5834ccacefa, type: 3}
+  beastBill: {fileID: 1349939896323856189, guid: d761db670dcf5f64980adbfffaea8bf5,
+    type: 3}
+  itemCount: 15
+  beastBillChance: 5
 --- !u!1 &539430964
 GameObject:
   m_ObjectHideFlags: 0
@@ -5657,7 +5691,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!145 &1028349270
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -5669,7 +5703,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -23.5, y: 7.61, z: 0.25}
+  m_ConnectedAnchor: {x: 0.75, y: 7.61, z: -0.35}
   serializedVersion: 2
   m_Spring: 2000
   m_Damper: 200
@@ -5770,7 +5804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028349269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.5, y: 2.8600001, z: 0.25}
+  m_LocalPosition: {x: 0.75, y: 5.61, z: -0.35}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11080,8 +11114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxer: {fileID: 1974632266}
   maxStaminaRecharge: 500
-  staminaBreakRegainSpeed: 100
-  maxstaminaHp: 100
+  staminaBreakRegainSpeed: 200
+  maxstaminaHp: 200
   slider: {fileID: 2070462539}
   OnStaminaBreakEffects:
     m_PersistentCalls:
@@ -11396,7 +11430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnRadius: 1
-  lockOnTarget: {fileID: 0}
+  lockOnTarget: {fileID: 506892748}
   player: {fileID: 1974632272}
   lockOnLayer:
     serializedVersion: 2

@@ -227,6 +227,7 @@ public class BoxerMovement : MonoBehaviour
                 slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
 
                 //Slip Input
+                slipInput = 0;
                 if (input.SlipInput != -1)
                 {
                     MoveState = BoxerMoveState.Slipping;
@@ -260,10 +261,10 @@ public class BoxerMovement : MonoBehaviour
                 }
 
                 RollInput();
-                ReceiveJumpInput();
                 break;
 
             case BoxerMoveState.Rolling:
+                slipInput = 0;
                 slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
 
                 if (crouchElapsed > 0.2f)
@@ -281,6 +282,7 @@ public class BoxerMovement : MonoBehaviour
                 break;
 
             case BoxerMoveState.StaminaDepleted:
+                slipInput = 0;
                 slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
 
                 if (prevMoveState != MoveState) rb.velocity = Vector3.zero;
