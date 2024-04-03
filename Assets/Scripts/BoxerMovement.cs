@@ -15,7 +15,7 @@ public class BoxerMovement : MonoBehaviour
     [Header("Slipping Settings")]
     [SerializeField] private float rotationSmoothSpeed;
     [SerializeField] private float slipStaminaCost = 10f;
-    public int SlipDirection => slipInput;
+    public int SlipDirection { get { return slipInput; } set { slipInput = value; } }
     private int slipInput = 0;
 
     [Header("Crouch Settings")]
@@ -151,6 +151,7 @@ public class BoxerMovement : MonoBehaviour
 
                 break;
             case BoxerMoveState.Slipping:
+            case BoxerMoveState.StaminaDepleted:
                 movementMultiplier = Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
                 ClampSpeed(maxSpeed * 0.5f, movementMultiplier);
                 rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
@@ -160,20 +161,14 @@ public class BoxerMovement : MonoBehaviour
                 movementMultiplier = Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
                 ClampSpeed(maxSpeed * 2f, movementMultiplier);
                 break;
-            case BoxerMoveState.Stunned:
-                movementMultiplier = Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
-                ClampSpeed(maxSpeed * 0.5f, movementMultiplier);
-                rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
-                break;
-            case BoxerMoveState.StaminaDepleted:
-                movementMultiplier = Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
-                ClampSpeed(maxSpeed * 0.5f, movementMultiplier);
-                rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
+            default:
                 break;
         }
     }
 
     BoxerMoveState prevMoveState;
+    private float stunTime = 0f;
+
     public void SendFrameInput(FrameInput input)
     {
         if (!enabled) return;
@@ -279,6 +274,9 @@ public class BoxerMovement : MonoBehaviour
 
             case BoxerMoveState.Stunned:
                 slipPivot.transform.localRotation = Quaternion.Slerp(slipPivot.transform.localRotation, Quaternion.Euler(0f, orientation.localEulerAngles.y, 0f), Time.deltaTime * rotationSmoothSpeed);
+
+                stunTime -= Time.deltaTime;
+                if (stunTime < 0f) MoveState = BoxerMoveState.Moving; 
                 break;
 
             case BoxerMoveState.StaminaDepleted:
@@ -296,5 +294,13 @@ public class BoxerMovement : MonoBehaviour
     {
         hover.enabled = false;
         rb.AddExplosionForce(50f, transform.position + Vector3.down, 1f, 1f, ForceMode.Impulse);
+    }
+
+    public void Stun(float amount)
+    {
+        if (stunTime > amount) return;
+
+        stunTime = amount;
+        MoveState = BoxerMoveState.Stunned;
     }
 }

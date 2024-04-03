@@ -20,7 +20,6 @@ public class BoxingController : MonoBehaviour
     [Header("Refrences")]
     [SerializeField] Damageable health;
     [SerializeField] StaminaController stamina;
-    [SerializeField] StunController stun;
     [SerializeField] BlockController block;
     [SerializeField] BoxerMovement movement;
     [SerializeField] private Transform orientation;
@@ -36,7 +35,6 @@ public class BoxingController : MonoBehaviour
 
     public Damageable Health => health;
     public StaminaController Stamina => stamina;
-    public StunController Stun => stun;
     public BlockController Block => block;
     public BoxerMovement Movement => movement;
 
@@ -70,14 +68,21 @@ public class BoxingController : MonoBehaviour
         switch (movement.MoveState)
         {
             case BoxerMoveState.Moving:
-                gloves[button].SetGlove(true, 0f, stamina);
+                gloves[button].SetGlove(true, 0f, stamina, true);
                 movement.Rb.velocity *= 0f;
 
                 AttackState = BoxerAttackState.Punching;
                 break;
             case BoxerMoveState.Slipping:
-                gloves[button].SetGlove(true, 0f, stamina);
                 movement.Rb.velocity *= 0f;
+
+                //Hook punch
+                if (movement.SlipDirection == 1 && button == 0 || movement.SlipDirection == -1 && button == 1)
+                {
+                    movement.SlipDirection = -movement.SlipDirection;
+                    gloves[button].SetGlove(true, 0f, stamina, false);
+                }
+                else gloves[button].SetGlove(true, 0f, stamina, true);
 
                 AttackState = BoxerAttackState.Punching;
                 break;

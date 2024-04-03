@@ -150,7 +150,7 @@ MonoBehaviour:
     type: 3}
   gloveCollider: {fileID: 6136373200338076479}
   punchDamage: 10
-  punchStun: 0.25
+  punchStun: 0.35
   punchForce: 5
   punchClips:
   - {fileID: 8300000, guid: 5ee2e7dc3057c2a41ab26fe41b086609, type: 3}
@@ -164,7 +164,8 @@ MonoBehaviour:
   punchDelay: 0.1
   throwClips: []
   startRot: {x: 0, y: 0, z: 0}
-  hitRot: {x: 0.40557975, y: 0.579228, z: -0.579228, w: -0.40557975}
+  hitRotStraight: {x: 0.17373532, y: 0.656702, z: -0.5113355, w: -0.52639776}
+  hitRotHook: {x: 0.047978237, y: -0.123374104, z: -0.70402896, w: -0.69772494}
   gfx: {fileID: 6136373199581151446}
 --- !u!96 &6136373200338076609
 TrailRenderer:

@@ -76,12 +76,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a2b8180c89db9c4bba23519f4e06afe, type: 3}
   staminaCost: 35
   punchRange: 3.25
-  punchForwardTime: 0.3
+  punchForwardTime: 0.2
   punchBackTime: 0.15
-  punchDelay: 0.3
+  punchDelay: 0.15
   throwClips: []
-  startRot: {x: 0, y: 180, z: 0}
-  hitRot: {x: 0.5684126, y: 0.42060322, z: -0.42060322, w: -0.5684126}
+  startRot: {x: 0, y: 0, z: 0}
+  hitRotStraight: {x: -0.4077122, y: -0.45506972, z: -0.630139, w: -0.47917342}
+  hitRotHook: {x: 0.31298074, y: -0.30895782, z: 0.689773, w: 0.5751533}
   gfx: {fileID: 4555363807621747245}
 --- !u!96 &4555363806734254080
 TrailRenderer:

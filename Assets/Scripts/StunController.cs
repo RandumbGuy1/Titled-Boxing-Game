@@ -3,19 +3,27 @@ using UnityEngine;
 
 public class StunController : MonoBehaviour
 {
+    [SerializeField] private BoxingController boxer;
     private float stunAmount = 0f;
     public bool InStun => stunAmount > 0f;
 
-    public UnityEvent<Vector3, float> OnPlayerStun;
+    public UnityEvent<float> OnPlayerStun;
 
     void Update()
     {
         stunAmount -= Time.deltaTime;
+
+        if (stunAmount < 0f)
+        {
+            boxer.SetMoveState(BoxerMoveState.Moving);
+        }
     }
 
-    public void Stun(Vector3 dir, float amount)
+    public void Stun(float amount)
     {
         stunAmount = amount;
-        OnPlayerStun?.Invoke(dir, amount);
+        boxer.SetMoveState(BoxerMoveState.Stunned);
+
+        OnPlayerStun?.Invoke(amount);
     }
 }

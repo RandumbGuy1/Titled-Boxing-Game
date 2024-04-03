@@ -23,10 +23,12 @@ public class GloveCollision : MonoBehaviour
 
     [Header("Glove GFX Settings")]
     [SerializeField] Vector3 startRot;
-    [SerializeField] Quaternion hitRot;
+    [SerializeField] Quaternion hitRotStraight;
+    [SerializeField] Quaternion hitRotHook;
     [SerializeField] Transform gfx;
     private float overExtendDelay = 1f;
     bool hitSomething = false;
+    bool straightPunch = false;
 
     //Data to modify during runtime
     float punchElapsed;
@@ -39,29 +41,32 @@ public class GloveCollision : MonoBehaviour
     {
         //Detection
         Vector3 gloveTravel = transform.position - lastPos;
-        if (Active && Physics.SphereCast(transform.position - gloveTravel * 5f, gloveCollider.radius, gloveTravel, out var hit, gloveTravel.magnitude * 5f, hitLayer))
+        if (Active && Physics.SphereCast(transform.position - gloveTravel * 5f, gloveCollider.radius * 0.5f, gloveTravel, out var hit, gloveTravel.magnitude * 5f, hitLayer))
         {
             //Damage Logic
+            if (hit.transform.IsChildOf(thrower)) return;
+
             BoxingController boxer = hit.collider.GetComponent<BoxingController>();
             if (boxer != null)
             {
-                if (boxer.Movement.Rolling || boxer.Movement.SlipDirection != 0) return;
+                if (boxer.Movement.Rolling || boxer.Movement.SlipDirection != 0 && straightPunch) return;
 
                 switch (boxer.AttackState)
                 {
                     case BoxerAttackState.Punching:
                         boxer.Health.Damage(punchDamage * 1.25f);
                         boxer.Health.Counter();
-                        boxer.Stun.Stun((hit.point - thrower.position).normalized, punchStun);
+                        boxer.Movement.Stun(punchStun);
                         break;
 
                     case BoxerAttackState.Blocking:
                         boxer.Health.Damage(punchDamage * 0.25f);
                         break;
+                    default:
+                        boxer.Health.Damage(punchDamage);
+                        boxer.Movement.Stun(punchStun);
+                        break;
                 }
-
-                boxer.Health.Damage(punchDamage);
-                boxer.Stun.Stun((hit.point - thrower.position).normalized, punchStun);
             }
 
             Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
@@ -106,8 +111,8 @@ public class GloveCollision : MonoBehaviour
                 return;
             }
 
-            endPunchPos = handPosition.position + forward * punchRange;
-            gfx.localRotation = Quaternion.Slerp(gfx.localRotation, hitRot, EaseInQuad(punchElapsed / punchForwardTime));
+            endPunchPos = handPosition.position + forward * punchRange * (straightPunch ? 1f : 0.5f);
+            gfx.localRotation = Quaternion.Slerp(gfx.localRotation, straightPunch ? hitRotStraight : hitRotHook, EaseInQuad(punchElapsed / punchForwardTime));
             transform.position = Vector3.Lerp(handPosition.position, endPunchPos, EaseInQuad(punchElapsed / punchForwardTime));
             return;
         }
@@ -116,9 +121,11 @@ public class GloveCollision : MonoBehaviour
         gfx.localRotation = Quaternion.Slerp(gfx.localRotation, Quaternion.Euler(startRot), EaseInQuad(punchElapsed / punchForwardTime));
     }
 
-    public void SetGlove(bool active = true, float punchElapsed = 0f, StaminaController stamina = null)
+    public void SetGlove(bool active = true, float punchElapsed = 0f, StaminaController stamina = null, bool straightPunch = false)
     {
         this.punchElapsed = punchElapsed;
+        this.straightPunch = straightPunch;
+
         endPunchPos = transform.position;
         Active = active;
 
