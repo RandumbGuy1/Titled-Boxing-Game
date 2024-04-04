@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.029290695, g: 0.03873025, b: 0.047135748, a: 1}
+  m_IndirectSpecularColor: {r: 0.029281585, g: 0.038718887, b: 0.047144875, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10945,7 +10945,7 @@ MonoBehaviour:
   jumpForce: 25
   uprightStrength: 40
   uprightDampening: 3
-  rotationSmoothSpeed: 20
+  rotationSmoothSpeed: 10
   slipStaminaCost: 10
   dashStaminaCost: 30
   slideFriction: 30
