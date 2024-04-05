@@ -26,37 +26,44 @@ public class BoxingEnemy : MonoBehaviour
             -1);
 
         float random = Random.Range(0, 100);
+        float distToTarget = Vector3.Distance(orientation.position, target.position);
 
-        float multi = Mathf.Clamp(Vector3.Distance(orientation.position, target.position) - distance, -1f, 1f);
+        float multi = Mathf.Clamp(distToTarget - distance, -1f, 1f);
         Vector3 movDir = orientation.forward * multi + (orientation.right * Random.Range(-1, 1));
 
         if (random > 80)
         {
-            //Left Punch
-            EnemyFrameInput.SetInput(
-            movDir,
-            Vector2.one,
-            false,
-            false,
-            false,
-            -1,
-            false,
-            0,
-            -1);
+            if (distToTarget < distance + 1f)
+            {
+                //Left Punch
+                EnemyFrameInput.SetInput(
+                movDir,
+                Vector2.one,
+                false,
+                false,
+                false,
+                -1,
+                false,
+                0,
+                -1);
+            }
         }
         else if (random > 4f)
         {
-            //Right Punch
-            EnemyFrameInput.SetInput(
-            movDir,
-            Vector2.one,
-            false,
-            false,
-            false,
-            -1,
-            false,
-            1,
-            -1);
+            if (distToTarget < distance + 1f)
+            {
+                //Right Punch
+                EnemyFrameInput.SetInput(
+                movDir,
+                Vector2.one,
+                false,
+                false,
+                false,
+                -1,
+                false,
+                1,
+                -1);
+            }
         }
         else if (random > 2f)
         {

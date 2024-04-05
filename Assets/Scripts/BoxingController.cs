@@ -74,6 +74,7 @@ public class BoxingController : MonoBehaviour
 
                 AttackState = BoxerAttackState.Punching;
                 if (camShaker) camShaker.ShakeOnce(new PerlinShake(ShakeData.Create(3f, 6f, 0.7f, 10f)));
+                movement.Rb.AddTorque(orientation.right * 2.5f, ForceMode.Impulse);
                 break;
             case BoxerMoveState.Slipping:
                 movement.Rb.velocity *= 0f;
@@ -84,10 +85,12 @@ public class BoxingController : MonoBehaviour
                     movement.SlipDirection = -movement.SlipDirection;
                     gloves[button].SetGlove(true, 0f, stamina, false);
                 }
+                //Straight punch
                 else gloves[button].SetGlove(true, 0f, stamina, true);
 
                 AttackState = BoxerAttackState.Punching;
-                if (camShaker) camShaker.ShakeOnce(new PerlinShake(ShakeData.Create(3f, 6f, 0.7f, 10f)));
+                if (camShaker) camShaker.ShakeOnce(new PerlinShake(ShakeData.Create(2f, 6f, 0.7f, 10f)));
+                movement.Rb.AddTorque(orientation.right * 2.5f, ForceMode.Impulse);
                 break;
             default:
                 break;

@@ -47,6 +47,8 @@ public class GloveCollision : MonoBehaviour
             //Damage Logic
             if (hit.transform.IsChildOf(thrower)) return;
 
+            print(thrower + ": " + hit.collider);
+
             BoxingController boxer = hit.collider.GetComponent<BoxingController>();
             if (boxer != null)
             {
