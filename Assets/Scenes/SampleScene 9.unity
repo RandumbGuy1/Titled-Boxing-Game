@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.029290695, g: 0.03873025, b: 0.047135748, a: 1}
+  m_IndirectSpecularColor: {r: 0.029281585, g: 0.038718887, b: 0.047144875, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2773,7 +2773,19 @@ MonoBehaviour:
   healthBar: {fileID: 839243334}
   OnDamageEffects:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1974632271}
+        m_TargetAssemblyTypeName: SpecialConditionFX, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnCounter:
     m_PersistentCalls:
       m_Calls:
@@ -12037,7 +12049,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sounds.Array.data[7].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 101d176b5e21a504eb6331e4db5bdcee, type: 3}
+      objectReference: {fileID: 8300000, guid: b46e39a89ac8b0b49aa39197479ec920, type: 3}
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
       propertyPath: sounds.Array.data[13].clip
@@ -12141,7 +12153,7 @@ PrefabInstance:
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
       propertyPath: sounds.Array.data[7].volume
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
@@ -12191,7 +12203,7 @@ PrefabInstance:
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
       propertyPath: sounds.Array.data[22].volume
-      value: 0.2
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
