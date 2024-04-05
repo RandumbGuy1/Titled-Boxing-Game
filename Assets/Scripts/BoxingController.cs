@@ -23,6 +23,7 @@ public class BoxingController : MonoBehaviour
     [SerializeField] BlockController block;
     [SerializeField] BoxerMovement movement;
     [SerializeField] private Transform orientation;
+    [SerializeField] CameraShaker camShaker;
 
     public bool CanPunch
     {
@@ -72,6 +73,7 @@ public class BoxingController : MonoBehaviour
                 movement.Rb.velocity *= 0f;
 
                 AttackState = BoxerAttackState.Punching;
+                if (camShaker) camShaker.ShakeOnce(new PerlinShake(ShakeData.Create(3f, 6f, 0.7f, 10f)));
                 break;
             case BoxerMoveState.Slipping:
                 movement.Rb.velocity *= 0f;
@@ -85,6 +87,7 @@ public class BoxingController : MonoBehaviour
                 else gloves[button].SetGlove(true, 0f, stamina, true);
 
                 AttackState = BoxerAttackState.Punching;
+                if (camShaker) camShaker.ShakeOnce(new PerlinShake(ShakeData.Create(3f, 6f, 0.7f, 10f)));
                 break;
             default:
                 break;

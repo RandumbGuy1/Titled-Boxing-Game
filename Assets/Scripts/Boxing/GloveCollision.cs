@@ -26,6 +26,7 @@ public class GloveCollision : MonoBehaviour
     [SerializeField] Quaternion hitRotStraight;
     [SerializeField] Quaternion hitRotHook;
     [SerializeField] Transform gfx;
+    [SerializeField] ParticleSystem smoke;
     private float overExtendDelay = 1f;
     bool hitSomething = false;
     bool straightPunch = false;
@@ -41,7 +42,7 @@ public class GloveCollision : MonoBehaviour
     {
         //Detection
         Vector3 gloveTravel = transform.position - lastPos;
-        if (Active && Physics.SphereCast(transform.position - gloveTravel * 5f, gloveCollider.radius * 0.5f, gloveTravel, out var hit, gloveTravel.magnitude * 5f, hitLayer))
+        if (Active && Physics.SphereCast(transform.position - gloveTravel * 5f, gloveCollider.radius, gloveTravel, out var hit, gloveTravel.magnitude * 5f, hitLayer))
         {
             //Damage Logic
             if (hit.transform.IsChildOf(thrower)) return;
@@ -77,6 +78,8 @@ public class GloveCollision : MonoBehaviour
             }
 
             AudioManager.Instance.PlayOnce(punchClips, transform.position);
+            if (smoke) smoke.Stop();
+
             Instantiate(hitSpark, hit.point, Quaternion.identity);
 
             SetGlove(false);
@@ -133,6 +136,7 @@ public class GloveCollision : MonoBehaviour
 
         stamina.TakeStamina(staminaCost);
         AudioManager.Instance.PlayOnce(throwClips, transform.position);
+        if (smoke) smoke.Play();
     }
 
     Transform prevParent = null;

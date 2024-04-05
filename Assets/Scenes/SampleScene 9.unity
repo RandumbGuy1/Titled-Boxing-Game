@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.029281585, g: 0.038718887, b: 0.047144875, a: 1}
+  m_IndirectSpecularColor: {r: 0.02920554, g: 0.03863617, b: 0.047038265, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2887,6 +2887,7 @@ MonoBehaviour:
   block: {fileID: 506892739}
   movement: {fileID: 506892743}
   orientation: {fileID: 1378535329}
+  camShaker: {fileID: 0}
 --- !u!114 &506892743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5001,6 +5002,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 194435035}
     m_Modifications:
+    - target: {fileID: 430531058730610435, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136373199581151446, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6136373200338076472, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
         type: 3}
       propertyPath: m_RootOrder
@@ -5078,6 +5089,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6136373200338076478, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
         type: 3}
+      propertyPath: smoke
+      value: 
+      objectReference: {fileID: 862056642}
+    - target: {fileID: 6136373200338076478, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
+        type: 3}
       propertyPath: punchStun
       value: 0.35
       objectReference: {fileID: 0}
@@ -5101,11 +5117,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7491770797318160605, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d062cc38b31a54a3983f9e2c09d7bdf8, type: 3}
 --- !u!4 &862056641 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6136373200338076472, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
+    type: 3}
+  m_PrefabInstance: {fileID: 862056640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &862056642 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4723465452010211879, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
     type: 3}
   m_PrefabInstance: {fileID: 862056640}
   m_PrefabAsset: {fileID: 0}
@@ -11188,6 +11215,7 @@ MonoBehaviour:
   block: {fileID: 1974632263}
   movement: {fileID: 1974632260}
   orientation: {fileID: 1451122814}
+  camShaker: {fileID: 2037341747}
 --- !u!114 &1974632267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12002,7 +12030,7 @@ PrefabInstance:
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
       propertyPath: sounds.Array.size
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
@@ -12056,6 +12084,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: aa5bbe323c098494b8208c301a82dd71, type: 3}
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
+      propertyPath: sounds.Array.data[22].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7e2b6829d68dad84b84cc8ffb55c78f2, type: 3}
+    - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
+        type: 3}
       propertyPath: sounds.Array.data[13].pitch
       value: 1
       objectReference: {fileID: 0}
@@ -12097,6 +12130,11 @@ PrefabInstance:
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
       propertyPath: sounds.Array.data[21].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
+        type: 3}
+      propertyPath: sounds.Array.data[22].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
@@ -12151,13 +12189,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
+      propertyPath: sounds.Array.data[22].volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
+        type: 3}
       propertyPath: sounds.Array.data[21].looping
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
+      propertyPath: sounds.Array.data[22].looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
+        type: 3}
       propertyPath: sounds.Array.data[21].playOnAwake
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
+        type: 3}
+      propertyPath: sounds.Array.data[22].playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
@@ -12211,6 +12264,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
+      propertyPath: sounds.Array.data[22].spatialBlend
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
+        type: 3}
       propertyPath: sounds.Array.data[7].soundCapacity
       value: 1
       objectReference: {fileID: 0}
@@ -12258,6 +12316,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sounds.Array.data[21].soundCapacity
       value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
+        type: 3}
+      propertyPath: sounds.Array.data[22].soundCapacity
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7122289844981017559, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
