@@ -3,6 +3,7 @@ using UnityEngine;
 public class BoxerRagdoll : MonoBehaviour
 {
     BoxingController boxer;
+    [SerializeField] GameObject explosion;
 
     void Start()
     {
@@ -12,5 +13,6 @@ public class BoxerRagdoll : MonoBehaviour
     public void Ragdoll()
     {
         boxer.Disable();
+        if (explosion) Instantiate(explosion, transform.position, Quaternion.identity);
     }
 }

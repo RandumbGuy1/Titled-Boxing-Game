@@ -27,8 +27,8 @@ public enum BoxerMoveState
 {
     Moving,
     Slipping,
-    SlipLeft,
-    SlipRight,
+    SlippingLeft,
+    SlippingRight,
     Rolling,
     Stunned,
     StaminaDepleted,

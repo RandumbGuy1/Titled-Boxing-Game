@@ -79,7 +79,7 @@ public class BoxingEnemy : MonoBehaviour
             -1,
             -1);
         }
-        else if (random > 0.05f)
+        else if (random > 0.01f)
         {
             //Slip Left
             EnemyFrameInput.SetInput(
