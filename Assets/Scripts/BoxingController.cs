@@ -66,6 +66,12 @@ public class BoxingController : MonoBehaviour
 
         if (button >= 2 || button < 0 || !CanPunch || !Idle) return;
 
+        void PunchShake()
+        {
+            if (camShaker) camShaker.ShakeOnce(new PerlinShake(ShakeData.Create(3f, 6f, 0.7f, 10f)));
+            movement.Rb.AddTorque(orientation.right * 2.5f, ForceMode.Impulse);
+        }
+
         switch (movement.MoveState)
         {
             case BoxerMoveState.Moving:
@@ -73,24 +79,35 @@ public class BoxingController : MonoBehaviour
                 movement.Rb.velocity *= 0f;
 
                 AttackState = BoxerAttackState.Punching;
-                if (camShaker) camShaker.ShakeOnce(new PerlinShake(ShakeData.Create(3f, 6f, 0.7f, 10f)));
-                movement.Rb.AddTorque(orientation.right * 2.5f, ForceMode.Impulse);
+                PunchShake();
                 break;
-            case BoxerMoveState.Slipping:
+            case BoxerMoveState.SlippingLeft:
                 movement.Rb.velocity *= 0f;
 
-                //Hook punch
-                if (movement.SlipDirection == 1 && button == 0 || movement.SlipDirection == -1 && button == 1)
+                if (button == 0)
                 {
-                    movement.SlipDirection = -movement.SlipDirection;
                     gloves[button].SetGlove(true, 0f, stamina, false);
+                    SetMoveState(BoxerMoveState.Moving);
+                    PunchShake();
+                    break;
                 }
-                //Straight punch
-                else gloves[button].SetGlove(true, 0f, stamina, true);
 
-                AttackState = BoxerAttackState.Punching;
-                if (camShaker) camShaker.ShakeOnce(new PerlinShake(ShakeData.Create(2f, 6f, 0.7f, 10f)));
-                movement.Rb.AddTorque(orientation.right * 2.5f, ForceMode.Impulse);
+                gloves[button].SetGlove(true, 0f, stamina, true);
+                PunchShake();
+                break;
+            case BoxerMoveState.SlippingRight:
+                movement.Rb.velocity *= 0f;
+
+                if (button == 1)
+                {
+                    gloves[button].SetGlove(true, 0f, stamina, false);
+                    SetMoveState(BoxerMoveState.Moving);
+                    PunchShake();
+                    break;
+                }
+
+                gloves[button].SetGlove(true, 0f, stamina, true);
+                PunchShake();
                 break;
             default:
                 break;

@@ -52,7 +52,7 @@ public class GloveCollision : MonoBehaviour
             BoxingController boxer = hit.collider.GetComponent<BoxingController>();
             if (boxer != null)
             {
-                if (boxer.Movement.Rolling || boxer.Movement.SlipDirection != 0 && straightPunch) return;
+                if (boxer.Movement.Rolling || (boxer.MoveState == BoxerMoveState.SlippingLeft || boxer.MoveState == BoxerMoveState.SlippingRight) && straightPunch) return;
 
                 switch (boxer.AttackState)
                 {
@@ -76,7 +76,7 @@ public class GloveCollision : MonoBehaviour
             if (rb != null)
             {
                 rb.AddForce(-hit.normal * punchForce, ForceMode.Impulse);
-                rb.AddTorque(-hit.normal * punchForce, ForceMode.Impulse);
+                rb.AddTorque(-hit.normal * punchForce * 5f, ForceMode.Impulse);
             }
 
             AudioManager.Instance.PlayOnce(punchClips, transform.position);
