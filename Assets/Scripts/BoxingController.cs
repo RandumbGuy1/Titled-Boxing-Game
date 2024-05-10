@@ -70,12 +70,14 @@ public class BoxingController : MonoBehaviour
         {
             if (camShaker) camShaker.ShakeOnce(new PerlinShake(ShakeData.Create(3f, 6f, 0.7f, 10f)));
             movement.Rb.AddTorque(orientation.right * 2.5f, ForceMode.Impulse);
+
+            stamina.TakeStamina(gloves[button].StaminaCost);
         }
 
         switch (movement.MoveState)
         {
             case BoxerMoveState.Moving:
-                gloves[button].SetGlove(true, 0f, stamina, true);
+                gloves[button].SetGlove(true, PunchType.Straight);
                 movement.Rb.velocity *= 0f;
 
                 AttackState = BoxerAttackState.Punching;
@@ -86,13 +88,13 @@ public class BoxingController : MonoBehaviour
 
                 if (button == 0)
                 {
-                    gloves[button].SetGlove(true, 0f, stamina, false);
+                    gloves[button].SetGlove(true, PunchType.Hook);
                     SetMoveState(BoxerMoveState.Moving);
                     PunchShake();
                     break;
                 }
 
-                gloves[button].SetGlove(true, 0f, stamina, true);
+                gloves[button].SetGlove(true, PunchType.Straight);
                 PunchShake();
                 break;
             case BoxerMoveState.SlippingRight:
@@ -100,13 +102,13 @@ public class BoxingController : MonoBehaviour
 
                 if (button == 1)
                 {
-                    gloves[button].SetGlove(true, 0f, stamina, false);
+                    gloves[button].SetGlove(true, PunchType.Hook);
                     SetMoveState(BoxerMoveState.Moving);
                     PunchShake();
                     break;
                 }
 
-                gloves[button].SetGlove(true, 0f, stamina, true);
+                gloves[button].SetGlove(true, PunchType.Straight);
                 PunchShake();
                 break;
             default:

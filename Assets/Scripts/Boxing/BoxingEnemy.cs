@@ -31,7 +31,7 @@ public class BoxingEnemy : MonoBehaviour
         float multi = Mathf.Clamp(distToTarget - distance, -1f, 1f);
         Vector3 movDir = orientation.forward * multi + (orientation.right * Random.Range(-1, 1));
 
-        if (random > 80)
+        if (random > 50)
         {
             if (distToTarget < distance + 1f)
             {
@@ -46,7 +46,7 @@ public class BoxingEnemy : MonoBehaviour
                 false,
                 0,
                 -1);
-            }
+            } 
         }
         else if (random > 4f)
         {
@@ -63,9 +63,9 @@ public class BoxingEnemy : MonoBehaviour
                 false,
                 1,
                 -1);
-            }
+            } 
         }
-        else if (random > 2f)
+        else if (random > 0.5f)
         {
             //Roll
             EnemyFrameInput.SetInput(
@@ -79,7 +79,7 @@ public class BoxingEnemy : MonoBehaviour
             -1,
             -1);
         }
-        else if (random > 0.01f)
+        else if (random > 0.005f)
         {
             //Slip Left
             EnemyFrameInput.SetInput(

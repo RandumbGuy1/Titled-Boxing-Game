@@ -30,6 +30,9 @@ public class BoxerMovement : MonoBehaviour
     private Vector2 crouchVel = Vector2.zero;
 
     public bool Rolling => MoveState == BoxerMoveState.Rolling;
+    public bool Slipleft => MoveState == BoxerMoveState.SlippingLeft;
+    public bool Slipright => MoveState == BoxerMoveState.SlippingRight;
+
     public bool Stunned => MoveState == BoxerMoveState.Stunned;
     public bool RanOutofStamina => MoveState == BoxerMoveState.StaminaDepleted;
 

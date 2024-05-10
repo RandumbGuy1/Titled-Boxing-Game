@@ -83,7 +83,7 @@ public class BoxingBot : MonoBehaviour, IBoxer
                 {
                     elapsed[i] = 0f;
                     randomTimes[i] = Random.Range(0.2f, 1f);
-                    gloves[i].SetGlove(true, 0f, stamina);
+                    //gloves[i].SetGlove(true, 0f, stamina);
                 }
             }
         } 

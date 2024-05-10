@@ -68,7 +68,7 @@ public class BoxingGloves : MonoBehaviour, IBoxer
         if (button >= 2 || button < 0) return;
         if (!CanPunch || !CanPreformActions) return;
 
-        gloves[button].SetGlove(true, 0f, stamina);
+        //gloves[button].SetGlove(true, 0f, stamina);
         player.PlayerMovement.Rb.velocity *= 0f;
     }
 

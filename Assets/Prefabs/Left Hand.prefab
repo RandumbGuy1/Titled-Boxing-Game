@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2bab18bc3f554af898b3ea2faa477ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  side: 0
   hitLayer:
     serializedVersion: 2
     m_Bits: 9
@@ -159,7 +160,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 09c7204c95d70604190f0d00ec6db578, type: 3}
   staminaCost: 25
   punchRange: 3.5
-  punchForwardTime: 0.2
+  punchForwardTime: 0.4
   punchBackTime: 0.15
   punchDelay: 0.1
   throwClips:
