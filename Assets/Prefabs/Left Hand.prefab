@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6136373199581151446}
   - component: {fileID: 6136373199581151448}
   - component: {fileID: 6136373199581151449}
+  - component: {fileID: 7456842531580620239}
   m_Layer: 7
   m_Name: Glove GFX
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7456842531580620239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6136373199581151447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287bb094dbd8d45e5b53fc87d6256e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothTime: 10
+  meshRenderer: {fileID: 6136373199581151449}
 --- !u!1 &6136373200338076473
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,11 +175,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 09c7204c95d70604190f0d00ec6db578, type: 3}
   staminaCost: 25
   punchRange: 3.5
-  punchForwardTime: 0.4
+  punchForwardTime: 0.25
   punchBackTime: 0.15
   punchDelay: 0.1
   throwClips:
   - {fileID: 8300000, guid: 7e2b6829d68dad84b84cc8ffb55c78f2, type: 3}
+  flash: {fileID: 7456842531580620239}
   startRot: {x: 0, y: 0, z: 0}
   hitRotStraight: {x: 0.17373532, y: 0.656702, z: -0.5113355, w: -0.52639776}
   hitRotHook: {x: 0.047978237, y: -0.123374104, z: -0.70402896, w: -0.69772494}

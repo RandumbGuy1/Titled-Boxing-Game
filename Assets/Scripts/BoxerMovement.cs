@@ -29,6 +29,10 @@ public class BoxerMovement : MonoBehaviour
     private float playerHeight = 0f;
     private Vector2 crouchVel = Vector2.zero;
 
+    public bool RollInvincible => capsuleCol.height <= playerHeight - 0.1f;
+    public bool SlipInvincibleleft => capsuleCol.height <= playerHeight - 0.25f;
+    public bool SlipInvincibleright => capsuleCol.height <= playerHeight - 0.25f;
+
     public bool Rolling => MoveState == BoxerMoveState.Rolling;
     public bool Slipleft => MoveState == BoxerMoveState.SlippingLeft;
     public bool Slipright => MoveState == BoxerMoveState.SlippingRight;
@@ -147,10 +151,9 @@ public class BoxerMovement : MonoBehaviour
         switch (MoveState)
         {
             case BoxerMoveState.Moving:
-                float movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f);
+                float movementMultiplier = 3.5f * Time.fixedDeltaTime * (Grounded ? 1f : 0.6f) * (boxer.AttackState == BoxerAttackState.Punching ? 0.1f : 1f);
                 ClampSpeed(maxSpeed, movementMultiplier);
                 rb.AddForce(acceleration * movementMultiplier * input.MoveDir.normalized, ForceMode.Impulse);
-
                 break;
             case BoxerMoveState.SlippingLeft:
             case BoxerMoveState.SlippingRight:
@@ -241,14 +244,22 @@ public class BoxerMovement : MonoBehaviour
             case BoxerMoveState.SlippingLeft:
                 angle = slipAngle;
                 if (input.SlipInput == 0) MoveState = BoxerMoveState.Moving;
-                if (input.SlipInput == 1) MoveState = BoxerMoveState.SlippingRight;
+                if (input.SlipInput == 1)
+                {
+                    MoveState = BoxerMoveState.SlippingRight;
+                    boxer.Stamina.TakeStamina(slipStaminaCost, true);
+                }
 
                 RollInput();
                 break;
             case BoxerMoveState.SlippingRight:
                 angle = -slipAngle;
 
-                if (input.SlipInput == 0) MoveState = BoxerMoveState.SlippingLeft;
+                if (input.SlipInput == 0)
+                {
+                    MoveState = BoxerMoveState.SlippingLeft;
+                    boxer.Stamina.TakeStamina(slipStaminaCost, true);
+                }
                 if (input.SlipInput == 1) MoveState = BoxerMoveState.Moving;
 
                 RollInput();

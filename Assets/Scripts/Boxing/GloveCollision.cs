@@ -23,6 +23,7 @@ public class GloveCollision : MonoBehaviour
     [SerializeField] AudioClip[] throwClips;
 
     [Header("Glove GFX Settings")]
+    [SerializeField] FlashMaterial flash;
     [SerializeField] Vector3 startRot;
     [SerializeField] Quaternion hitRotStraight;
     [SerializeField] Quaternion hitRotHook;
@@ -52,7 +53,7 @@ public class GloveCollision : MonoBehaviour
         BoxingController boxer = hit.collider.GetComponent<BoxingController>();
         if (boxer != null)
         {
-            if (boxer.Movement.Rolling) return;
+            if (boxer.Movement.RollInvincible) return;
             if (boxer.Movement.Slipleft && side == PunchSide.Left) return;
             if (boxer.Movement.Slipright && side == PunchSide.Right) return;
 
@@ -136,7 +137,7 @@ public class GloveCollision : MonoBehaviour
 
     public void SetGlove(bool active, PunchType type = PunchType.Straight)
     {
-        punchElapsed = 0f;
+        punchElapsed = -0.01f;
         this.type = type;
 
         endPunchPos = transform.position;
@@ -146,6 +147,7 @@ public class GloveCollision : MonoBehaviour
 
         AudioManager.Instance.PlayOnce(throwClips, transform.position);
         if (smoke) smoke.Play();
+        flash.Flash(Color.white);
     }
 
     Transform prevParent = null;
