@@ -33,7 +33,6 @@ public class GloveCollision : MonoBehaviour
     bool hitSomething = false;
 
     //Data to modify during runtime
-    float distanceToPunch = 0;
     float punchElapsed;
     private PunchType type;
 
@@ -47,15 +46,15 @@ public class GloveCollision : MonoBehaviour
         Vector3 gloveTravel = transform.position - lastPos;
         lastPos = transform.position;
 
-        if (!Active || !Physics.SphereCast(transform.position - gloveTravel * 5f, gloveCollider.radius, gloveTravel, out var hit, gloveTravel.magnitude * 5f, hitLayer)) return;
+        if (!Active || !Physics.SphereCast(transform.position - gloveTravel * 5f, 0.6f, gloveTravel, out var hit, gloveTravel.magnitude * 5f, hitLayer)) return;
         if (hit.transform.IsChildOf(thrower)) return;
 
         BoxingController boxer = hit.collider.GetComponent<BoxingController>();
         if (boxer != null)
         {
             if (boxer.Movement.RollInvincible) return;
-            if (boxer.Movement.Slipleft && side == PunchSide.Left) return;
-            if (boxer.Movement.Slipright && side == PunchSide.Right) return;
+            if (boxer.Movement.SlipInvincibleleft && side == PunchSide.Left) return;
+            if (boxer.Movement.SlipInvincibleright && side == PunchSide.Right) return;
 
             float damageMulti = 1f;
 
@@ -123,11 +122,9 @@ public class GloveCollision : MonoBehaviour
                 return;
             }
 
-            distanceToPunch = (endPunchPos - handPosition.position).sqrMagnitude;
-
-            endPunchPos = handPosition.position + forward * punchRange * (type == PunchType.Straight ? 1f : 0.5f);
-            gfx.localRotation = Quaternion.Slerp(gfx.localRotation, type == PunchType.Straight ? hitRotStraight : hitRotHook, EaseInQuad(punchElapsed / punchForwardTime));
-            transform.position = Vector3.Lerp(handPosition.position, endPunchPos, EaseInQuad(punchElapsed / punchForwardTime));
+            endPunchPos = handPosition.position + (type == PunchType.Straight ? 1f : 0.75f) * punchRange * forward;
+            gfx.localRotation = Quaternion.SlerpUnclamped(gfx.localRotation, type == PunchType.Straight ? hitRotStraight : hitRotHook, EaseInOutBack(punchElapsed / punchForwardTime));
+            transform.position = Vector3.LerpUnclamped(handPosition.position, endPunchPos, EaseInQuad(punchElapsed / punchForwardTime));
             return;
         }
 
@@ -135,7 +132,7 @@ public class GloveCollision : MonoBehaviour
         gfx.localRotation = Quaternion.Slerp(gfx.localRotation, Quaternion.Euler(startRot), EaseInQuad(punchElapsed / punchForwardTime));
     }
 
-    public void SetGlove(bool active, PunchType type = PunchType.Straight)
+    public void SetGlove(bool active, PunchType type = PunchType.Straight, Color flashColor = default)
     {
         punchElapsed = -0.01f;
         this.type = type;
@@ -147,7 +144,7 @@ public class GloveCollision : MonoBehaviour
 
         AudioManager.Instance.PlayOnce(throwClips, transform.position);
         if (smoke) smoke.Play();
-        flash.Flash(Color.white);
+        if (flash) flash.Flash(flashColor);
     }
 
     Transform prevParent = null;
@@ -176,6 +173,19 @@ public class GloveCollision : MonoBehaviour
     {
         return x * x * x;
     }
+
+    float EaseOutSine(float x) {
+        return Mathf.Sin((x* Mathf.PI) / 2);
+    }
+
+    float EaseInOutBack(float x) {
+        float c1 = 1.70158f;
+        float c2 = c1 * 1.525f;
+
+        return x < 0.5
+          ? (Mathf.Pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
+          : (Mathf.Pow(2 * x - 2, 2) * ((c2 + 1) * (x* 2 - 2) + c2) + 2) / 2;
+        }
 }
 
 public enum PunchType

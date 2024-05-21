@@ -29,9 +29,9 @@ public class BoxerMovement : MonoBehaviour
     private float playerHeight = 0f;
     private Vector2 crouchVel = Vector2.zero;
 
-    public bool RollInvincible => capsuleCol.height <= playerHeight - 0.1f;
-    public bool SlipInvincibleleft => capsuleCol.height <= playerHeight - 0.25f;
-    public bool SlipInvincibleright => capsuleCol.height <= playerHeight - 0.25f;
+    public bool RollInvincible => Rolling || capsuleCol.height <= playerHeight - 0.25f;
+    public bool SlipInvincibleleft => Slipleft || GetZObjectRotation(slipPivot) >= slipAngle - slipAngle * 0.75f;
+    public bool SlipInvincibleright => Slipright || GetZObjectRotation(slipPivot) <= -slipAngle + slipAngle * 0.75f;
 
     public bool Rolling => MoveState == BoxerMoveState.Rolling;
     public bool Slipleft => MoveState == BoxerMoveState.SlippingLeft;
@@ -89,6 +89,12 @@ public class BoxerMovement : MonoBehaviour
     {
         playerHeight = capsuleCol.height;
         gfxOffset = gfx.localPosition;
+    }
+
+    float GetZObjectRotation(Transform transform)
+    {
+        if (transform.eulerAngles.z > 180) return transform.eulerAngles.z - 360;
+        return transform.eulerAngles.z;
     }
 
     void FixedUpdate()

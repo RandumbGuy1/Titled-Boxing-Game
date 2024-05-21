@@ -16,6 +16,7 @@ public class BoxingController : MonoBehaviour
 
     [SerializeField] Transform[] handPositions = new Transform[2];
     [SerializeField] GloveCollision[] gloves = new GloveCollision[2];
+    [SerializeField] Color punchIndicator;
 
     [Header("Refrences")]
     [SerializeField] Damageable health;
@@ -77,7 +78,7 @@ public class BoxingController : MonoBehaviour
         switch (movement.MoveState)
         {
             case BoxerMoveState.Moving:
-                gloves[button].SetGlove(true, PunchType.Straight);
+                gloves[button].SetGlove(true, PunchType.Straight, punchIndicator);
                 movement.Rb.velocity *= 0f;
 
                 AttackState = BoxerAttackState.Punching;
@@ -88,13 +89,13 @@ public class BoxingController : MonoBehaviour
 
                 if (button == 0)
                 {
-                    gloves[button].SetGlove(true, PunchType.Hook);
+                    gloves[button].SetGlove(true, PunchType.Hook, punchIndicator);
                     SetMoveState(BoxerMoveState.Moving);
                     PunchShake();
                     break;
                 }
 
-                gloves[button].SetGlove(true, PunchType.Straight);
+                gloves[button].SetGlove(true, PunchType.Straight, punchIndicator);
                 PunchShake();
                 break;
             case BoxerMoveState.SlippingRight:
@@ -102,13 +103,13 @@ public class BoxingController : MonoBehaviour
 
                 if (button == 1)
                 {
-                    gloves[button].SetGlove(true, PunchType.Hook);
+                    gloves[button].SetGlove(true, PunchType.Hook, punchIndicator);
                     SetMoveState(BoxerMoveState.Moving);
                     PunchShake();
                     break;
                 }
 
-                gloves[button].SetGlove(true, PunchType.Straight);
+                gloves[button].SetGlove(true, PunchType.Straight, punchIndicator);
                 PunchShake();
                 break;
             default:

@@ -46,7 +46,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4555363806734254087
 MonoBehaviour:
@@ -85,7 +85,7 @@ MonoBehaviour:
   flash: {fileID: 6958754287062317627}
   startRot: {x: 0, y: 0, z: 0}
   hitRotStraight: {x: -0.4077122, y: -0.45506972, z: -0.630139, w: -0.47917342}
-  hitRotHook: {x: 0.31298074, y: -0.30895782, z: 0.689773, w: 0.5751533}
+  hitRotHook: {x: 0.41443145, y: 0.020199507, z: 0.63950986, w: 0.6471983}
   gfx: {fileID: 4555363807621747245}
   smoke: {fileID: 1284466208682733482}
 --- !u!1 &4555363807621747244

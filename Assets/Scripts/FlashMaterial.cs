@@ -14,6 +14,6 @@ public class FlashMaterial : MonoBehaviour
 
     public void Flash(Color color)
     {
-        meshRenderer.material.color = color * 3f;
+        meshRenderer.material.color = color * 5f;
     }
 }
