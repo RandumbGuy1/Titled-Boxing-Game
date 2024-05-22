@@ -165,7 +165,7 @@ MonoBehaviour:
   hitSpark: {fileID: 5293751812607336622, guid: cd7fcc5518bf7473eb622e3315fd01f9,
     type: 3}
   gloveCollider: {fileID: 6136373200338076479}
-  punchDamage: 10
+  punchDamage: 5
   punchStun: 0.35
   punchForce: 10
   punchClips:
@@ -177,7 +177,7 @@ MonoBehaviour:
   punchRange: 3.5
   punchForwardTime: 0.25
   punchBackTime: 0.15
-  punchDelay: 0.1
+  punchDelay: 0.02
   throwClips:
   - {fileID: 8300000, guid: 7e2b6829d68dad84b84cc8ffb55c78f2, type: 3}
   flash: {fileID: 7456842531580620239}

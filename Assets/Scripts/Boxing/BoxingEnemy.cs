@@ -8,6 +8,8 @@ public class BoxingEnemy : MonoBehaviour
     public FrameInput EnemyFrameInput { get; private set; } = new FrameInput();
     public UnityEvent<FrameInput> OnFrameInput;
 
+    
+    [Range(1, 100)] [SerializeField] float difficulty;
     [SerializeField] float distance;
     [SerializeField] Transform target;
     [SerializeField] Transform orientation;
@@ -30,6 +32,25 @@ public class BoxingEnemy : MonoBehaviour
 
         float multi = Mathf.Clamp(distToTarget - distance, -1f, 1f);
         Vector3 movDir = orientation.forward * multi + (orientation.right * Random.Range(-1, 1));
+
+        float doesSomething = Random.Range(0, 100);
+        if (doesSomething >= difficulty)
+        {
+            EnemyFrameInput.SetInput(
+                movDir,
+                Vector2.one,
+                false,
+                false,
+                false,
+                -1,
+                false,
+                -1,
+                -1);
+
+            OnFrameInput?.Invoke(EnemyFrameInput);
+            orientation.LookAt(target);
+            return;
+        }
 
         if (random > 50)
         {

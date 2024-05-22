@@ -116,7 +116,7 @@ public class GloveCollision : MonoBehaviour
             if (punchElapsed >= punchForwardTime)
             {
                 if (hitSomething) hitSomething = false;
-                else overExtendDelay = 5f;
+                else overExtendDelay = 10f;
 
                 SetGlove(false);
                 return;
