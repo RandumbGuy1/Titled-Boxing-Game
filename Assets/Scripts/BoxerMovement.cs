@@ -40,7 +40,7 @@ public class BoxerMovement : MonoBehaviour
     public bool Stunned => MoveState == BoxerMoveState.Stunned;
     public bool RanOutofStamina => MoveState == BoxerMoveState.StaminaDepleted;
 
-    public Vector3 CrouchOffset => (playerHeight - capsuleCol.height) * transform.localScale.y * Vector3.down;
+    public Vector3 CrouchOffset => (playerHeight - capsuleCol.height) * transform.localScale.y * Vector3.down * 0.25f;
 
     [Header("Friction Settings")]
     [SerializeField] private float friction;
