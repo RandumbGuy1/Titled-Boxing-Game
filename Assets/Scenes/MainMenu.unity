@@ -2475,6 +2475,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ariel
       objectReference: {fileID: 0}
+    - target: {fileID: 4283330000835505263, guid: c6bb691ae367146debff814e0084848f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4283330000835505264, guid: c6bb691ae367146debff814e0084848f,
         type: 3}
       propertyPath: target
@@ -7039,6 +7044,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ariel (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283330000835505263, guid: c6bb691ae367146debff814e0084848f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4283330000835505264, guid: c6bb691ae367146debff814e0084848f,
         type: 3}

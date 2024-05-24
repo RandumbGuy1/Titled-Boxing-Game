@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource PlayOnce(AudioClip clip, Vector3 sourcePos, float volumeMultiplier = 1f)
     {
+        if (clip == null) return null;
         if (!SoundDictionary.ContainsKey(clip)) return null;
 
         //Spawn audio instance at the sounds source position
@@ -57,6 +58,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayOnce(AudioClip clip)
     {
+        if (clip == null) return;
         if (!SoundDictionary.ContainsKey(clip)) return;
 
         //Spawn audio instance at the sounds source position
@@ -102,6 +104,7 @@ public class AudioManager : MonoBehaviour
     //Stop a certain audio source
     public void StopSound(AudioClip clip, AudioSource source)
     {
+        if (clip == null) return;
         if (!SoundDictionary.ContainsKey(clip)) return;
         if (source == null) return;
 
