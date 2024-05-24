@@ -46,7 +46,7 @@ public class GloveCollision : MonoBehaviour
         Vector3 gloveTravel = transform.position - lastPos;
         lastPos = transform.position;
 
-        if (!Active || !Physics.SphereCast(transform.position - gloveTravel * 5f, 0.6f, gloveTravel, out var hit, gloveTravel.magnitude * 5f, hitLayer)) return;
+        if (!Active || !Physics.SphereCast(transform.position - gloveTravel * 5f, 0.75f, gloveTravel, out var hit, gloveTravel.magnitude * 5f, hitLayer)) return;
         if (hit.transform.IsChildOf(thrower)) return;
 
         BoxingController boxer = hit.collider.GetComponent<BoxingController>();

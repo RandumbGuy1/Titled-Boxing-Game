@@ -161,7 +161,7 @@ MonoBehaviour:
   side: 0
   hitLayer:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 2057
   hitSpark: {fileID: 5293751812607336622, guid: cd7fcc5518bf7473eb622e3315fd01f9,
     type: 3}
   gloveCollider: {fileID: 6136373200338076479}
