@@ -46,10 +46,10 @@ MonoBehaviour:
     m_Value: 0
   quality:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 2
   intensity:
     m_OverrideState: 1
-    m_Value: 0.3
+    m_Value: 0.5
   clamp:
     m_OverrideState: 0
     m_Value: 0.05
@@ -68,12 +68,12 @@ MonoBehaviour:
   active: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   intensity:
     m_OverrideState: 1
-    m_Value: 2.98
+    m_Value: 11.48
   scatter:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.7
   clamp:
     m_OverrideState: 0
@@ -144,22 +144,22 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 1704.1
+    m_Value: 26.48
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 62.35
+    m_Value: 77.3
   gaussianMaxRadius:
     m_OverrideState: 1
-    m_Value: 1.068
+    m_Value: 0.956
   highQualitySampling:
     m_OverrideState: 0
     m_Value: 0
   focusDistance:
     m_OverrideState: 1
-    m_Value: 1.4
+    m_Value: 2.1
   aperture:
     m_OverrideState: 0
     m_Value: 5.6
@@ -189,17 +189,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   color:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   center:
     m_OverrideState: 0
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.178
+    m_Value: 0.229
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.357
+    m_Value: 1
   rounded:
     m_OverrideState: 0
     m_Value: 0

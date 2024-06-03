@@ -1569,7 +1569,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
+      key0: {r: 0, g: 0.0323627, b: 1, a: 1}
       key1: {r: 0, g: 0.04815674, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -9248,7 +9248,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0, g: 0.059990406, b: 1, a: 1}
-      key1: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
+      key1: {r: 0, g: 0.023826122, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -18593,7 +18593,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
+      key1: {r: 1, g: 0, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -26339,7 +26339,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
+      key0: {r: 1, g: 0, b: 0, a: 1}
       key1: {r: 1, g: 0, b: 0, a: 1}
       key2: {r: 1, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

@@ -35,6 +35,7 @@ public class MenuSway : MonoBehaviour
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(settingsRot + idleSway.HeadSwayOffset), Time.deltaTime * 8f);
                 break;
             case MainMenuState.LevelSelect:
+                pivot.Rotate(new Vector3(0, rotateSpeed * 0.25f, 0) * Time.deltaTime);
                 transform.localPosition = Vector3.Lerp(transform.localPosition, levelSelectPos, Time.deltaTime * 8f);
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(levelSelectRot + idleSway.HeadSwayOffset), Time.deltaTime * 8f);
                 break;
