@@ -39,7 +39,7 @@ public class PlayParticleOnEnable : MonoBehaviour
         if (particle != null)
         {
             particle.Play();
-            if (GameManager.Instance.CurrentGameState == GameState.Paused) particle.Pause();
+            //if (GameManager.Instance.CurrentGameState == GameState.Paused) particle.Pause();
         }
 
         if (light != null)
