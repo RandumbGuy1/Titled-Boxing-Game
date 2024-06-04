@@ -186,6 +186,12 @@ MonoBehaviour:
   hitRotHook: {x: -0.33688912, y: 0.029927716, z: 0.46537995, w: 0.8179435}
   gfx: {fileID: 6136373199581151446}
   smoke: {fileID: 4723465452010211879}
+  headBob:
+    enabled: 1
+    viewBobMultiplier: {x: 42.01, y: 52.66}
+    viewBobSpeed: 15
+    viewBobDampingRatio: 0.38
+    viewBobAngularFrequency: 20
 --- !u!1 &6765277744416788890
 GameObject:
   m_ObjectHideFlags: 0

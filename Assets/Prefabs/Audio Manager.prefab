@@ -101,8 +101,8 @@ MonoBehaviour:
     volume: 0.25
     pitch: 1
     spatialBlend: 1
-    looping: 1
-    playOnAwake: 1
+    looping: 0
+    playOnAwake: 0
   - clip: {fileID: 8300000, guid: 0773cec74862a514c866d92abb41555e, type: 3}
     soundCapacity: 1
     volume: 0.4

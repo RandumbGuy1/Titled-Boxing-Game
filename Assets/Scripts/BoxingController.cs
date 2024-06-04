@@ -14,6 +14,8 @@ public class BoxingController : MonoBehaviour
     public bool Idle => AttackState == BoxerAttackState.Idle;
     public bool Blocking => AttackState == BoxerAttackState.Blocking;
 
+    Vector3[] startHandPositions;
+    Vector3[] startHandRotations;
     [SerializeField] Transform[] handPositions = new Transform[2];
     [SerializeField] GloveCollision[] gloves = new GloveCollision[2];
     [SerializeField] Color punchIndicator;
@@ -25,6 +27,7 @@ public class BoxingController : MonoBehaviour
     [SerializeField] BoxerMovement movement;
     [SerializeField] private Transform orientation;
     [SerializeField] CameraShaker camShaker;
+    [SerializeField] CameraHeadBob headBob;
 
     public bool CanPunch
     {
@@ -39,6 +42,16 @@ public class BoxingController : MonoBehaviour
     public StaminaController Stamina => stamina;
     public BlockController Block => block;
     public BoxerMovement Movement => movement;
+    private void Start()
+    {
+        startHandPositions = new Vector3[handPositions.Length];
+        startHandRotations = new Vector3[handPositions.Length];
+        for (int i = 0; i < handPositions.Length; i++)
+        {
+            startHandPositions[i] = handPositions[i].localPosition;
+            startHandRotations[i] = handPositions[i].localEulerAngles;
+        }
+    }
 
     void FixedUpdate()
     {
@@ -52,7 +65,15 @@ public class BoxingController : MonoBehaviour
         if (!enabled || gloves.Length <= 0) return;
 
         for (int i = 0; i < gloves.Length && i < handPositions.Length; i++)
+        {
+            if (headBob)
+            {
+                handPositions[i].localPosition = startHandPositions[i] + headBob.ViewBobOffset * 0.15f * (i % 2 == 0 ? 1 : -0.3f);
+                handPositions[i].localRotation = Quaternion.Euler(startHandRotations[i] + headBob.ViewBobOffset * 5f * (i % 2 == 0 ? 1 : -0.3f));
+            }
+            
             gloves[i].HandleGloves(handPositions[i], orientation.forward);
+        }
 
         bool PunchCheck()
         {

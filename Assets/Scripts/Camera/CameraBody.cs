@@ -48,7 +48,7 @@ public class CameraBody : MonoBehaviour
         player.PlayerCam.fieldOfView = camFov.FOVUpdate(player);
         camSprintEffect.SpeedLines(player);
         camIdleSway.IdleCameraSway(player);
-        camHeadBob.BobUpdate(player);
+        camHeadBob.BobUpdate(player.Movement.Grounded && (player.Movement.Magnitude > 0.5f && player.Keys.PlayerFrameInput.MoveDir.sqrMagnitude > 0f));
         camCollider.ColliderUpdate(player.PlayerCam.transform.position, player.transform.position);
     }
 
@@ -71,7 +71,7 @@ public class CameraBody : MonoBehaviour
             player.Orientation.rotation = Quaternion.Euler(0, GetLockOnAngleDelta() + camLookSettings.SmoothRotation.y, 0);
 
             //Camera effects rotation
-            player.PlayerCam.transform.localRotation = Quaternion.Euler(ToEuler(camHeadBob.ViewBobOffset) + Vector3.forward * camHeadBob.TiltSway + camShaker.Offset + camIdleSway.HeadSwayOffset);
+            player.PlayerCam.transform.localRotation = Quaternion.Euler(ToEuler(camHeadBob.ViewBobOffset) + camShaker.Offset + camIdleSway.HeadSwayOffset);
 
             //Camera positions
             Vector3 cameraTPSOffset = camCollider.Enabled ? posOffset + CamHeadBob.ViewBobOffset * 0.2f : Vector3.zero;

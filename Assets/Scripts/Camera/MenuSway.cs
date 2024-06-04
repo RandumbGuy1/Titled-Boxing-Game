@@ -6,11 +6,13 @@ public class MenuSway : MonoBehaviour
 {
     [SerializeField] private Transform pivot;
     [SerializeField] private float rotateSpeed;
-    [SerializeField] private Vector3 settingsPos;    [SerializeField] private Vector3 settingsRot;
+    [SerializeField] private Vector3 settingsPos;
+    [SerializeField] private Vector3 settingsRot;
 
     [Space(10)]
 
-    [SerializeField] private Vector3 levelSelectPos;    [SerializeField] private Vector3 levelSelectRot;
+    [SerializeField] private Vector3 levelSelectPos;
+    [SerializeField] private Vector3 levelSelectRot;
 
     [SerializeField] CameraIdleSway idleSway;
     public MainMenuState MenuState { get; set; }
@@ -22,8 +24,6 @@ public class MenuSway : MonoBehaviour
         startPos = transform.localPosition;
         startRot = transform.localEulerAngles;
     }
-
-    // Update is called once per frame
     void Update()
     {
         idleSway.IdleCameraSway();
