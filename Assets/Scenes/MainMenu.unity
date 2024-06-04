@@ -2062,7 +2062,17 @@ PrefabInstance:
     - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
       propertyPath: sounds.Array.data[7].volume
-      value: 0.5
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
+        type: 3}
+      propertyPath: sounds.Array.data[7].looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122289844981017558, guid: 9f6b4ccb4261543879b8e5373fc46864,
+        type: 3}
+      propertyPath: sounds.Array.data[7].playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7122289844981017559, guid: 9f6b4ccb4261543879b8e5373fc46864,
         type: 3}
