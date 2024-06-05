@@ -13,7 +13,7 @@ public class PlayerInteraction : MonoBehaviour
 
     [Header("Refrences")]
     [SerializeField] private bool showUI = true;
-    [SerializeField] private PlayerRef player;
+    [SerializeField] private Player player;
     [SerializeField] private TextMeshProUGUI interactionKeyBindText;
     [SerializeField] private TextMeshProUGUI interactionText;
     [SerializeField] private GameObject interactionUI;
@@ -22,7 +22,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void Awake()
     {
-        player.PlayerInput.OnInteractInput += CheckForInteractable;
+        player.Keys.OnInteractInput += CheckForInteractable;
     }
 
     private void CheckForInteractable(bool interact)
@@ -46,8 +46,9 @@ public class PlayerInteraction : MonoBehaviour
 
                 interactable = interactableTemp;
                 interactable.OnStartHover(player);
+                interactable.OutlineHoverStart();
             }
-            else if (currentleyLookingAt != interactable.GameObject)
+            else if (currentleyLookingAt != interactable.gameObject)
             {
                 ResetInteraction();
                 return;
@@ -63,12 +64,12 @@ public class PlayerInteraction : MonoBehaviour
             if (showUI) interactionUI.SetActive(true);
 
             interactionText.text = text;
-            interactionKeyBindText.text = player.PlayerInput.InteractKey.ToString();
+            interactionKeyBindText.text = player.Keys.InteractKey.ToString();
 
             if (interact)
             {
-                interactable.Player = player;
                 interactable.OnInteract(player);
+                interactable.OutlineHoverEnd();
             }
 
         }
@@ -83,6 +84,7 @@ public class PlayerInteraction : MonoBehaviour
         if (interactable == null || !noInteraction) return;
 
         interactable.OnEndHover(player);
+        interactable.OutlineHoverEnd();
         interactable = null;
     }
 }

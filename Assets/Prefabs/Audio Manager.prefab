@@ -125,8 +125,8 @@ MonoBehaviour:
     looping: 0
     playOnAwake: 0
   - clip: {fileID: 8300000, guid: b058043fdabc15c45b9353cc021be1b6, type: 3}
-    soundCapacity: 20
-    volume: 0.4
+    soundCapacity: 5
+    volume: 0.5
     pitch: 1
     spatialBlend: 1
     looping: 0

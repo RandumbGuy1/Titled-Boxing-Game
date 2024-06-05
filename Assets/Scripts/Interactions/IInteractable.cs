@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class IInteractable
+public abstract class IInteractable : MonoBehaviour
 {
-    public PlayerRef Player { get; set; }
-    public GameObject GameObject { get; }
+    public abstract PlayerRef Player { get; }
 
     [SerializeField] Outline selectedOutline;
-    public abstract string GetDescription(PlayerRef player);
-    public abstract void OnInteract(PlayerRef player);
-    public abstract void OnStartHover(PlayerRef player);
-    public abstract void OnEndHover(PlayerRef player);
+    public abstract string GetDescription(Player player);
+    public abstract void OnInteract(Player player);
+    public abstract void OnStartHover(Player player);
+    public abstract void OnEndHover(Player player);
 
     public void OutlineHoverStart()
     {
