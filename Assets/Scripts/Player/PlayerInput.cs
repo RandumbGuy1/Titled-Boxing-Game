@@ -21,14 +21,16 @@ public class PlayerInput : MonoBehaviour
     public event ReceieveVector2Input OnMouseInput;
     public event ReceieveBoolInput OnLockInput;
     public event ReceieveBoolInput OnPauseToggle;
+    public event ReceieveBoolInput OnInteractInput;
 
-    [Header("Movement Keybinds")]
+    [Header("Boxing Keybinds")]
     [SerializeField] private KeyCode jumpKey;
     [SerializeField] private KeyCode rollKey;
     [SerializeField] private List<KeyCode> slipKeys = new List<KeyCode>();
+    [SerializeField] private KeyCode blockKey;
 
     [Header("Interact Keybinds")]
-    [SerializeField] private KeyCode blockKey;
+    [SerializeField] private KeyCode interactKey;
 
     [Header("UI Keybinds")]
     [SerializeField] private KeyCode toggleLockOnKey;
@@ -42,6 +44,7 @@ public class PlayerInput : MonoBehaviour
     public KeyCode BlockKey => blockKey;
     public KeyCode ToggleLockOnKey => toggleLockOnKey;
     public KeyCode PauseMenuKey => pauseMenuKey;
+    public KeyCode InteractKey => interactKey;
 
     void Update()
     {
@@ -55,6 +58,7 @@ public class PlayerInput : MonoBehaviour
 
         MouseInput = new Vector2(Input.GetAxisRaw("Mouse Y"), Input.GetAxisRaw("Mouse X"));
         OnMouseInput?.Invoke(MouseInput);
+        OnInteractInput?.Invoke(Input.GetKeyDown(interactKey));
 
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
