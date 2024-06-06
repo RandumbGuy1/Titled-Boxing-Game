@@ -303,13 +303,14 @@ MonoBehaviour:
   gloves:
   - {fileID: 3498425683707143311}
   - {fileID: 6526778302221070359}
-  punchIndicator: {r: 0.41037738, g: 0.67397356, b: 1, a: 1}
+  punchIndicator: {r: 0, g: 0.2929263, b: 1, a: 1}
   health: {fileID: 7324015686529701417}
   stamina: {fileID: 7324015686529701422}
   block: {fileID: 7324015686529701416}
   movement: {fileID: 7324015686529701420}
   orientation: {fileID: 7324015685252776010}
   camShaker: {fileID: 0}
+  headBob: {fileID: 0}
 --- !u!114 &7324015686529701422
 MonoBehaviour:
   m_ObjectHideFlags: 0

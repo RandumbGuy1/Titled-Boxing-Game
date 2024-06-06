@@ -7575,7 +7575,7 @@ GameObject:
   - component: {fileID: 8198274386141136992}
   - component: {fileID: 3093066205569288978}
   - component: {fileID: 4667641079716837860}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Ring Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}

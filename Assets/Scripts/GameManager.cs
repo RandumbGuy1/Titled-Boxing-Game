@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 
     public GameState CurrentGameState { get; private set; } = GameState.Gameplay;
     public int CoinCount { get; set; } = 0;
+    public Color GloveColor { get; set; } = Color.red;
 
     public delegate void GameStateChangeHandler(GameState newGameState);
     public event GameStateChangeHandler OnGameStateChanged;

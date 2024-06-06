@@ -4751,7 +4751,7 @@ MonoBehaviour:
   gloves:
   - {fileID: 9219422551726918170}
   - {fileID: 1580435953668530797}
-  punchIndicator: {r: 1, g: 1, b: 1, a: 1}
+  punchIndicator: {r: 0, g: 0.23127818, b: 1, a: 1}
   health: {fileID: 3087553030839322274}
   stamina: {fileID: 3087553030839322285}
   block: {fileID: 3087553030839322275}
@@ -5135,9 +5135,9 @@ MonoBehaviour:
   Interactables:
     serializedVersion: 2
     m_Bits: 4096
-  interactionRange: 20
+  interactionRange: 10
   interactionRadius: 1
-  showUI: 1
+  showUI: 0
   player: {fileID: 3087553030839322292}
   interactionKeyBindText: {fileID: 3529357579849252739}
   interactionText: {fileID: 3594914321287098503}
@@ -6214,6 +6214,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7456842531580620239, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
+        type: 3}
+      propertyPath: usePlayerColor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7491770797318160605, guid: d062cc38b31a54a3983f9e2c09d7bdf8,
         type: 3}
       propertyPath: m_RootOrder
@@ -7247,6 +7252,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6958754287062317627, guid: 014bf08eb322d4922b4623d3c96812b9,
+        type: 3}
+      propertyPath: usePlayerColor
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 014bf08eb322d4922b4623d3c96812b9, type: 3}

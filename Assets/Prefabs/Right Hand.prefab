@@ -88,12 +88,6 @@ MonoBehaviour:
   hitRotHook: {x: 0.41443145, y: 0.020199507, z: 0.63950986, w: 0.6471983}
   gfx: {fileID: 4555363807621747245}
   smoke: {fileID: 1284466208682733482}
-  headBob:
-    enabled: 1
-    viewBobMultiplier: {x: 42.01, y: 52.66}
-    viewBobSpeed: 15
-    viewBobDampingRatio: 0.38
-    viewBobAngularFrequency: 20
 --- !u!1 &4555363807621747244
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,6 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287bb094dbd8d45e5b53fc87d6256e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usePlayerColor: 0
+  gloveColor: {r: 1, g: 0, b: 0, a: 1}
   smoothTime: 10
   meshRenderer: {fileID: 4555363807621747246}
 --- !u!1 &8263907927209332806

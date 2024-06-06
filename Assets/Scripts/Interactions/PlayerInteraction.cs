@@ -27,8 +27,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void CheckForInteractable(bool interact)
     {
-        Ray ray = player.PlayerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        if (Physics.SphereCast(ray, interactionRadius, out var hit, interactionRange + (player.transform.position - player.PlayerCam.transform.position).magnitude, Interactables, QueryTriggerInteraction.Ignore))
+        if (Physics.SphereCast(transform.position, interactionRadius, player.Orientation.forward, out var hit, interactionRange, Interactables, QueryTriggerInteraction.Ignore))
         {
             GameObject currentleyLookingAt = hit.transform.gameObject;
 
@@ -69,7 +68,6 @@ public class PlayerInteraction : MonoBehaviour
             if (interact)
             {
                 interactable.OnInteract(player);
-                interactable.OutlineHoverEnd();
             }
 
         }
