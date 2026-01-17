@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.15896338, g: 0.5172149, b: 1.0379918, a: 1}
+  m_IndirectSpecularColor: {r: 0.15896621, g: 0.51753515, b: 1.0392404, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9239,7 +9239,7 @@ PrefabInstance:
     - target: {fileID: 7324015686529701414, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
       propertyPath: difficulty
-      value: 65
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 7324015686529701415, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
@@ -9303,6 +9303,11 @@ PrefabInstance:
       objectReference: {fileID: 2057781235}
     - target: {fileID: 7324015686529701417, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
+      propertyPath: maxHealth
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701417, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
       propertyPath: OnDamageEffects.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2057781237}
@@ -9315,6 +9320,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Clash King
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701420, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7324015686529701422, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}

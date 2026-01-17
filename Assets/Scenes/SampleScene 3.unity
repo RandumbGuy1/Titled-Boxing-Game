@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3638,8 +3638,13 @@ PrefabInstance:
       objectReference: {fileID: 884271036}
     - target: {fileID: 7324015686529701414, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
+      propertyPath: distance
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701414, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
       propertyPath: difficulty
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7324015686529701415, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
@@ -3703,6 +3708,11 @@ PrefabInstance:
       objectReference: {fileID: 884271037}
     - target: {fileID: 7324015686529701417, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
+      propertyPath: maxHealth
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701417, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
       propertyPath: OnDamageEffects.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 884271034}
@@ -3715,6 +3725,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pythagoras
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701420, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7324015686529701422, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.022058126, g: 0.011648523, b: 0.019650297, a: 1}
+  m_IndirectSpecularColor: {r: 0.022107633, g: 0.011648666, b: 0.019674858, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1129,6 +1129,66 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3498425683707143311, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchStun
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498425683707143311, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchForce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498425683707143311, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchRange
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498425683707143311, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498425683707143311, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: staminaCost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498425683707143311, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchForwardTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526778302221070359, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchStun
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526778302221070359, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchDelay
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526778302221070359, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchForce
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526778302221070359, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchDamage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526778302221070359, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchBackTime
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526778302221070359, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchForwardTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7324015686529701414, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
       propertyPath: target
@@ -1136,8 +1196,13 @@ PrefabInstance:
       objectReference: {fileID: 221662093}
     - target: {fileID: 7324015686529701414, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
+      propertyPath: distance
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701414, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
       propertyPath: difficulty
-      value: 50
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7324015686529701415, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
@@ -1201,6 +1266,11 @@ PrefabInstance:
       objectReference: {fileID: 221662091}
     - target: {fileID: 7324015686529701417, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
+      propertyPath: maxHealth
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701417, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
       propertyPath: OnDamageEffects.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 221662092}
@@ -1213,6 +1283,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Freddy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701420, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7324015686529701422, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}

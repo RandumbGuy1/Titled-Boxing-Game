@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.0034645246, g: 0.024900015, b: 0.15359038, a: 1}
+  m_IndirectSpecularColor: {r: 0.0034717766, g: 0.024900146, b: 0.15363325, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -322,6 +322,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3498425683707143311, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchRange
+      value: 4.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498425683707143311, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498425683707143311, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchForwardTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526778302221070359, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchRange
+      value: 3.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526778302221070359, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchDamage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526778302221070359, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: punchForwardTime
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7324015686529701414, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
       propertyPath: target
@@ -329,8 +359,13 @@ PrefabInstance:
       objectReference: {fileID: 1679198448}
     - target: {fileID: 7324015686529701414, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
+      propertyPath: distance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701414, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
       propertyPath: difficulty
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7324015686529701415, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
@@ -416,6 +451,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ice Bear
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701420, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7324015686529701422, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
@@ -3104,7 +3144,7 @@ PrefabInstance:
     - target: {fileID: 1276704963671540528, guid: 0e61ee74a122341738de53f8f42f3549,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.932424
+      value: 10.49
       objectReference: {fileID: 0}
     - target: {fileID: 1276704963671540528, guid: 0e61ee74a122341738de53f8f42f3549,
         type: 3}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.0034645246, g: 0.024900015, b: 0.15359038, a: 1}
+  m_IndirectSpecularColor: {r: 0.0034717766, g: 0.024900146, b: 0.15363325, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3422,6 +3422,11 @@ PrefabInstance:
       objectReference: {fileID: 1884900770}
     - target: {fileID: 7324015686529701417, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701417, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
       propertyPath: OnDamageEffects.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1884900771}
@@ -3434,6 +3439,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Kasa Jizo
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324015686529701420, guid: b8ec9182a793e1644b81bd75e68a5704,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7324015686529701422, guid: b8ec9182a793e1644b81bd75e68a5704,
         type: 3}
